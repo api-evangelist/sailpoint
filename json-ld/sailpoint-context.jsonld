@@ -1,0 +1,633 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://developer.sailpoint.com/docs/api/v3/",
+    "sailpoint": "https://developer.sailpoint.com/docs/api/v3/",
+    "schema": "https://schema.org/",
+    "iam": "https://www.w3.org/ns/iam#",
+    "sec": "https://w3id.org/security#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "org": "http://www.w3.org/ns/org#",
+    "vcard": "http://www.w3.org/2006/vcard/ns#",
+
+    "PublicIdentity": {
+      "@id": "sailpoint:PublicIdentity",
+      "@context": {
+        "id": {
+          "@id": "sailpoint:identityId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "alias": {
+          "@id": "sailpoint:alias",
+          "@type": "xsd:string"
+        },
+        "email": {
+          "@id": "schema:email",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "sailpoint:lifecycleStatus",
+          "@type": "xsd:string"
+        },
+        "identityState": {
+          "@id": "sailpoint:identityState",
+          "@type": "xsd:string"
+        },
+        "manager": {
+          "@id": "sailpoint:manager",
+          "@type": "@id"
+        },
+        "attributes": {
+          "@id": "sailpoint:identityAttributes",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "IdentityReference": {
+      "@id": "sailpoint:IdentityReference",
+      "@context": {
+        "type": {
+          "@id": "sailpoint:referenceType",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "sailpoint:identityId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "IdentityAttribute": {
+      "@id": "sailpoint:IdentityAttribute",
+      "@context": {
+        "key": {
+          "@id": "sailpoint:attributeKey",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "value": {
+          "@id": "sailpoint:attributeValue",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "IdentityProfile": {
+      "@id": "sailpoint:IdentityProfile",
+      "@context": {
+        "id": {
+          "@id": "sailpoint:profileId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "owner": {
+          "@id": "sailpoint:owner",
+          "@type": "@id"
+        },
+        "priority": {
+          "@id": "sailpoint:priority",
+          "@type": "xsd:integer"
+        },
+        "authoritativeSource": {
+          "@id": "sailpoint:authoritativeSource",
+          "@type": "@id"
+        },
+        "identityRefreshRequired": {
+          "@id": "sailpoint:identityRefreshRequired",
+          "@type": "xsd:boolean"
+        },
+        "identityCount": {
+          "@id": "sailpoint:identityCount",
+          "@type": "xsd:integer"
+        },
+        "hasTimeBasedAttr": {
+          "@id": "sailpoint:hasTimeBasedAttr",
+          "@type": "xsd:boolean"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "OwnerReference": {
+      "@id": "sailpoint:OwnerReference",
+      "@context": {
+        "type": {
+          "@id": "sailpoint:referenceType",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "sailpoint:ownerId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "SourceReference": {
+      "@id": "sailpoint:SourceReference",
+      "@context": {
+        "type": {
+          "@id": "sailpoint:referenceType",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "sailpoint:sourceId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "AccessProfile": {
+      "@id": "sailpoint:AccessProfile",
+      "@context": {
+        "id": {
+          "@id": "sailpoint:accessProfileId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "enabled": {
+          "@id": "sailpoint:enabled",
+          "@type": "xsd:boolean"
+        },
+        "owner": {
+          "@id": "sailpoint:owner",
+          "@type": "@id"
+        },
+        "source": {
+          "@id": "sailpoint:source",
+          "@type": "@id"
+        },
+        "entitlements": {
+          "@id": "sailpoint:entitlements",
+          "@container": "@set"
+        },
+        "requestable": {
+          "@id": "sailpoint:requestable",
+          "@type": "xsd:boolean"
+        },
+        "accessRequestConfig": {
+          "@id": "sailpoint:accessRequestConfig",
+          "@type": "@id"
+        },
+        "revocationRequestConfig": {
+          "@id": "sailpoint:revocationRequestConfig",
+          "@type": "@id"
+        },
+        "segments": {
+          "@id": "sailpoint:segments",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "EntitlementRef": {
+      "@id": "sailpoint:EntitlementRef",
+      "@context": {
+        "type": {
+          "@id": "sailpoint:referenceType",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "sailpoint:entitlementId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "Entitlement": {
+      "@id": "sailpoint:Entitlement",
+      "@context": {
+        "id": {
+          "@id": "sailpoint:entitlementId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "attribute": {
+          "@id": "sailpoint:entitlementAttribute",
+          "@type": "xsd:string"
+        },
+        "value": {
+          "@id": "sailpoint:entitlementValue",
+          "@type": "xsd:string"
+        },
+        "sourceSchemaObjectType": {
+          "@id": "sailpoint:sourceSchemaObjectType",
+          "@type": "xsd:string"
+        },
+        "privileged": {
+          "@id": "sailpoint:privileged",
+          "@type": "xsd:boolean"
+        },
+        "cloudGoverned": {
+          "@id": "sailpoint:cloudGoverned",
+          "@type": "xsd:boolean"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "source": {
+          "@id": "sailpoint:source",
+          "@type": "@id"
+        },
+        "owner": {
+          "@id": "sailpoint:owner",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "AccessProfileRef": {
+      "@id": "sailpoint:AccessProfileRef",
+      "@context": {
+        "id": {
+          "@id": "sailpoint:accessProfileId",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "sailpoint:referenceType",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "Role": {
+      "@id": "sailpoint:Role",
+      "@context": {
+        "id": {
+          "@id": "sailpoint:roleId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "owner": {
+          "@id": "sailpoint:owner",
+          "@type": "@id"
+        },
+        "accessProfiles": {
+          "@id": "sailpoint:accessProfiles",
+          "@container": "@set"
+        },
+        "entitlements": {
+          "@id": "sailpoint:entitlements",
+          "@container": "@set"
+        },
+        "membership": {
+          "@id": "sailpoint:membership",
+          "@type": "@id"
+        },
+        "enabled": {
+          "@id": "sailpoint:enabled",
+          "@type": "xsd:boolean"
+        },
+        "requestable": {
+          "@id": "sailpoint:requestable",
+          "@type": "xsd:boolean"
+        },
+        "accessRequestConfig": {
+          "@id": "sailpoint:accessRequestConfig",
+          "@type": "@id"
+        },
+        "revocationRequestConfig": {
+          "@id": "sailpoint:revocationRequestConfig",
+          "@type": "@id"
+        },
+        "segments": {
+          "@id": "sailpoint:segments",
+          "@container": "@set"
+        },
+        "dimensional": {
+          "@id": "sailpoint:dimensional",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "RoleMembershipSelector": {
+      "@id": "sailpoint:RoleMembershipSelector",
+      "@context": {
+        "type": {
+          "@id": "sailpoint:selectorType",
+          "@type": "xsd:string"
+        },
+        "criteria": {
+          "@id": "sailpoint:criteria",
+          "@type": "@id"
+        },
+        "identities": {
+          "@id": "sailpoint:memberIdentities",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "IdentityCertification": {
+      "@id": "sailpoint:IdentityCertification",
+      "@context": {
+        "id": {
+          "@id": "sailpoint:certificationId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "campaign": {
+          "@id": "sailpoint:campaign",
+          "@type": "@id"
+        },
+        "completed": {
+          "@id": "sailpoint:completed",
+          "@type": "xsd:boolean"
+        },
+        "identitiesCompleted": {
+          "@id": "sailpoint:identitiesCompleted",
+          "@type": "xsd:integer"
+        },
+        "identitiesTotal": {
+          "@id": "sailpoint:identitiesTotal",
+          "@type": "xsd:integer"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "decisionsMade": {
+          "@id": "sailpoint:decisionsMade",
+          "@type": "xsd:integer"
+        },
+        "decisionsTotal": {
+          "@id": "sailpoint:decisionsTotal",
+          "@type": "xsd:integer"
+        },
+        "due": {
+          "@id": "sailpoint:dueDate",
+          "@type": "xsd:dateTime"
+        },
+        "signed": {
+          "@id": "sailpoint:signedDate",
+          "@type": "xsd:dateTime"
+        },
+        "reviewer": {
+          "@id": "sailpoint:reviewer",
+          "@type": "@id"
+        },
+        "reassignment": {
+          "@id": "sailpoint:reassignment",
+          "@type": "@id"
+        },
+        "hasErrors": {
+          "@id": "sailpoint:hasErrors",
+          "@type": "xsd:boolean"
+        },
+        "errorMessage": {
+          "@id": "sailpoint:errorMessage",
+          "@type": "xsd:string"
+        },
+        "phase": {
+          "@id": "sailpoint:certificationPhase",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "CampaignReference": {
+      "@id": "sailpoint:CampaignReference",
+      "@context": {
+        "id": {
+          "@id": "sailpoint:campaignId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "sailpoint:referenceType",
+          "@type": "xsd:string"
+        },
+        "campaignType": {
+          "@id": "sailpoint:campaignType",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "correlatedStatus": {
+          "@id": "sailpoint:correlatedStatus",
+          "@type": "xsd:string"
+        },
+        "mandatoryCommentRequirement": {
+          "@id": "sailpoint:mandatoryCommentRequirement",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "Reviewer": {
+      "@id": "sailpoint:Reviewer",
+      "@context": {
+        "id": {
+          "@id": "sailpoint:reviewerId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "email": {
+          "@id": "schema:email",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "sailpoint:referenceType",
+          "@type": "xsd:string"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "CertificationDecision": {
+      "@id": "sailpoint:CertificationDecision",
+      "@context": {
+        "id": {
+          "@id": "sailpoint:reviewItemId",
+          "@type": "xsd:string"
+        },
+        "decision": {
+          "@id": "sailpoint:decision",
+          "@type": "xsd:string"
+        },
+        "bulk": {
+          "@id": "sailpoint:bulkDecision",
+          "@type": "xsd:boolean"
+        },
+        "comments": {
+          "@id": "sailpoint:decisionComments",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "AccessReviewItem": {
+      "@id": "sailpoint:AccessReviewItem",
+      "@context": {
+        "id": {
+          "@id": "sailpoint:reviewItemId",
+          "@type": "xsd:string"
+        },
+        "accessSummary": {
+          "@id": "sailpoint:accessSummary",
+          "@type": "@id"
+        },
+        "identitySummary": {
+          "@id": "sailpoint:identitySummary",
+          "@type": "@id"
+        },
+        "decision": {
+          "@id": "sailpoint:decision",
+          "@type": "xsd:string"
+        },
+        "recommendation": {
+          "@id": "sailpoint:recommendation",
+          "@type": "@id"
+        },
+        "comments": {
+          "@id": "sailpoint:reviewComments",
+          "@type": "xsd:string"
+        },
+        "completed": {
+          "@id": "sailpoint:completed",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "Requestability": {
+      "@id": "sailpoint:Requestability",
+      "@context": {
+        "commentsRequired": {
+          "@id": "sailpoint:commentsRequired",
+          "@type": "xsd:boolean"
+        },
+        "denialCommentsRequired": {
+          "@id": "sailpoint:denialCommentsRequired",
+          "@type": "xsd:boolean"
+        },
+        "approvalSchemes": {
+          "@id": "sailpoint:approvalSchemes",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "ApprovalScheme": {
+      "@id": "sailpoint:ApprovalScheme",
+      "@context": {
+        "approverType": {
+          "@id": "sailpoint:approverType",
+          "@type": "xsd:string"
+        },
+        "approverId": {
+          "@id": "sailpoint:approverId",
+          "@type": "xsd:string"
+        }
+      }
+    }
+  }
+}

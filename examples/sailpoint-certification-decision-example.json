@@ -1,0 +1,46 @@
+{
+  "operation": "Make Certification Decision",
+  "method": "POST",
+  "path": "/v3/certifications/{id}/decide",
+  "description": "Approve or revoke access during a certification review.",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer <access_token>",
+      "Content-Type": "application/json"
+    },
+    "pathParameters": {
+      "id": "ef38f94347e94562b5bb8424a56397d8"
+    },
+    "body": {
+      "items": [
+        {
+          "id": "2c918085718230600171993736c90012",
+          "decision": "APPROVE",
+          "comments": "Access is still required for current project responsibilities."
+        },
+        {
+          "id": "2c918085718230600171993736c90013",
+          "decision": "REVOKE",
+          "comments": "Employee transferred to different department. Access no longer needed."
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "items": [
+        {
+          "id": "2c918085718230600171993736c90012",
+          "completed": true,
+          "decision": "APPROVE"
+        },
+        {
+          "id": "2c918085718230600171993736c90013",
+          "completed": true,
+          "decision": "REVOKE"
+        }
+      ]
+    }
+  }
+}

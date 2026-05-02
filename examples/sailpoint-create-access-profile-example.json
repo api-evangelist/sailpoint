@@ -1,0 +1,62 @@
+{
+  "operation": "Create Access Profile",
+  "method": "POST",
+  "path": "/v3/access-profiles",
+  "description": "Create a new access profile grouping Active Directory entitlements.",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer <access_token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "AD Developers",
+      "description": "Access profile for software developers requiring Active Directory developer entitlements.",
+      "enabled": true,
+      "owner": {
+        "type": "IDENTITY",
+        "id": "2c9180a46faadee4016fb4e018c20639",
+        "name": "Sarah Johnson"
+      },
+      "source": {
+        "id": "2c9180835d191a86015d28455b4a2329",
+        "type": "SOURCE",
+        "name": "Active Directory"
+      },
+      "entitlements": [
+        {
+          "id": "2c91809773dee32014e13e122092014e",
+          "type": "ENTITLEMENT",
+          "name": "Employees"
+        },
+        {
+          "id": "2c9180807a6d4f8b017a6d4f8b000000",
+          "type": "ENTITLEMENT",
+          "name": "Developers"
+        }
+      ],
+      "requestable": true,
+      "accessRequestConfig": {
+        "commentsRequired": false,
+        "denialCommentsRequired": false,
+        "approvalSchemes": [
+          {
+            "approverType": "MANAGER",
+            "approverId": null
+          }
+        ]
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "id": "2c91808874ff91550175097daaec161c",
+      "name": "AD Developers",
+      "description": "Access profile for software developers requiring Active Directory developer entitlements.",
+      "enabled": true,
+      "requestable": true,
+      "created": "2026-05-02T10:00:00.000Z",
+      "modified": "2026-05-02T10:00:00.000Z"
+    }
+  }
+}

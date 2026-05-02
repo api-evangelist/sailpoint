@@ -1,0 +1,82 @@
+{
+  "name": "SailPoint Identity Security Cloud Data Structures",
+  "description": "Core data structure documentation for the SailPoint Identity Security Cloud V3 API.",
+  "version": "3.0.0",
+  "structures": [
+    {
+      "name": "PublicIdentity",
+      "description": "A public-facing identity record representing a user in Identity Security Cloud.",
+      "fields": [
+        { "name": "id", "type": "string", "required": false, "description": "Unique identity ID." },
+        { "name": "name", "type": "string", "required": false, "description": "Human-readable display name." },
+        { "name": "alias", "type": "string", "required": false, "description": "Alternate unique identifier (username)." },
+        { "name": "email", "type": "string | null", "required": false, "description": "Email address." },
+        { "name": "status", "type": "string | null", "required": false, "description": "Lifecycle status." },
+        { "name": "identityState", "type": "string | null", "required": false, "description": "Current state: ACTIVE, INACTIVE_SHORT_TERM, INACTIVE_LONG_TERM." },
+        { "name": "manager", "type": "IdentityReference | null", "required": false, "description": "Reference to the identity's manager." },
+        { "name": "attributes", "type": "IdentityAttribute[]", "required": false, "description": "Public identity attributes." }
+      ]
+    },
+    {
+      "name": "IdentityProfile",
+      "description": "Configuration mapping source accounts to identities.",
+      "fields": [
+        { "name": "id", "type": "string", "required": false, "description": "Identity profile ID (read-only)." },
+        { "name": "name", "type": "string", "required": true, "description": "Identity profile name." },
+        { "name": "description", "type": "string", "required": false, "description": "Optional description." },
+        { "name": "authoritativeSource", "type": "object", "required": true, "description": "The source of record for this profile." },
+        { "name": "identityAttributeConfig", "type": "object", "required": false, "description": "Attribute mapping configuration." },
+        { "name": "created", "type": "string", "required": false, "description": "ISO 8601 creation timestamp." },
+        { "name": "modified", "type": "string", "required": false, "description": "ISO 8601 last modified timestamp." }
+      ]
+    },
+    {
+      "name": "AccessProfile",
+      "description": "A named collection of entitlements for provisioning and access requests.",
+      "fields": [
+        { "name": "id", "type": "string", "required": false, "description": "Access profile ID (read-only)." },
+        { "name": "name", "type": "string", "required": true, "description": "Access profile name." },
+        { "name": "description", "type": "string", "required": false, "description": "Optional description." },
+        { "name": "enabled", "type": "boolean", "required": false, "description": "Whether the access profile is enabled." },
+        { "name": "owner", "type": "OwnerReference", "required": true, "description": "Owner of the access profile." },
+        { "name": "source", "type": "SourceReference", "required": true, "description": "Source system the entitlements belong to." },
+        { "name": "entitlements", "type": "EntitlementReference[]", "required": false, "description": "Entitlements included in the profile." },
+        { "name": "requestable", "type": "boolean", "required": false, "description": "Whether users can self-service request this profile." },
+        { "name": "created", "type": "string", "required": false, "description": "ISO 8601 creation timestamp." },
+        { "name": "modified", "type": "string", "required": false, "description": "ISO 8601 last modified timestamp." }
+      ]
+    },
+    {
+      "name": "Role",
+      "description": "The highest-level access packaging, grouping access profiles.",
+      "fields": [
+        { "name": "id", "type": "string", "required": false, "description": "Role ID (read-only)." },
+        { "name": "name", "type": "string", "required": true, "description": "Role name." },
+        { "name": "description", "type": "string", "required": false, "description": "Optional description." },
+        { "name": "enabled", "type": "boolean", "required": false, "description": "Whether the role is enabled." },
+        { "name": "owner", "type": "OwnerReference", "required": true, "description": "Owner of the role." },
+        { "name": "accessProfiles", "type": "AccessProfileReference[]", "required": false, "description": "Access profiles included in the role." },
+        { "name": "membership", "type": "RoleMembershipSelector", "required": false, "description": "Auto-assignment criteria for the role." },
+        { "name": "requestable", "type": "boolean", "required": false, "description": "Whether users can self-service request this role." },
+        { "name": "created", "type": "string", "required": false, "description": "ISO 8601 creation timestamp." },
+        { "name": "modified", "type": "string", "required": false, "description": "ISO 8601 last modified timestamp." }
+      ]
+    },
+    {
+      "name": "Certification",
+      "description": "An access review certification instance.",
+      "fields": [
+        { "name": "id", "type": "string", "required": false, "description": "Certification ID." },
+        { "name": "name", "type": "string", "required": false, "description": "Certification name." },
+        { "name": "campaign", "type": "CampaignReference", "required": false, "description": "The campaign this certification belongs to." },
+        { "name": "completed", "type": "boolean", "required": false, "description": "Whether the certification is completed." },
+        { "name": "completedAt", "type": "string | null", "required": false, "description": "ISO 8601 completion timestamp." },
+        { "name": "deadline", "type": "string | null", "required": false, "description": "ISO 8601 deadline timestamp." },
+        { "name": "identitiesCompleted", "type": "integer", "required": false, "description": "Number of completed identity reviews." },
+        { "name": "identitiesTotal", "type": "integer", "required": false, "description": "Total number of identity reviews." },
+        { "name": "reviewer", "type": "Reviewer", "required": false, "description": "The reviewer assigned to this certification." },
+        { "name": "phase", "type": "string", "required": false, "description": "Current phase: STAGED, ACTIVE, SIGNED_OFF, ARCHIVED." }
+      ]
+    }
+  ]
+}

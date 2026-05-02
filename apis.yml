@@ -2,8 +2,11 @@ aid: sailpoint
 name: SailPoint
 description: >-
   Enterprise identity security and governance platform providing identity management,
-  access governance, and compliance solutions.
+  access governance, and compliance solutions for workforce and non-employee identities.
+  SailPoint delivers cloud-native IAM, certification automation, role mining, AI-driven
+  recommendations, and developer-friendly APIs for integrating identity into any workflow.
 type: Index
+x-type: company
 position: Consumer
 access: 3rd-Party
 image: https://www.sailpoint.com/wp-content/uploads/2021/02/sailpoint-logo.svg
@@ -15,7 +18,7 @@ tags:
   - Identity Security
   - Security
 created: '2025-02-17'
-modified: '2026-03-03'
+modified: '2026-05-02'
 url: https://raw.githubusercontent.com/api-evangelist/sailpoint/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
@@ -48,6 +51,12 @@ apis:
         url: json-schema/sailpoint-identity-schema.json
       - type: JSONLD
         url: json-ld/sailpoint-context.jsonld
+      - type: SpectralRules
+        url: rules/sailpoint-rules.yml
+      - type: Capabilities
+        url: capabilities/identity-governance.yaml
+      - type: Vocabulary
+        url: vocabulary/sailpoint-vocabulary.yml
   - aid: sailpoint:identity-security-cloud-v2024-api
     name: SailPoint Identity Security Cloud V2024 API
     description: The V2024 APIs provide annual-release endpoints to interact with the Identity Security Cloud platform, including advanced features like machine identities, connector customizers, IAI recommendations, role mining, and multi-host integration.

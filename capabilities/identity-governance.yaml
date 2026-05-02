@@ -1,0 +1,419 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SailPoint Identity Governance"
+  description: >-
+    Unified workflow capability for identity governance and access management
+    using SailPoint Identity Security Cloud. Combines identity lifecycle,
+    access profile management, role administration, and certification review
+    into a single governance workflow for IAM administrators and compliance teams.
+  tags:
+    - Access Governance
+    - Certifications
+    - Compliance
+    - IAM
+    - Identity Management
+    - Identity Security
+    - Roles
+    - SailPoint
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SAILPOINT_OAUTH2_TOKEN: SAILPOINT_OAUTH2_TOKEN
+      SAILPOINT_TENANT: SAILPOINT_TENANT
+
+capability:
+  consumes:
+    - import: isc-v3
+      location: ./shared/identity-security-cloud-v3.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: sailpoint-identity-governance-api
+      description: "Unified REST API for SailPoint identity governance workflows."
+      resources:
+        - path: /v1/identities
+          name: identities
+          description: "Identity profiles for users in the organization."
+          operations:
+            - method: GET
+              name: list-identities
+              description: "List public identities with filtering and pagination."
+              call: "isc-v3.list-public-identities"
+              with:
+                filters: "rest.filters"
+                limit: "rest.limit"
+                offset: "rest.offset"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/identities/{id}
+          name: identity-by-id
+          description: "Retrieve a specific identity."
+          operations:
+            - method: GET
+              name: get-identity
+              description: "Get a public identity by ID."
+              call: "isc-v3.get-public-identity"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/identity-profiles
+          name: identity-profiles
+          description: "Identity profiles defining source-to-identity attribute mappings."
+          operations:
+            - method: GET
+              name: list-identity-profiles
+              description: "List identity profiles."
+              call: "isc-v3.list-identity-profiles"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+            - method: POST
+              name: create-identity-profile
+              description: "Create a new identity profile."
+              call: "isc-v3.create-identity-profile"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/identity-profiles/{id}
+          name: identity-profile-by-id
+          description: "Manage a specific identity profile."
+          operations:
+            - method: GET
+              name: get-identity-profile
+              description: "Get an identity profile by ID."
+              call: "isc-v3.get-identity-profile"
+              with:
+                identity-profile-id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-identity-profile
+              description: "Update an identity profile."
+              call: "isc-v3.update-identity-profile"
+              with:
+                identity-profile-id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-identity-profile
+              description: "Delete an identity profile."
+              call: "isc-v3.delete-identity-profile"
+              with:
+                identity-profile-id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/access-profiles
+          name: access-profiles
+          description: "Access profiles grouping entitlements for provisioning."
+          operations:
+            - method: GET
+              name: list-access-profiles
+              description: "List access profiles."
+              call: "isc-v3.list-access-profiles"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+            - method: POST
+              name: create-access-profile
+              description: "Create a new access profile."
+              call: "isc-v3.create-access-profile"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/access-profiles/{id}
+          name: access-profile-by-id
+          description: "Manage a specific access profile."
+          operations:
+            - method: GET
+              name: get-access-profile
+              description: "Get an access profile by ID."
+              call: "isc-v3.get-access-profile"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-access-profile
+              description: "Delete an access profile."
+              call: "isc-v3.delete-access-profile"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/roles
+          name: roles
+          description: "Roles for organizational access management."
+          operations:
+            - method: GET
+              name: list-roles
+              description: "List roles."
+              call: "isc-v3.list-roles"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+            - method: POST
+              name: create-role
+              description: "Create a new role."
+              call: "isc-v3.create-role"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/roles/{id}
+          name: role-by-id
+          description: "Manage a specific role."
+          operations:
+            - method: GET
+              name: get-role
+              description: "Get a role by ID."
+              call: "isc-v3.get-role"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-role
+              description: "Delete a role."
+              call: "isc-v3.delete-role"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/roles/{id}/identities
+          name: role-identities
+          description: "Identities assigned to a role."
+          operations:
+            - method: GET
+              name: list-role-identities
+              description: "List identities assigned to a role."
+              call: "isc-v3.list-role-identities"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/certifications
+          name: certifications
+          description: "Access certifications for compliance reviews."
+          operations:
+            - method: GET
+              name: list-certifications
+              description: "List identity campaign certifications."
+              call: "isc-v3.list-certifications"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/certifications/{id}
+          name: certification-by-id
+          description: "Manage a specific certification."
+          operations:
+            - method: GET
+              name: get-certification
+              description: "Get a certification by ID."
+              call: "isc-v3.get-certification"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/certifications/{id}/access-review-items
+          name: certification-review-items
+          description: "Access review items within a certification."
+          operations:
+            - method: GET
+              name: list-access-review-items
+              description: "List access review items for a certification."
+              call: "isc-v3.list-access-review-items"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/certifications/{id}/decide
+          name: certification-decisions
+          description: "Make decisions on certification items."
+          operations:
+            - method: POST
+              name: decide-certification
+              description: "Approve or revoke access certification items."
+              call: "isc-v3.decide-certification"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/certifications/{id}/sign-off
+          name: certification-sign-off
+          description: "Finalize certification decisions."
+          operations:
+            - method: POST
+              name: sign-off-certification
+              description: "Sign off and finalize a certification."
+              call: "isc-v3.sign-off-certification"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9080
+      namespace: sailpoint-identity-governance-mcp
+      transport: http
+      description: "MCP server for AI-assisted SailPoint identity governance workflows."
+      tools:
+        - name: list-identities
+          description: "List public identities in SailPoint Identity Security Cloud with filtering."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.list-public-identities"
+          with:
+            filters: "tools.filters"
+            limit: "tools.limit"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: get-identity
+          description: "Get a specific identity by ID."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.get-public-identity"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-identity-profiles
+          description: "List identity profiles defining source attribute mappings."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.list-identity-profiles"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: create-identity-profile
+          description: "Create a new identity profile."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "isc-v3.create-identity-profile"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-access-profiles
+          description: "List access profiles grouping entitlements."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.list-access-profiles"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: create-access-profile
+          description: "Create a new access profile."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "isc-v3.create-access-profile"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-roles
+          description: "List organizational roles for access management."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.list-roles"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: create-role
+          description: "Create a new role in Identity Security Cloud."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "isc-v3.create-role"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-role-identities
+          description: "List identities assigned to a specific role."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.list-role-identities"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: list-certifications
+          description: "List identity campaign certifications for compliance review."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.list-certifications"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: get-certification
+          description: "Get a specific certification by ID."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.get-certification"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-access-review-items
+          description: "List access review items for a certification campaign."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.list-access-review-items"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: decide-certification-items
+          description: "Make approve or revoke decisions on certification access items."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "isc-v3.decide-certification"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: sign-off-certification
+          description: "Finalize and sign off a completed certification review."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "isc-v3.sign-off-certification"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."

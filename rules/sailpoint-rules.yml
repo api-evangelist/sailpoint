@@ -1,0 +1,113 @@
+extends: spectral:oas
+rules:
+
+  # SailPoint API naming conventions
+  sailpoint-operation-id-camel-case:
+    description: OperationIds must use camelCase (SailPoint convention).
+    message: "OperationId '{{value}}' must be camelCase."
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  sailpoint-summary-not-empty:
+    description: All operations must have a summary.
+    message: "Operation must have a non-empty summary."
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: summary
+      function: truthy
+
+  sailpoint-tags-required:
+    description: All operations must have at least one tag.
+    message: "Operation must have at least one tag."
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  sailpoint-response-200-required:
+    description: All operations must define a 200 or 201 response.
+    message: "Operation must define a success response (200 or 201)."
+    severity: error
+    given: "$.paths[*][*].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ["200"]
+            - required: ["201"]
+
+  sailpoint-error-responses-required:
+    description: Operations should define standard SailPoint error responses (400, 401, 403, 404, 429, 500).
+    message: "Operation should define standard error responses."
+    severity: warn
+    given: "$.paths[*][*].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          required: ["400", "401", "403"]
+
+  sailpoint-path-kebab-case:
+    description: Paths must use kebab-case for multi-word segments.
+    message: "Path segment '{{value}}' must use kebab-case."
+    severity: warn
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z0-9{}-]+-?[a-z0-9{}-]*)*$"
+
+  sailpoint-oauth2-security:
+    description: All operations should declare OAuth2 or PAT security.
+    message: "Operation must declare security (oauth2 or personalAccessToken)."
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: security
+      function: truthy
+
+  sailpoint-list-operations-pagination:
+    description: List operations should support limit and offset query parameters.
+    message: "List operation should support pagination parameters (limit, offset)."
+    severity: hint
+    given: "$.paths[*].get"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          properties:
+            parameters:
+              type: array
+              contains:
+                type: object
+                properties:
+                  name:
+                    enum: [limit, offset]
+
+  sailpoint-no-trailing-slash:
+    description: Paths must not have trailing slashes.
+    message: "Path '{{value}}' must not end with a slash."
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "/$"
+
+  sailpoint-content-type-json:
+    description: Request bodies should use application/json content type.
+    message: "Request body must specify application/json content type."
+    severity: warn
+    given: "$.paths[*][*].requestBody.content"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          required: ["application/json"]

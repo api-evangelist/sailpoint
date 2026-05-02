@@ -1,0 +1,43 @@
+{
+  "operation": "List Public Identities",
+  "method": "GET",
+  "path": "/v3/public-identities",
+  "description": "List public identities filtered by status with pagination.",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer <access_token>"
+    },
+    "queryParameters": {
+      "filters": "status eq \"Active\"",
+      "limit": 25,
+      "offset": 0,
+      "count": true
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "X-Total-Count": "150",
+      "Content-Type": "application/json"
+    },
+    "body": [
+      {
+        "id": "2c9180857182305e0171993735622948",
+        "name": "John Smith",
+        "alias": "john.smith",
+        "email": "john.smith@acme-solar.com",
+        "status": "Active",
+        "identityState": "ACTIVE",
+        "manager": {
+          "type": "IDENTITY",
+          "id": "2c9180a46faadee4016fb4e018c20639",
+          "name": "Sarah Johnson"
+        },
+        "attributes": [
+          { "key": "department", "name": "Department", "value": "Engineering" },
+          { "key": "location", "name": "Location", "value": "Remote" }
+        ]
+      }
+    ]
+  }
+}

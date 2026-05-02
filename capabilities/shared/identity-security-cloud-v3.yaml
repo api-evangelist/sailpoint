@@ -1,0 +1,590 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SailPoint Identity Security Cloud V3 API"
+  description: >-
+    Core V3 API for SailPoint Identity Security Cloud. Covers identities,
+    identity profiles, access profiles, roles, certifications, and access reviews.
+    Provides the building blocks for identity governance, access lifecycle, and
+    compliance workflows.
+  tags:
+    - Access Governance
+    - Certifications
+    - IAM
+    - Identity Management
+    - Identity Security
+    - Roles
+    - SailPoint
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SAILPOINT_OAUTH2_TOKEN: SAILPOINT_OAUTH2_TOKEN
+      SAILPOINT_TENANT: SAILPOINT_TENANT
+
+capability:
+  consumes:
+    - type: http
+      namespace: isc-v3
+      baseUri: "https://{{env.SAILPOINT_TENANT}}.api.identitynow.com/v3"
+      description: "SailPoint Identity Security Cloud V3 REST API."
+      authentication:
+        type: bearer
+        token: "{{env.SAILPOINT_OAUTH2_TOKEN}}"
+      resources:
+        - name: public-identities
+          path: /public-identities
+          description: "Public identity profiles for users in Identity Security Cloud."
+          operations:
+            - name: list-public-identities
+              method: GET
+              description: "List public identities with optional filtering and sorting."
+              inputParameters:
+                - name: add-core-filters
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Exclude incomplete identities and uncorrelated accounts."
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of results (max 250)."
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Offset into the full result set."
+                - name: filters
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter expression (e.g. name eq \"John Smith\")."
+                - name: sorters
+                  in: query
+                  type: string
+                  required: false
+                  description: "Sort expression (e.g. name,-email)."
+              outputRawFormat: json
+              outputParameters:
+                - name: identities
+                  type: array
+                  value: "$."
+            - name: get-public-identity
+              method: GET
+              description: "Get a single public identity by ID."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The identity ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: identity
+                  type: object
+                  value: "$."
+
+        - name: identity-profiles
+          path: /identity-profiles
+          description: "Identity profile mappings between source accounts and identity attributes."
+          operations:
+            - name: list-identity-profiles
+              method: GET
+              description: "List identity profiles."
+              inputParameters:
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of results."
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Offset into the full result set."
+                - name: filters
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter expression."
+              outputRawFormat: json
+              outputParameters:
+                - name: profiles
+                  type: array
+                  value: "$."
+            - name: create-identity-profile
+              method: POST
+              description: "Create a new identity profile."
+              outputRawFormat: json
+              outputParameters:
+                - name: profile
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  authoritativeSource: "{{tools.authoritativeSource}}"
+            - name: get-identity-profile
+              method: GET
+              description: "Get an identity profile by ID."
+              inputParameters:
+                - name: identity-profile-id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The identity profile ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: profile
+                  type: object
+                  value: "$."
+            - name: update-identity-profile
+              method: PUT
+              description: "Update an identity profile."
+              inputParameters:
+                - name: identity-profile-id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The identity profile ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: profile
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+            - name: delete-identity-profile
+              method: DELETE
+              description: "Delete an identity profile."
+              inputParameters:
+                - name: identity-profile-id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The identity profile ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: access-profiles
+          path: /access-profiles
+          description: "Access profiles grouping entitlements for provisioning and certifications."
+          operations:
+            - name: list-access-profiles
+              method: GET
+              description: "List access profiles with optional filtering and sorting."
+              inputParameters:
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of results."
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Offset into the result set."
+                - name: filters
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter expression."
+                - name: sorters
+                  in: query
+                  type: string
+                  required: false
+                  description: "Sort expression."
+              outputRawFormat: json
+              outputParameters:
+                - name: accessProfiles
+                  type: array
+                  value: "$."
+            - name: create-access-profile
+              method: POST
+              description: "Create a new access profile."
+              outputRawFormat: json
+              outputParameters:
+                - name: accessProfile
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  owner: "{{tools.owner}}"
+                  source: "{{tools.source}}"
+                  entitlements: "{{tools.entitlements}}"
+            - name: get-access-profile
+              method: GET
+              description: "Get an access profile by ID."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The access profile ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: accessProfile
+                  type: object
+                  value: "$."
+            - name: delete-access-profile
+              method: DELETE
+              description: "Delete an access profile."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The access profile ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: bulk-delete-access-profiles
+              method: POST
+              description: "Bulk delete multiple access profiles."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  ids: "{{tools.ids}}"
+
+        - name: roles
+          path: /roles
+          description: "Roles grouping access profiles for broad organizational access assignment."
+          operations:
+            - name: list-roles
+              method: GET
+              description: "List roles with optional filtering and sorting."
+              inputParameters:
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of results."
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Offset into the result set."
+                - name: filters
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter expression."
+                - name: sorters
+                  in: query
+                  type: string
+                  required: false
+                  description: "Sort expression."
+              outputRawFormat: json
+              outputParameters:
+                - name: roles
+                  type: array
+                  value: "$."
+            - name: create-role
+              method: POST
+              description: "Create a new role."
+              outputRawFormat: json
+              outputParameters:
+                - name: role
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  owner: "{{tools.owner}}"
+                  accessProfiles: "{{tools.accessProfiles}}"
+            - name: get-role
+              method: GET
+              description: "Get a role by ID."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The role ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: role
+                  type: object
+                  value: "$."
+            - name: delete-role
+              method: DELETE
+              description: "Delete a role."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The role ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: list-role-identities
+              method: GET
+              description: "List identities assigned to a role."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The role ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: identities
+                  type: array
+                  value: "$."
+
+        - name: certifications
+          path: /certifications
+          description: "Access certifications for periodic access review and compliance."
+          operations:
+            - name: list-certifications
+              method: GET
+              description: "List identity campaign certifications."
+              inputParameters:
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of results."
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Offset into the result set."
+                - name: filters
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter expression."
+              outputRawFormat: json
+              outputParameters:
+                - name: certifications
+                  type: array
+                  value: "$."
+            - name: get-certification
+              method: GET
+              description: "Get a single identity certification by ID."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The certification ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: certification
+                  type: object
+                  value: "$."
+            - name: list-access-review-items
+              method: GET
+              description: "List access review items for a certification."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The certification ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: items
+                  type: array
+                  value: "$."
+            - name: decide-certification
+              method: POST
+              description: "Make approve/revoke decisions on certification items."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The certification ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  items: "{{tools.items}}"
+            - name: reassign-certification
+              method: POST
+              description: "Reassign identities or items in a certification."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The certification ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  reassignTo: "{{tools.reassignTo}}"
+                  items: "{{tools.items}}"
+            - name: sign-off-certification
+              method: POST
+              description: "Finalize identity certification decisions."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The certification ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: sailpoint-isc-v3-api
+      resources:
+        - path: /v1/identities
+          name: public-identities
+          description: "Public identity management."
+          operations:
+            - method: GET
+              name: list-public-identities
+              description: "List public identities."
+              call: "isc-v3.list-public-identities"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/identities/{id}
+          name: identity-by-id
+          operations:
+            - method: GET
+              name: get-public-identity
+              description: "Get a public identity by ID."
+              call: "isc-v3.get-public-identity"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/identity-profiles
+          name: identity-profiles
+          operations:
+            - method: GET
+              name: list-identity-profiles
+              description: "List identity profiles."
+              call: "isc-v3.list-identity-profiles"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/access-profiles
+          name: access-profiles
+          operations:
+            - method: GET
+              name: list-access-profiles
+              description: "List access profiles."
+              call: "isc-v3.list-access-profiles"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/roles
+          name: roles
+          operations:
+            - method: GET
+              name: list-roles
+              description: "List roles."
+              call: "isc-v3.list-roles"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/certifications
+          name: certifications
+          operations:
+            - method: GET
+              name: list-certifications
+              description: "List identity campaign certifications."
+              call: "isc-v3.list-certifications"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: sailpoint-isc-v3-mcp
+      transport: http
+      tools:
+        - name: list-public-identities
+          description: "List public identities in SailPoint Identity Security Cloud."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.list-public-identities"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: get-public-identity
+          description: "Get a single public identity by ID."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.get-public-identity"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-identity-profiles
+          description: "List identity profiles."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.list-identity-profiles"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: list-access-profiles
+          description: "List access profiles."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.list-access-profiles"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: list-roles
+          description: "List roles."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.list-roles"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: list-certifications
+          description: "List identity campaign certifications."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "isc-v3.list-certifications"
+          outputParameters:
+            - type: array
+              mapping: "$."

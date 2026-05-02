@@ -1,0 +1,189 @@
+vocabulary:
+  name: SailPoint Identity Security Cloud Vocabulary
+  description: >-
+    Operational vocabulary for SailPoint Identity Security Cloud covering
+    identity lifecycle management, access governance, roles, certifications,
+    entitlements, and compliance automation.
+  version: "1.0"
+  created: "2026-05-02"
+  modified: "2026-05-02"
+  tags:
+    - Access Governance
+    - IAM
+    - Identity Management
+    - Identity Security
+    - SailPoint
+
+  domains:
+    - name: Identity Management
+      description: "Core concepts for managing digital identities."
+      terms:
+        - term: Identity
+          definition: >-
+            A digital representation of a person or entity within Identity Security Cloud.
+            Identities have lifecycle states, attributes, and relationships to sources.
+          aliases: [User, Subject, Principal]
+          related: [Identity Profile, Source, Lifecycle State]
+
+        - term: Identity Profile
+          definition: >-
+            A configuration object that defines how source account attributes are
+            mapped to identity attributes, and how lifecycle states are configured.
+          aliases: [Profile]
+          related: [Source, Identity, Attribute Mapping]
+
+        - term: Lifecycle State
+          definition: >-
+            The current phase of an identity in the organization (e.g., Active,
+            Inactive, Pre-hire, Leaver). Drives provisioning and deprovisioning rules.
+          aliases: [Lifecycle, Identity State]
+          related: [Identity, Provisioning]
+
+        - term: Source
+          definition: >-
+            An authoritative or non-authoritative data source (e.g., Active Directory,
+            HR system) that feeds identity and account data into Identity Security Cloud.
+          aliases: [Connector, Integration]
+          related: [Account, Identity, Attribute Mapping]
+
+        - term: Account
+          definition: >-
+            An individual's record on a specific source system, linked to an identity.
+          aliases: [Account Record]
+          related: [Source, Identity, Entitlement]
+
+    - name: Access Governance
+      description: "Terms related to controlling and reviewing access rights."
+      terms:
+        - term: Access Profile
+          definition: >-
+            A named collection of entitlements grouped together for provisioning,
+            access requests, and role composition. The fundamental unit of access packaging.
+          aliases: [Access Bundle]
+          related: [Entitlement, Role, Provisioning]
+
+        - term: Entitlement
+          definition: >-
+            A specific permission or access right on a source system (e.g., AD group
+            membership, Salesforce permission set).
+          aliases: [Permission, Access Right, Privilege]
+          related: [Access Profile, Source, Account]
+
+        - term: Role
+          definition: >-
+            The broadest level of access packaging, grouping one or more access profiles.
+            Roles can be automatically assigned based on role criteria matching identity attributes.
+          aliases: [Role Definition, Business Role]
+          related: [Access Profile, Entitlement, Role Mining]
+
+        - term: Role Mining
+          definition: >-
+            AI-driven analysis of existing access patterns to discover candidate roles
+            that reflect how access is actually used in the organization.
+          related: [Role, Identity, Access Profile]
+
+        - term: Access Request
+          definition: >-
+            A self-service request by an identity or their manager to gain access
+            to entitlements, access profiles, or roles.
+          related: [Access Profile, Role, Approval Workflow]
+
+    - name: Certifications
+      description: "Terms related to periodic access review and compliance."
+      terms:
+        - term: Certification
+          definition: >-
+            A structured access review process where reviewers confirm or revoke
+            identities' access to entitlements, access profiles, or roles.
+          aliases: [Access Certification, Access Review, Recertification]
+          related: [Campaign, Reviewer, Certification Decision]
+
+        - term: Campaign
+          definition: >-
+            An organizational initiative that launches multiple certifications,
+            typically on a periodic basis (quarterly, annually) for compliance.
+          aliases: [Certification Campaign, Review Campaign]
+          related: [Certification, Reviewer]
+
+        - term: Certification Decision
+          definition: >-
+            A reviewer's choice on a certification item: Approve (retain access),
+            Revoke (remove access), or Reassign (delegate to another reviewer).
+          aliases: [Decision, Review Decision]
+          related: [Certification, Reviewer, Sign-Off]
+
+        - term: Sign-Off
+          definition: >-
+            The final action that closes a certification, indicating all items
+            have been reviewed and decided upon.
+          related: [Certification, Certification Decision]
+
+        - term: Reviewer
+          definition: >-
+            A person assigned to review and make decisions on certification items.
+            Can be a manager, application owner, or compliance officer.
+          related: [Certification, Certification Decision]
+
+    - name: Security & Compliance
+      description: "Terms for audit, compliance, and security controls."
+      terms:
+        - term: Governance
+          definition: >-
+            The policies, processes, and controls used to manage and audit who
+            has access to what within the organization.
+          related: [Certification, Role, Access Policy]
+
+        - term: Separation of Duties (SoD)
+          definition: >-
+            A policy control that prevents a single identity from holding
+            conflicting access rights that together could enable fraud or error.
+          aliases: [SoD, Conflict Detection]
+          related: [Policy, Entitlement, Role]
+
+        - term: Provisioning
+          definition: >-
+            The automated process of granting or revoking access to systems
+            based on identity lifecycle events, access requests, or role assignments.
+          aliases: [Deprovisioning, Joiner-Mover-Leaver]
+          related: [Source, Account, Lifecycle State]
+
+        - term: Transform
+          definition: >-
+            A configuration that maps or modifies source attribute values when
+            constructing identity attributes (e.g., concatenate first and last name).
+          related: [Identity Profile, Attribute Mapping]
+
+    - name: Developer & Integration
+      description: "Vocabulary for API developers and integration engineers."
+      terms:
+        - term: Tenant
+          definition: >-
+            An isolated Identity Security Cloud environment for an organization,
+            identified by a unique subdomain (e.g., mycompany.identitynow.com).
+          related: [OAuth2, API, Environment]
+
+        - term: Personal Access Token (PAT)
+          definition: >-
+            A long-lived bearer token generated in Identity Security Cloud for
+            programmatic API access without going through OAuth2 authorization code flow.
+          aliases: [PAT, Bearer Token]
+          related: [OAuth2, API Authentication]
+
+        - term: Event Trigger
+          definition: >-
+            A webhook-style mechanism that fires when specific events occur in
+            Identity Security Cloud (e.g., identity created, certification completed).
+          aliases: [Trigger, Webhook]
+          related: [Workflow, Identity, Certification]
+
+        - term: Workflow
+          definition: >-
+            An automated process built in Identity Security Cloud that executes
+            a sequence of actions in response to triggers.
+          related: [Event Trigger, Provisioning, Certification]
+
+        - term: SaaS Connectivity
+          definition: >-
+            SailPoint's framework for building custom connectors that integrate
+            any SaaS application with Identity Security Cloud using JavaScript.
+          related: [Source, Connector, Integration]

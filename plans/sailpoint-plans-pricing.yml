@@ -4,165 +4,47 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: SailPoint
 providerId: sailpoint
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
+  - Identity Security
+  - IAM
   - Access Governance
   - Compliance
-  - IAM
-  - Identity Management
-  - Identity Security
-  - Security
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+  - B2B
+description: SailPoint Identity Security Cloud is an enterprise IGA platform sold under annual subscription
+  contracts sized by identity counts and module mix (Standard / Business / Business Plus). Public marketing
+  pages do not list per-identity prices; commercial terms are negotiated through SailPoint sales.
+sources:
+  - https://www.sailpoint.com/products/identity-security-cloud
+  - https://developer.sailpoint.com/docs/api/getting-started
+notes: SailPoint does not publish per-identity / per-seat prices in the public surface. Plan tiers (Standard,
+  Business, Business Plus, plus add-on suites for AI, Non-Employee, Data Access Security) are referenced
+  in marketing but not priced. This artifact is intentionally a single Contact Sales plan.
 plans:
-  - id: sailpoint-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the SailPoint API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: SailPoint
-      - name: SailPoint Identity Security Cloud V3 API
-      - name: SailPoint Identity Security Cloud V2024 API
-      - name: SailPoint Identity Security Cloud V2025 API
-      - name: SailPoint Identity Security Cloud Beta API
-      - name: SailPoint IdentityIQ SCIM API
-      - name: SailPoint Non-Employee Risk Management V1 API
-      - name: SailPoint Non-Employee Risk Management V2025 API
-  - id: sailpoint-pro
-    name: Professional
-    type: paid
-    description: Production tier for SailPoint. Provides higher quotas, priority support, and access to
-      the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: SailPoint
-      - name: SailPoint Identity Security Cloud V3 API
-      - name: SailPoint Identity Security Cloud V2024 API
-      - name: SailPoint Identity Security Cloud V2025 API
-      - name: SailPoint Identity Security Cloud Beta API
-      - name: SailPoint IdentityIQ SCIM API
-      - name: SailPoint Non-Employee Risk Management V1 API
-      - name: SailPoint Non-Employee Risk Management V2025 API
-      - name: SailPoint Identity Security Cloud V2026 API
-  - id: sailpoint-enterprise
-    name: Enterprise
+  - id: sailpoint-contact-sales
+    name: Contact Sales
     type: enterprise
-    description: Custom-negotiated tier for SailPoint. Includes dedicated capacity, contractual SLAs,
-      security review, data residency options, and named technical account management.
+    description: Annual subscription to SailPoint Identity Security Cloud, sized by identity count, module
+      tier (Standard / Business / Business Plus), and add-on capabilities. API access to V3 endpoints
+      is included with a paid subscription, subject to documented rate limits.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Identity Security Cloud Subscription
+        name: subscription
+        type: subscription
+        metric: varies
         limit: -1
-        timeFrame: month
-        geo: configurable
-        domains: []
+        timeFrame: year
+        geo: global
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains: []
-        unit: 1
-        price: custom
-        userMultiplied: false
+        price: contact sales
+        userMultiplied: true
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: SailPoint
-      - name: SailPoint Identity Security Cloud V3 API
-      - name: SailPoint Identity Security Cloud V2024 API
-      - name: SailPoint Identity Security Cloud V2025 API
-      - name: SailPoint Identity Security Cloud Beta API
-      - name: SailPoint IdentityIQ SCIM API
-      - name: SailPoint Non-Employee Risk Management V1 API
-      - name: SailPoint Non-Employee Risk Management V2025 API
-      - name: SailPoint Identity Security Cloud V2026 API
+      - name: Standard / Business / Business Plus tiers
+      - name: V3 REST API access (100 req / 10s per access_token rate limit)
+      - name: Connectors and source integrations
+      - name: Access certification and policy modules
+      - name: Add-on suites (AI, Non-Employee Risk Management, Data Access Security)
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
-  - name: SailPoint Technologies
-    email: developer@sailpoint.com
-    url: https://developer.sailpoint.com

@@ -4,130 +4,39 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: SailPoint
 providerId: sailpoint
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
-  - Access Governance
-  - Compliance
-  - IAM
-  - Identity Management
   - Identity Security
-  - Security
+  - IAM
+  - B2B
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the SailPoint API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
+description: SailPoint Identity Security Cloud enforces a 100 requests / 10 seconds rate limit per access_token
+  across V3 API calls through the API gateway. Throttled responses return HTTP 429 with a Retry-After
+  header indicating seconds until the limit resets. Limits are scoped to the access token rather than
+  per-tenant aggregate, so distributing across tokens is the documented scaling lever.
+sources:
+  - https://developer.sailpoint.com/docs/api/getting-started
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
   retryAfter: Retry-After
-  policy: RateLimit-Policy
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - SailPoint
-      - SailPoint Identity Security Cloud V3 API
-      - SailPoint Identity Security Cloud V2024 API
-      - SailPoint Identity Security Cloud V2025 API
-      - SailPoint Identity Security Cloud Beta API
-      - SailPoint IdentityIQ SCIM API
-      - SailPoint Non-Employee Risk Management V1 API
-      - SailPoint Non-Employee Risk Management V2025 API
-      - SailPoint Identity Security Cloud V2026 API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - SailPoint
-      - SailPoint Identity Security Cloud V3 API
-      - SailPoint Identity Security Cloud V2024 API
-      - SailPoint Identity Security Cloud V2025 API
-      - SailPoint Identity Security Cloud Beta API
-      - SailPoint IdentityIQ SCIM API
-      - SailPoint Non-Employee Risk Management V1 API
-      - SailPoint Non-Employee Risk Management V2025 API
-      - SailPoint Identity Security Cloud V2026 API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
+  - name: V3 API gateway
+    scope: access_token
+    metric: requests_per_window
     limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - SailPoint
-      - SailPoint Identity Security Cloud V3 API
-      - SailPoint Identity Security Cloud V2024 API
-      - SailPoint Identity Security Cloud V2025 API
-      - SailPoint Identity Security Cloud Beta API
-      - SailPoint IdentityIQ SCIM API
-      - SailPoint Non-Employee Risk Management V1 API
-      - SailPoint Non-Employee Risk Management V2025 API
-      - SailPoint Identity Security Cloud V2026 API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - SailPoint
-      - SailPoint Identity Security Cloud V3 API
-      - SailPoint Identity Security Cloud V2024 API
-      - SailPoint Identity Security Cloud V2025 API
-      - SailPoint Identity Security Cloud Beta API
-      - SailPoint IdentityIQ SCIM API
-      - SailPoint Non-Employee Risk Management V1 API
-      - SailPoint Non-Employee Risk Management V2025 API
-      - SailPoint Identity Security Cloud V2026 API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - SailPoint
-      - SailPoint Identity Security Cloud V3 API
-      - SailPoint Identity Security Cloud V2024 API
-      - SailPoint Identity Security Cloud V2025 API
-      - SailPoint Identity Security Cloud Beta API
-      - SailPoint IdentityIQ SCIM API
-      - SailPoint Non-Employee Risk Management V1 API
-      - SailPoint Non-Employee Risk Management V2025 API
-      - SailPoint Identity Security Cloud V2026 API
+    timeFrame: second
+    notes: 100 requests per 10 seconds per access_token across V3 endpoints.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Retry-After signaling
+    description: Throttled responses include a Retry-After header indicating seconds to wait before retrying.
+  - name: Token-scoped throttling
+    description: The 100 / 10s limit is per access_token. High-throughput integrations should mint multiple
+      tokens (per integration / per service account) rather than share a single token.
+  - name: Exponential backoff
+    description: Clients should apply exponential backoff with jitter on 429 responses, honoring the Retry-After
+      header.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
-  - name: SailPoint Technologies
-    email: developer@sailpoint.com
-    url: https://developer.sailpoint.com

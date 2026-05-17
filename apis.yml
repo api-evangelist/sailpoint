@@ -6,7 +6,7 @@ description: >-
   SailPoint delivers cloud-native IAM, certification automation, role mining, AI-driven
   recommendations, and developer-friendly APIs for integrating identity into any workflow.
 type: Index
-x-type: company
+kind: company
 position: Consumer
 access: 3rd-Party
 image: https://www.sailpoint.com/wp-content/uploads/2021/02/sailpoint-logo.svg
@@ -154,7 +154,7 @@ common:
   - url: https://developer.sailpoint.com
     type: Developer Portal
   - url: https://developer.sailpoint.com/idn/api/getting-started
-    type: Getting Started
+    type: GettingStarted
   - url: https://developer.sailpoint.com/idn/tools/sdk
     type: SDKs
   - url: https://developer.sailpoint.com/discuss
@@ -164,11 +164,11 @@ common:
   - url: https://www.sailpoint.com/support
     type: Support
   - url: https://status.sailpoint.com
-    type: Status Page
+    type: StatusPage
   - url: https://www.sailpoint.com/legal/terms-of-use
-    type: Terms of Service
+    type: TermsOfService
   - url: https://www.sailpoint.com/legal/privacy
-    type: Privacy Policy
+    type: PrivacyPolicy
   - url: https://developer.sailpoint.com/docs/api/authentication/
     type: Authentication
   - url: https://developer.sailpoint.com/docs/api/postman-collections/
@@ -180,7 +180,7 @@ common:
   - url: https://github.com/sailpoint-oss/api-specs
     type: OpenAPI Source
   - url: https://github.com/sailpoint-oss
-    type: GitHub Organization
+    type: GitHubOrganization
   - url: https://developer.sailpoint.com/docs/tools/sdk/python/
     type: Python SDK
   - url: https://developer.sailpoint.com/docs/tools/sdk/typescript/

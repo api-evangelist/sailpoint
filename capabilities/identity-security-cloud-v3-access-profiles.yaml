@@ -1,0 +1,360 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Identity Security Cloud V3 API — Access Profiles
+  description: 'Identity Security Cloud V3 API — Access Profiles. 7 operations. Lead operation: List access profiles. Self-contained
+    Naftiko capability covering one Sailpoint business surface.'
+  tags:
+  - Sailpoint
+  - Access Profiles
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAILPOINT_API_KEY: SAILPOINT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: identity-security-cloud-v3-access-profiles
+    baseUri: https://{tenant}.api.identitynow.com/v3
+    description: Identity Security Cloud V3 API — Access Profiles business capability. Self-contained, no shared references.
+    resources:
+    - name: access-profiles
+      path: /access-profiles
+      operations:
+      - name: listaccessprofiles
+        method: GET
+        description: List access profiles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: for-subadmin
+          in: query
+          type: string
+          description: Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN or SOURCE_SUBADMIN
+            identity. The value is either an identity ID or the spe
+        - name: filters
+          in: query
+          type: string
+          description: 'Filter results using the standard syntax. Filtering is supported for the following fields and operators:
+            id (eq, in), name (eq, sw), created (gt, ge, le), modif'
+        - name: sorters
+          in: query
+          type: string
+          description: 'Sort results using the standard syntax. Sorting is supported for the following fields: name, created,
+            modified.'
+        - name: for-segment-ids
+          in: query
+          type: string
+          description: Filters access profiles to only those assigned to the segment(s) with the specified IDs. If segmentation
+            is unavailable, specifying this parameter results in an
+        - name: include-unsegmented
+          in: query
+          type: boolean
+          description: Indicates whether the response should include unsegmented access profiles. If for-segment-ids is absent
+            or empty, specifying this as false results in an error.
+      - name: createaccessprofile
+        method: POST
+        description: Create an access profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: access-profiles-bulk-delete
+      path: /access-profiles/bulk-delete
+      operations:
+      - name: bulkdeleteaccessprofiles
+        method: POST
+        description: Bulk delete access profiles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: access-profiles-id
+      path: /access-profiles/{id}
+      operations:
+      - name: getaccessprofile
+        method: GET
+        description: Get an access profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The access profile ID.
+          required: true
+      - name: patchaccessprofile
+        method: PATCH
+        description: Patch an access profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The access profile ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteaccessprofile
+        method: DELETE
+        description: Delete an access profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The access profile ID.
+          required: true
+    - name: access-profiles-id-entitlements
+      path: /access-profiles/{id}/entitlements
+      operations:
+      - name: listaccessprofileentitlements
+        method: GET
+        description: List access profile entitlements
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The access profile ID.
+          required: true
+        - name: filters
+          in: query
+          type: string
+          description: 'Filter results using the standard syntax. Filtering is supported for the following fields: name (eq,
+            sw).'
+        - name: sorters
+          in: query
+          type: string
+          description: 'Sort results using the standard syntax. Sorting is supported for the following fields: name, created,
+            modified.'
+    authentication:
+      type: bearer
+      token: '{{env.SAILPOINT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: identity-security-cloud-v3-access-profiles-rest
+    port: 8080
+    description: REST adapter for Identity Security Cloud V3 API — Access Profiles. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/access-profiles
+      name: access-profiles
+      description: REST surface for access-profiles.
+      operations:
+      - method: GET
+        name: listaccessprofiles
+        description: List access profiles
+        call: identity-security-cloud-v3-access-profiles.listaccessprofiles
+        with:
+          for-subadmin: rest.for-subadmin
+          filters: rest.filters
+          sorters: rest.sorters
+          for-segment-ids: rest.for-segment-ids
+          include-unsegmented: rest.include-unsegmented
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createaccessprofile
+        description: Create an access profile
+        call: identity-security-cloud-v3-access-profiles.createaccessprofile
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/access-profiles/bulk-delete
+      name: access-profiles-bulk-delete
+      description: REST surface for access-profiles-bulk-delete.
+      operations:
+      - method: POST
+        name: bulkdeleteaccessprofiles
+        description: Bulk delete access profiles
+        call: identity-security-cloud-v3-access-profiles.bulkdeleteaccessprofiles
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/access-profiles/{id}
+      name: access-profiles-id
+      description: REST surface for access-profiles-id.
+      operations:
+      - method: GET
+        name: getaccessprofile
+        description: Get an access profile
+        call: identity-security-cloud-v3-access-profiles.getaccessprofile
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchaccessprofile
+        description: Patch an access profile
+        call: identity-security-cloud-v3-access-profiles.patchaccessprofile
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteaccessprofile
+        description: Delete an access profile
+        call: identity-security-cloud-v3-access-profiles.deleteaccessprofile
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/access-profiles/{id}/entitlements
+      name: access-profiles-id-entitlements
+      description: REST surface for access-profiles-id-entitlements.
+      operations:
+      - method: GET
+        name: listaccessprofileentitlements
+        description: List access profile entitlements
+        call: identity-security-cloud-v3-access-profiles.listaccessprofileentitlements
+        with:
+          id: rest.id
+          filters: rest.filters
+          sorters: rest.sorters
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: identity-security-cloud-v3-access-profiles-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Identity Security Cloud V3 API — Access Profiles. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-access-profiles
+      description: List access profiles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: identity-security-cloud-v3-access-profiles.listaccessprofiles
+      with:
+        for-subadmin: tools.for-subadmin
+        filters: tools.filters
+        sorters: tools.sorters
+        for-segment-ids: tools.for-segment-ids
+        include-unsegmented: tools.include-unsegmented
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-access-profile
+      description: Create an access profile
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: identity-security-cloud-v3-access-profiles.createaccessprofile
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: bulk-delete-access-profiles
+      description: Bulk delete access profiles
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: identity-security-cloud-v3-access-profiles.bulkdeleteaccessprofiles
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-access-profile
+      description: Get an access profile
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: identity-security-cloud-v3-access-profiles.getaccessprofile
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patch-access-profile
+      description: Patch an access profile
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: identity-security-cloud-v3-access-profiles.patchaccessprofile
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-access-profile
+      description: Delete an access profile
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: identity-security-cloud-v3-access-profiles.deleteaccessprofile
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-access-profile-entitlements
+      description: List access profile entitlements
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: identity-security-cloud-v3-access-profiles.listaccessprofileentitlements
+      with:
+        id: tools.id
+        filters: tools.filters
+        sorters: tools.sorters
+      outputParameters:
+      - type: object
+        mapping: $.

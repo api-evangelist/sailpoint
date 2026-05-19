@@ -1,0 +1,458 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Identity Security Cloud V3 API — Certifications
+  description: 'Identity Security Cloud V3 API — Certifications. 9 operations. Lead operation: List identity campaign certifications.
+    Self-contained Naftiko capability covering one Sailpoint business surface.'
+  tags:
+  - Sailpoint
+  - Certifications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAILPOINT_API_KEY: SAILPOINT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: identity-security-cloud-v3-certifications
+    baseUri: https://{tenant}.api.identitynow.com/v3
+    description: Identity Security Cloud V3 API — Certifications business capability. Self-contained, no shared references.
+    resources:
+    - name: certifications
+      path: /certifications
+      operations:
+      - name: listidentitycertifications
+        method: GET
+        description: List identity campaign certifications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filters
+          in: query
+          type: string
+          description: 'Filter results using the standard syntax. Filtering is supported for the following fields: id (eq,
+            in), campaign.id (eq, in), phase (eq), completed (eq).'
+        - name: sorters
+          in: query
+          type: string
+          description: 'Sort results using the standard syntax. Sorting is supported for the following fields: name, due,
+            signed.'
+    - name: certifications-id
+      path: /certifications/{id}
+      operations:
+      - name: getidentitycertification
+        method: GET
+        description: Get an identity certification
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The certification ID.
+          required: true
+    - name: certifications-id-access-review-items
+      path: /certifications/{id}/access-review-items
+      operations:
+      - name: listcertificationaccessreviewitems
+        method: GET
+        description: List access review items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The certification ID.
+          required: true
+        - name: filters
+          in: query
+          type: string
+          description: 'Filter results using the standard syntax. Filtering is supported for the following fields: type (eq),
+            status (eq).'
+        - name: sorters
+          in: query
+          type: string
+          description: 'Sort results using the standard syntax. Sorting is supported for the following fields: name, type,
+            status.'
+    - name: certifications-id-decide
+      path: /certifications/{id}/decide
+      operations:
+      - name: makecertificationdecision
+        method: POST
+        description: Decide on a certification item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The certification ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: certifications-id-reassign
+      path: /certifications/{id}/reassign
+      operations:
+      - name: reassignidentitycertification
+        method: POST
+        description: Reassign identities or items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The certification ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: certifications-id-reviewers
+      path: /certifications/{id}/reviewers
+      operations:
+      - name: listcertificationreviewers
+        method: GET
+        description: List certification reviewers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The certification ID.
+          required: true
+    - name: certifications-id-sign-off
+      path: /certifications/{id}/sign-off
+      operations:
+      - name: signoffidentitycertification
+        method: POST
+        description: Finalize identity certification decisions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The certification ID.
+          required: true
+    - name: certifications-id-tasks
+      path: /certifications/{id}/tasks
+      operations:
+      - name: listcertificationtasks
+        method: GET
+        description: List pending certification tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The certification ID.
+          required: true
+    - name: certifications-id-tasks-taskId
+      path: /certifications/{id}/tasks/{taskId}
+      operations:
+      - name: getcertificationtask
+        method: GET
+        description: Get a certification task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The certification ID.
+          required: true
+        - name: taskId
+          in: path
+          type: string
+          description: The certification task ID.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SAILPOINT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: identity-security-cloud-v3-certifications-rest
+    port: 8080
+    description: REST adapter for Identity Security Cloud V3 API — Certifications. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/certifications
+      name: certifications
+      description: REST surface for certifications.
+      operations:
+      - method: GET
+        name: listidentitycertifications
+        description: List identity campaign certifications
+        call: identity-security-cloud-v3-certifications.listidentitycertifications
+        with:
+          filters: rest.filters
+          sorters: rest.sorters
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/certifications/{id}
+      name: certifications-id
+      description: REST surface for certifications-id.
+      operations:
+      - method: GET
+        name: getidentitycertification
+        description: Get an identity certification
+        call: identity-security-cloud-v3-certifications.getidentitycertification
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/certifications/{id}/access-review-items
+      name: certifications-id-access-review-items
+      description: REST surface for certifications-id-access-review-items.
+      operations:
+      - method: GET
+        name: listcertificationaccessreviewitems
+        description: List access review items
+        call: identity-security-cloud-v3-certifications.listcertificationaccessreviewitems
+        with:
+          id: rest.id
+          filters: rest.filters
+          sorters: rest.sorters
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/certifications/{id}/decide
+      name: certifications-id-decide
+      description: REST surface for certifications-id-decide.
+      operations:
+      - method: POST
+        name: makecertificationdecision
+        description: Decide on a certification item
+        call: identity-security-cloud-v3-certifications.makecertificationdecision
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/certifications/{id}/reassign
+      name: certifications-id-reassign
+      description: REST surface for certifications-id-reassign.
+      operations:
+      - method: POST
+        name: reassignidentitycertification
+        description: Reassign identities or items
+        call: identity-security-cloud-v3-certifications.reassignidentitycertification
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/certifications/{id}/reviewers
+      name: certifications-id-reviewers
+      description: REST surface for certifications-id-reviewers.
+      operations:
+      - method: GET
+        name: listcertificationreviewers
+        description: List certification reviewers
+        call: identity-security-cloud-v3-certifications.listcertificationreviewers
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/certifications/{id}/sign-off
+      name: certifications-id-sign-off
+      description: REST surface for certifications-id-sign-off.
+      operations:
+      - method: POST
+        name: signoffidentitycertification
+        description: Finalize identity certification decisions
+        call: identity-security-cloud-v3-certifications.signoffidentitycertification
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/certifications/{id}/tasks
+      name: certifications-id-tasks
+      description: REST surface for certifications-id-tasks.
+      operations:
+      - method: GET
+        name: listcertificationtasks
+        description: List pending certification tasks
+        call: identity-security-cloud-v3-certifications.listcertificationtasks
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/certifications/{id}/tasks/{taskid}
+      name: certifications-id-tasks-taskid
+      description: REST surface for certifications-id-tasks-taskId.
+      operations:
+      - method: GET
+        name: getcertificationtask
+        description: Get a certification task
+        call: identity-security-cloud-v3-certifications.getcertificationtask
+        with:
+          id: rest.id
+          taskId: rest.taskId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: identity-security-cloud-v3-certifications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Identity Security Cloud V3 API — Certifications. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-identity-campaign-certifications
+      description: List identity campaign certifications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: identity-security-cloud-v3-certifications.listidentitycertifications
+      with:
+        filters: tools.filters
+        sorters: tools.sorters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-identity-certification
+      description: Get an identity certification
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: identity-security-cloud-v3-certifications.getidentitycertification
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-access-review-items
+      description: List access review items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: identity-security-cloud-v3-certifications.listcertificationaccessreviewitems
+      with:
+        id: tools.id
+        filters: tools.filters
+        sorters: tools.sorters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: decide-certification-item
+      description: Decide on a certification item
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: identity-security-cloud-v3-certifications.makecertificationdecision
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reassign-identities-items
+      description: Reassign identities or items
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: identity-security-cloud-v3-certifications.reassignidentitycertification
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-certification-reviewers
+      description: List certification reviewers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: identity-security-cloud-v3-certifications.listcertificationreviewers
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: finalize-identity-certification-decisions
+      description: Finalize identity certification decisions
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: identity-security-cloud-v3-certifications.signoffidentitycertification
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-pending-certification-tasks
+      description: List pending certification tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: identity-security-cloud-v3-certifications.listcertificationtasks
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-certification-task
+      description: Get a certification task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: identity-security-cloud-v3-certifications.getcertificationtask
+      with:
+        id: tools.id
+        taskId: tools.taskId
+      outputParameters:
+      - type: object
+        mapping: $.

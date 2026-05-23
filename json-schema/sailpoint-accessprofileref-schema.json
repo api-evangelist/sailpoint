@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccessProfileRef",
+  "title": "AccessProfileRef",
+  "type": "object",
+  "description": "Reference to an access profile.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The access profile ID.",
+      "examples": [
+        "ff808081751e6e129f1518161919ecca"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "The access profile object type.",
+      "enum": [
+        "ACCESS_PROFILE"
+      ],
+      "examples": [
+        "ACCESS_PROFILE"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable display name of the access profile.",
+      "examples": [
+        "Access Profile 2567"
+      ]
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReviewReassign",
+  "title": "ReviewReassign",
+  "type": "object",
+  "description": "Request body to reassign a certification review.",
+  "required": [
+    "reassign",
+    "reason"
+  ],
+  "properties": {
+    "reassign": {
+      "type": "array",
+      "description": "List of reassignment items.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the item or identity to reassign."
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of item to reassign.",
+            "enum": [
+              "TARGET_SUMMARY",
+              "ACCESS_REVIEW_ITEM"
+            ]
+          }
+        }
+      }
+    },
+    "reassignTo": {
+      "$ref": "#/components/schemas/IdentityReference"
+    },
+    "reason": {
+      "type": "string",
+      "description": "The reason for the reassignment.",
+      "examples": [
+        "Reassigning to the appropriate reviewer"
+      ]
+    }
+  }
+}

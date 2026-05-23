@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CertificationDecision",
+  "title": "CertificationDecision",
+  "type": "object",
+  "description": "A decision made on a certification item, approving, revoking, or acknowledging access.",
+  "required": [
+    "id",
+    "decision"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of the access review item being decided.",
+      "examples": [
+        "2c9180857182305e0171993735622948"
+      ]
+    },
+    "decision": {
+      "type": "string",
+      "description": "The decision for the certification item.",
+      "enum": [
+        "APPROVE",
+        "REVOKE",
+        "ACKNOWLEDGE"
+      ],
+      "examples": [
+        "APPROVE"
+      ]
+    },
+    "bulk": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a bulk decision applying to multiple items."
+    },
+    "comments": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Comments to accompany the decision.",
+      "examples": [
+        "Access is still required for this project"
+      ]
+    }
+  }
+}

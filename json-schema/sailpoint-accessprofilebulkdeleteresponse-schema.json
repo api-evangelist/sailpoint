@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccessProfileBulkDeleteResponse",
+  "title": "AccessProfileBulkDeleteResponse",
+  "type": "object",
+  "description": "Response body for bulk deleting access profiles.",
+  "properties": {
+    "pending": {
+      "type": "array",
+      "description": "IDs of access profiles queued for deletion.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "inUse": {
+      "type": "array",
+      "description": "Details about access profiles that could not be deleted because they are in use.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "accessProfileId": {
+            "type": "string",
+            "description": "The access profile ID."
+          },
+          "usedBy": {
+            "type": "array",
+            "description": "Objects using this access profile.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

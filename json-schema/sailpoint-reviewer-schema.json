@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Reviewer",
+  "title": "Reviewer",
+  "type": "object",
+  "description": "The reviewer of a certification.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The reviewer ID.",
+      "examples": [
+        "ef38f94347e94562b5bb8424a56397d8"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The reviewer name.",
+      "examples": [
+        "Reviewer Name"
+      ]
+    },
+    "email": {
+      "type": "string",
+      "description": "The reviewer email address.",
+      "examples": [
+        "reviewer@test.com"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of the reviewing identity.",
+      "enum": [
+        "IDENTITY"
+      ],
+      "examples": [
+        "IDENTITY"
+      ]
+    },
+    "created": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "The date the reviewing identity was created.",
+      "examples": [
+        "2018-06-25T20:22:28.104Z"
+      ]
+    },
+    "modified": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "The date the reviewing identity was last modified.",
+      "examples": [
+        "2018-06-25T20:22:28.104Z"
+      ]
+    }
+  }
+}

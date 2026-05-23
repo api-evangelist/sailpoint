@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Entitlement",
+  "title": "Entitlement",
+  "type": "object",
+  "description": "An entitlement representing access rights on a source.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The entitlement ID.",
+      "examples": [
+        "2c91809773dee32014e13e122092014e"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The entitlement name.",
+      "examples": [
+        "CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The entitlement description.",
+      "examples": [
+        "Entitlement granting access to the developer tools"
+      ]
+    },
+    "attribute": {
+      "type": "string",
+      "description": "The name of the entitlement attribute.",
+      "examples": [
+        "memberOf"
+      ]
+    },
+    "value": {
+      "type": "string",
+      "description": "The value of the entitlement.",
+      "examples": [
+        "CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local"
+      ]
+    },
+    "sourceSchemaObjectType": {
+      "type": "string",
+      "description": "The object type of the source schema.",
+      "examples": [
+        "group"
+      ]
+    },
+    "privileged": {
+      "type": "boolean",
+      "description": "Whether the entitlement is privileged.",
+      "default": false
+    },
+    "cloudGoverned": {
+      "type": "boolean",
+      "description": "Whether the entitlement is governed in the cloud.",
+      "default": false
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the entitlement was created.",
+      "readOnly": true
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the entitlement was last modified.",
+      "readOnly": true
+    },
+    "source": {
+      "$ref": "#/components/schemas/EntitlementSourceRef"
+    },
+    "owner": {
+      "$ref": "#/components/schemas/OwnerReference"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Revocability",
+  "title": "Revocability",
+  "type": [
+    "object",
+    "null"
+  ],
+  "description": "Revocation request configuration for the object.",
+  "properties": {
+    "commentsRequired": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether comments are required for revocation requests."
+    },
+    "denialCommentsRequired": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether comments are required for denial of revocation requests."
+    },
+    "approvalSchemes": {
+      "type": "array",
+      "description": "List of approval schemes for revocation requests.",
+      "items": {
+        "$ref": "#/components/schemas/ApprovalScheme"
+      }
+    }
+  }
+}

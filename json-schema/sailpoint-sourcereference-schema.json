@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SourceReference",
+  "title": "SourceReference",
+  "type": "object",
+  "description": "Reference to a source.",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "The source object type.",
+      "enum": [
+        "SOURCE"
+      ],
+      "examples": [
+        "SOURCE"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "description": "The source ID.",
+      "examples": [
+        "2c9180835d191a86015d28455b4b232a"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The source name.",
+      "examples": [
+        "HR Active Directory"
+      ]
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RequestabilityForRole",
+  "title": "RequestabilityForRole",
+  "type": [
+    "object",
+    "null"
+  ],
+  "description": "Access request configuration for a role.",
+  "properties": {
+    "commentsRequired": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether comments are required for access requests."
+    },
+    "denialCommentsRequired": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether comments are required for denial."
+    },
+    "approvalSchemes": {
+      "type": "array",
+      "description": "List of approval schemes for access requests.",
+      "items": {
+        "$ref": "#/components/schemas/ApprovalScheme"
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RoleCriteriaKey",
+  "title": "RoleCriteriaKey",
+  "type": [
+    "object",
+    "null"
+  ],
+  "description": "The key element for role criteria.",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "The type of criteria key.",
+      "enum": [
+        "IDENTITY",
+        "ACCOUNT",
+        "ENTITLEMENT"
+      ],
+      "examples": [
+        "IDENTITY"
+      ]
+    },
+    "property": {
+      "type": "string",
+      "description": "The property name for the criteria.",
+      "examples": [
+        "attribute.department"
+      ]
+    },
+    "sourceId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The ID of the source. Required for ACCOUNT and ENTITLEMENT types.",
+      "examples": [
+        "2c9180867427f3a301745aec18211519"
+      ]
+    }
+  }
+}

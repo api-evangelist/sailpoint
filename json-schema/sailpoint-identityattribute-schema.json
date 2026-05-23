@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IdentityAttribute",
+  "title": "IdentityAttribute",
+  "type": "object",
+  "description": "A public identity attribute key-value pair.",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "The attribute key.",
+      "examples": [
+        "country"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable display name of the attribute.",
+      "examples": [
+        "Country"
+      ]
+    },
+    "value": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The attribute value.",
+      "examples": [
+        "US"
+      ]
+    }
+  }
+}

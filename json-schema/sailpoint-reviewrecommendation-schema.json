@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReviewRecommendation",
+  "title": "ReviewRecommendation",
+  "type": [
+    "object",
+    "null"
+  ],
+  "description": "AI-driven recommendation for the review item.",
+  "properties": {
+    "recommendation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The recommended decision.",
+      "enum": [
+        "APPROVE",
+        "REVOKE",
+        null
+      ],
+      "examples": [
+        "APPROVE"
+      ]
+    },
+    "reasons": {
+      "type": "array",
+      "description": "Reasons for the recommendation.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "The date the recommendation was generated."
+    }
+  }
+}

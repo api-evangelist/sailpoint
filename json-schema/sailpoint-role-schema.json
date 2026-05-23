@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Role",
+  "title": "Role",
+  "type": "object",
+  "description": "A role represents the broadest level of access and groups one or more access profiles. Roles can be automatically assigned to qualified identities based on configured criteria.",
+  "required": [
+    "name",
+    "owner"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The role ID. This field must be left null when creating a role.",
+      "readOnly": true,
+      "examples": [
+        "2c918086749d78830174a1a40e121518"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable display name of the role.",
+      "maxLength": 128,
+      "examples": [
+        "Role 2567"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A human-readable description of the role. Maximum supported length is 2000 characters.",
+      "maxLength": 2000,
+      "examples": [
+        "This role grants developers access to the source code repository and CI/CD pipeline."
+      ]
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the role was created.",
+      "readOnly": true,
+      "examples": [
+        "2021-03-01T22:32:58.104Z"
+      ]
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the role was last modified.",
+      "readOnly": true,
+      "examples": [
+        "2021-03-02T20:22:28.104Z"
+      ]
+    },
+    "owner": {
+      "$ref": "#/components/schemas/OwnerReference"
+    },
+    "accessProfiles": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "List of access profiles associated with the role.",
+      "items": {
+        "$ref": "#/components/schemas/AccessProfileRef"
+      }
+    },
+    "entitlements": {
+      "type": "array",
+      "description": "List of entitlements directly associated with the role.",
+      "items": {
+        "$ref": "#/components/schemas/EntitlementRef"
+      }
+    },
+    "membership": {
+      "$ref": "#/components/schemas/RoleMembershipSelector"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the role is enabled.",
+      "examples": [
+        true
+      ]
+    },
+    "requestable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the role can be the target of access requests.",
+      "examples": [
+        true
+      ]
+    },
+    "accessRequestConfig": {
+      "$ref": "#/components/schemas/RequestabilityForRole"
+    },
+    "revocationRequestConfig": {
+      "$ref": "#/components/schemas/RevocabilityForRole"
+    },
+    "segments": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "List of IDs of segments the role is assigned to.",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        [
+          "f7b1b8a3-5fed-4fd4-ad29-82014e137e19",
+          "29cb6c06-1da8-43ea-8be4-b3125f248f2a"
+        ]
+      ]
+    },
+    "dimensional": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "default": false,
+      "description": "Whether the role is dimensional."
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IdentityCertification",
+  "title": "IdentityCertification",
+  "type": "object",
+  "description": "An identity certification used in access review campaigns to review a user's access to entitlements and approve or remove that access.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The certification ID.",
+      "examples": [
+        "2c9180835d2e5168015d32f890ca1581"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The certification name.",
+      "examples": [
+        "Source Owner Access Review for Employees [source]"
+      ]
+    },
+    "campaign": {
+      "$ref": "#/components/schemas/CampaignReference"
+    },
+    "completed": {
+      "type": "boolean",
+      "description": "Whether all decisions have been made.",
+      "examples": [
+        true
+      ]
+    },
+    "identitiesCompleted": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The number of identities for whom all decisions have been made and are complete.",
+      "examples": [
+        5
+      ]
+    },
+    "identitiesTotal": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The total number of identities in the certification, both complete and incomplete.",
+      "examples": [
+        10
+      ]
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the certification was created.",
+      "examples": [
+        "2018-06-25T20:22:28.104Z"
+      ]
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the certification was last modified.",
+      "examples": [
+        "2018-06-25T20:22:28.104Z"
+      ]
+    },
+    "decisionsMade": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The number of approve/revoke/acknowledge decisions that have been made.",
+      "examples": [
+        20
+      ]
+    },
+    "decisionsTotal": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The total number of approve/revoke/acknowledge decisions.",
+      "examples": [
+        40
+      ]
+    },
+    "due": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "The due date of the certification.",
+      "examples": [
+        "2018-10-19T13:49:37.385Z"
+      ]
+    },
+    "signed": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "The date the reviewer signed off on the certification.",
+      "examples": [
+        "2018-10-19T13:49:37.385Z"
+      ]
+    },
+    "reviewer": {
+      "$ref": "#/components/schemas/Reviewer"
+    },
+    "reassignment": {
+      "$ref": "#/components/schemas/Reassignment"
+    },
+    "hasErrors": {
+      "type": "boolean",
+      "description": "Whether the certification has an error.",
+      "examples": [
+        false
+      ]
+    },
+    "errorMessage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Description of the certification error.",
+      "examples": [
+        "The certification has an error"
+      ]
+    },
+    "phase": {
+      "type": "string",
+      "description": "The current phase of the campaign. STAGED means the campaign is waiting to be activated. ACTIVE means the campaign is active. SIGNED means the reviewer has signed off and it is complete.",
+      "enum": [
+        "STAGED",
+        "ACTIVE",
+        "SIGNED"
+      ],
+      "examples": [
+        "ACTIVE"
+      ]
+    }
+  }
+}

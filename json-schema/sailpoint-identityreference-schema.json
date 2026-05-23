@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IdentityReference",
+  "title": "IdentityReference",
+  "type": [
+    "object",
+    "null"
+  ],
+  "description": "Reference to an identity.",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "The type of the referenced object.",
+      "enum": [
+        "IDENTITY"
+      ],
+      "examples": [
+        "IDENTITY"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "description": "The identity ID.",
+      "examples": [
+        "2c9180a46faadee4016fb4e018c20639"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable display name of the identity.",
+      "examples": [
+        "Thomas Edison"
+      ]
+    }
+  }
+}

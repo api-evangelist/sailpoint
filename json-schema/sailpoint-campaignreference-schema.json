@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CampaignReference",
+  "title": "CampaignReference",
+  "type": "object",
+  "description": "Reference to the campaign associated with the certification.",
+  "required": [
+    "id",
+    "name",
+    "type",
+    "campaignType"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID of the campaign.",
+      "examples": [
+        "ef38f94347e94562b5bb8424a56397d8"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the campaign.",
+      "examples": [
+        "Campaign Name"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of object being referenced.",
+      "enum": [
+        "CAMPAIGN"
+      ],
+      "examples": [
+        "CAMPAIGN"
+      ]
+    },
+    "campaignType": {
+      "type": "string",
+      "description": "The type of the campaign.",
+      "enum": [
+        "MANAGER",
+        "SOURCE_OWNER",
+        "SEARCH"
+      ],
+      "examples": [
+        "MANAGER"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The description of the campaign.",
+      "examples": [
+        "A description of the campaign"
+      ]
+    },
+    "correlatedStatus": {
+      "type": "string",
+      "description": "The correlated status of the campaign. Only SOURCE_OWNER campaigns can be Uncorrelated. An Uncorrelated campaign only includes uncorrelated identities.",
+      "enum": [
+        "CORRELATED",
+        "UNCORRELATED"
+      ],
+      "examples": [
+        "CORRELATED"
+      ]
+    },
+    "mandatoryCommentRequirement": {
+      "type": "string",
+      "description": "Determines whether comments are required for decisions during certification reviews. By default, comments are not required.",
+      "enum": [
+        "ALL_DECISIONS",
+        "REVOKE_ONLY_DECISIONS",
+        "NO_DECISIONS"
+      ],
+      "examples": [
+        "NO_DECISIONS"
+      ]
+    }
+  }
+}

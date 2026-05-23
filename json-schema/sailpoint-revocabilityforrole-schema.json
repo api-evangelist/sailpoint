@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RevocabilityForRole",
+  "title": "RevocabilityForRole",
+  "type": [
+    "object",
+    "null"
+  ],
+  "description": "Revocation request configuration for a role.",
+  "properties": {
+    "commentsRequired": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether comments are required for revocation requests."
+    },
+    "denialCommentsRequired": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether comments are required for denial."
+    },
+    "approvalSchemes": {
+      "type": "array",
+      "description": "List of approval schemes for revocation requests.",
+      "items": {
+        "$ref": "#/components/schemas/ApprovalScheme"
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TaskResultSimplified",
+  "title": "TaskResultSimplified",
+  "type": "object",
+  "description": "A simplified task result for asynchronous operations.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The task ID.",
+      "examples": [
+        "464ae7bf-791e-49fd-b746-06a2e4a89635"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of task.",
+      "examples": [
+        "TASK_RESULT"
+      ]
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The task name."
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccessReviewItem",
+  "title": "AccessReviewItem",
+  "type": "object",
+  "description": "An access review item within a certification, representing access that is being reviewed.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The access review item ID.",
+      "examples": [
+        "2c9180857182305e0171993735622948"
+      ]
+    },
+    "accessSummary": {
+      "$ref": "#/components/schemas/AccessSummary"
+    },
+    "identitySummary": {
+      "$ref": "#/components/schemas/CertificationIdentitySummary"
+    },
+    "decision": {
+      "type": "string",
+      "description": "The current decision for this item.",
+      "enum": [
+        "APPROVE",
+        "REVOKE",
+        "ACKNOWLEDGE"
+      ],
+      "examples": [
+        "APPROVE"
+      ]
+    },
+    "recommendation": {
+      "$ref": "#/components/schemas/ReviewRecommendation"
+    },
+    "comments": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Comments provided with the decision."
+    },
+    "completed": {
+      "type": "boolean",
+      "description": "Whether a decision has been made on this item.",
+      "examples": [
+        false
+      ]
+    }
+  }
+}

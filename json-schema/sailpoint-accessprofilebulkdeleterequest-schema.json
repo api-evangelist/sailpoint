@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccessProfileBulkDeleteRequest",
+  "title": "AccessProfileBulkDeleteRequest",
+  "type": "object",
+  "description": "Request body for bulk deleting access profiles.",
+  "required": [
+    "accessProfileIds"
+  ],
+  "properties": {
+    "accessProfileIds": {
+      "type": "array",
+      "description": "List of access profile IDs to delete.",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        [
+          "2c91808a7190d06e01719938fcd20792",
+          "2c91808a7190d06e01719938fcd20793"
+        ]
+      ]
+    },
+    "bestEffortOnly": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, silently skip access profiles that cannot be deleted."
+    }
+  }
+}

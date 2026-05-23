@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ErrorResponseDto",
+  "title": "ErrorResponseDto",
+  "type": "object",
+  "description": "Error response body.",
+  "properties": {
+    "detailCode": {
+      "type": "string",
+      "description": "Fine-grained error code providing more detail.",
+      "examples": [
+        "400.1 Bad Request Content"
+      ]
+    },
+    "trackingId": {
+      "type": "string",
+      "description": "Unique tracking ID for the error.",
+      "examples": [
+        "e7eab60924f64aa284175b9fa3309599"
+      ]
+    },
+    "messages": {
+      "type": "array",
+      "description": "Generic localized reason for error.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "locale": {
+            "type": "string",
+            "description": "The locale for the message text.",
+            "examples": [
+              "en-US"
+            ]
+          },
+          "localeOrigin": {
+            "type": "string",
+            "description": "An indicator of how the locale was selected.",
+            "enum": [
+              "DEFAULT",
+              "REQUEST"
+            ],
+            "examples": [
+              "DEFAULT"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "description": "The actual text of the error message.",
+            "examples": [
+              "The request was syntactically correct but its content is semantically invalid."
+            ]
+          }
+        }
+      }
+    },
+    "causes": {
+      "type": "array",
+      "description": "Plain-text descriptive reasons to provide additional detail to the text provided in the messages field.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "locale": {
+            "type": "string",
+            "examples": [
+              "en-US"
+            ]
+          },
+          "localeOrigin": {
+            "type": "string",
+            "enum": [
+              "DEFAULT",
+              "REQUEST"
+            ]
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

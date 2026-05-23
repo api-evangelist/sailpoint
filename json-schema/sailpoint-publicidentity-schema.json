@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PublicIdentity",
+  "title": "PublicIdentity",
+  "type": "object",
+  "description": "Details about a public identity.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The identity ID.",
+      "examples": [
+        "2c9180857182305e0171993735622948"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable display name of the identity.",
+      "examples": [
+        "Alison Ferguso"
+      ]
+    },
+    "alias": {
+      "type": "string",
+      "description": "Alternate unique identifier for the identity.",
+      "examples": [
+        "alison.ferguso"
+      ]
+    },
+    "email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Email address of the identity.",
+      "examples": [
+        "alison.ferguso@acme-solar.com"
+      ]
+    },
+    "status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The lifecycle status for the identity.",
+      "examples": [
+        "Active"
+      ]
+    },
+    "identityState": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The current state of the identity, which determines how Identity Security Cloud interacts with the identity. Active identities are included in identity picklists in Request Center, identity processing, and more. Inactive identities are excluded from these features.",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE_SHORT_TERM",
+        "INACTIVE_LONG_TERM",
+        null
+      ],
+      "examples": [
+        "ACTIVE"
+      ]
+    },
+    "manager": {
+      "$ref": "#/components/schemas/IdentityReference"
+    },
+    "attributes": {
+      "type": "array",
+      "description": "The public identity attributes of the identity.",
+      "items": {
+        "$ref": "#/components/schemas/IdentityAttribute"
+      }
+    }
+  }
+}

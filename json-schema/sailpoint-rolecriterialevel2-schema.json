@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RoleCriteriaLevel2",
+  "title": "RoleCriteriaLevel2",
+  "type": "object",
+  "description": "Second-level role criteria expression.",
+  "properties": {
+    "operation": {
+      "type": "string",
+      "enum": [
+        "EQUALS",
+        "NOT_EQUALS",
+        "CONTAINS",
+        "STARTS_WITH",
+        "ENDS_WITH",
+        "AND",
+        "OR"
+      ]
+    },
+    "key": {
+      "$ref": "#/components/schemas/RoleCriteriaKey"
+    },
+    "stringValue": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "children": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/components/schemas/RoleCriteriaLevel3"
+      }
+    }
+  }
+}

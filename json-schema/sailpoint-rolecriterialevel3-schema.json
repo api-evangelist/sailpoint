@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RoleCriteriaLevel3",
+  "title": "RoleCriteriaLevel3",
+  "type": "object",
+  "description": "Third-level (leaf) role criteria expression.",
+  "properties": {
+    "operation": {
+      "type": "string",
+      "enum": [
+        "EQUALS",
+        "NOT_EQUALS",
+        "CONTAINS",
+        "STARTS_WITH",
+        "ENDS_WITH"
+      ]
+    },
+    "key": {
+      "$ref": "#/components/schemas/RoleCriteriaKey"
+    },
+    "stringValue": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/JsonPatchOperation",
+  "title": "JsonPatchOperation",
+  "type": "object",
+  "description": "A JSON Patch operation as defined in RFC 6902.",
+  "required": [
+    "op",
+    "path"
+  ],
+  "properties": {
+    "op": {
+      "type": "string",
+      "description": "The operation to perform.",
+      "enum": [
+        "add",
+        "remove",
+        "replace",
+        "move",
+        "copy",
+        "test"
+      ],
+      "examples": [
+        "replace"
+      ]
+    },
+    "path": {
+      "type": "string",
+      "description": "The JSON pointer path for the operation.",
+      "examples": [
+        "/description"
+      ]
+    },
+    "value": {
+      "description": "The value for the operation (required for add, replace, test)."
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccessProfileSourceRef",
+  "title": "AccessProfileSourceRef",
+  "type": "object",
+  "description": "Reference to the source associated with the access profile.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The source ID.",
+      "examples": [
+        "2c91809773dee3610173fdb1b6969d4e"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "The source object type.",
+      "enum": [
+        "SOURCE"
+      ],
+      "examples": [
+        "SOURCE"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The source name.",
+      "examples": [
+        "ODS-AD-SOURCE"
+      ]
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RoleIdentity",
+  "title": "RoleIdentity",
+  "type": "object",
+  "description": "An identity assigned to a role.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The identity ID.",
+      "examples": [
+        "2c9180a46faadee4016fb4e018c20639"
+      ]
+    },
+    "aliasName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The identity alias.",
+      "examples": [
+        "t.edison"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The identity display name.",
+      "examples": [
+        "Thomas Edison"
+      ]
+    },
+    "email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The identity email.",
+      "examples": [
+        "t.edison@example.com"
+      ]
+    },
+    "roleAssignmentSource": {
+      "type": "string",
+      "description": "How the role was assigned.",
+      "enum": [
+        "ROLE_MEMBERSHIP",
+        "ACCESS_REQUEST"
+      ],
+      "examples": [
+        "ROLE_MEMBERSHIP"
+      ]
+    }
+  }
+}

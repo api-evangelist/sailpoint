@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OwnerReference",
+  "title": "OwnerReference",
+  "type": "object",
+  "description": "Reference to the owner of the object.",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Owner type. Must be either left null or set to IDENTITY on input, otherwise a 400 Bad Request error will result.",
+      "enum": [
+        "IDENTITY"
+      ],
+      "examples": [
+        "IDENTITY"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "description": "The owner's identity ID.",
+      "examples": [
+        "2c9180a46faadee4016fb4e018c20639"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The owner's name. If set, it must match the current value of the owner's display name, otherwise a 400 Bad Request error will result.",
+      "examples": [
+        "support"
+      ]
+    }
+  }
+}

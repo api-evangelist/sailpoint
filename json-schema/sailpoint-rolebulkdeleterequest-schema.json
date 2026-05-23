@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RoleBulkDeleteRequest",
+  "title": "RoleBulkDeleteRequest",
+  "type": "object",
+  "description": "Request body for bulk deleting roles.",
+  "required": [
+    "roleIds"
+  ],
+  "properties": {
+    "roleIds": {
+      "type": "array",
+      "description": "List of role IDs to delete.",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        [
+          "2c918086749d78830174a1a40e121518",
+          "2c918086749d78830174a1a40e121519"
+        ]
+      ]
+    }
+  }
+}

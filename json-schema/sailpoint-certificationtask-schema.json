@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CertificationTask",
+  "title": "CertificationTask",
+  "type": "object",
+  "description": "A pending certification task.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The certification task ID.",
+      "examples": [
+        "2c918086749d78830174a1a40e121518"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of the task.",
+      "examples": [
+        "ADMIN_REASSIGN"
+      ]
+    },
+    "targetType": {
+      "type": "string",
+      "description": "The type of the target.",
+      "enum": [
+        "CAMPAIGN",
+        "CERTIFICATION"
+      ],
+      "examples": [
+        "CERTIFICATION"
+      ]
+    },
+    "targetId": {
+      "type": "string",
+      "description": "The ID of the target.",
+      "examples": [
+        "ef38f94347e94562b5bb8424a56397d8"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the task.",
+      "enum": [
+        "QUEUED",
+        "IN_PROGRESS",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "examples": [
+        "QUEUED"
+      ]
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the task was created."
+    }
+  }
+}

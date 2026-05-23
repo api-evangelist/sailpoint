@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EntitlementSourceRef",
+  "title": "EntitlementSourceRef",
+  "type": "object",
+  "description": "Reference to the source associated with the entitlement.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The source ID.",
+      "examples": [
+        "2c9180835d191a86015d28455b4b232a"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "The source object type.",
+      "examples": [
+        "SOURCE"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The source name.",
+      "examples": [
+        "ODS-AD-SOURCE"
+      ]
+    }
+  }
+}

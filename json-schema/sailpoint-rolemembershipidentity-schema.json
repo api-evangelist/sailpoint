@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RoleMembershipIdentity",
+  "title": "RoleMembershipIdentity",
+  "type": "object",
+  "description": "An identity for role membership.",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "The type of the identity.",
+      "enum": [
+        "IDENTITY"
+      ],
+      "examples": [
+        "IDENTITY"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "description": "The identity ID.",
+      "examples": [
+        "2c9180a46faadee4016fb4e018c20639"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The identity name.",
+      "examples": [
+        "Thomas Edison"
+      ]
+    },
+    "aliasName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The identity alias name.",
+      "examples": [
+        "t.edison"
+      ]
+    }
+  }
+}

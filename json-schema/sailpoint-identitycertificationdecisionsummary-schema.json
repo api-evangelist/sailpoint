@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IdentityCertificationDecisionSummary",
+  "title": "IdentityCertificationDecisionSummary",
+  "type": "object",
+  "description": "Summary of certification decisions.",
+  "properties": {
+    "entitiesCertified": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of entities certified."
+    },
+    "entitiesCompleted": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of entities completed."
+    },
+    "entitiesTotalCount": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Total count of entities."
+    }
+  }
+}

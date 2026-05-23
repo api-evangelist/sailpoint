@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApprovalScheme",
+  "title": "ApprovalScheme",
+  "type": "object",
+  "description": "An approval scheme defining the approval process.",
+  "properties": {
+    "approverType": {
+      "type": "string",
+      "description": "The type of approver. APP_OWNER is the application owner, OWNER is the access profile/role owner, SOURCE_OWNER is the source owner, MANAGER is the requesting user's manager, and GOVERNANCE_GROUP is a governance group.",
+      "enum": [
+        "APP_OWNER",
+        "OWNER",
+        "SOURCE_OWNER",
+        "MANAGER",
+        "GOVERNANCE_GROUP"
+      ],
+      "examples": [
+        "MANAGER"
+      ]
+    },
+    "approverId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The ID of the approver. Only required when approverType is GOVERNANCE_GROUP.",
+      "examples": [
+        "46c79c6399252b1a80dbdff5e2b1d4b7"
+      ]
+    }
+  }
+}

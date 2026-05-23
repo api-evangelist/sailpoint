@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Reassignment",
+  "title": "Reassignment",
+  "type": [
+    "object",
+    "null"
+  ],
+  "description": "Information about a certification reassignment, if applicable.",
+  "properties": {
+    "from": {
+      "$ref": "#/components/schemas/IdentityReference"
+    },
+    "comment": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The comment provided when reassigning.",
+      "examples": [
+        "Reassigning to the new team lead"
+      ]
+    }
+  }
+}

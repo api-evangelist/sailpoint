@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccessSummary",
+  "title": "AccessSummary",
+  "type": "object",
+  "description": "Summary of the access being reviewed.",
+  "properties": {
+    "access": {
+      "type": "object",
+      "description": "The access item being reviewed.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of access.",
+          "enum": [
+            "ROLE",
+            "ACCESS_PROFILE",
+            "ENTITLEMENT"
+          ],
+          "examples": [
+            "ACCESS_PROFILE"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the access item.",
+          "examples": [
+            "2c91808568c529c60168cee9c85a015f"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the access item.",
+          "examples": [
+            "Cloud Engineering Access"
+          ]
+        }
+      }
+    },
+    "entitlement": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The entitlement associated with this access item.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The entitlement ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The entitlement name."
+        }
+      }
+    }
+  }
+}

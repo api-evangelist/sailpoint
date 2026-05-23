@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RoleCriteriaLevel1",
+  "title": "RoleCriteriaLevel1",
+  "type": [
+    "object",
+    "null"
+  ],
+  "description": "Top-level role criteria expression.",
+  "properties": {
+    "operation": {
+      "type": "string",
+      "description": "The logical operation for combining criteria.",
+      "enum": [
+        "EQUALS",
+        "NOT_EQUALS",
+        "CONTAINS",
+        "STARTS_WITH",
+        "ENDS_WITH",
+        "AND",
+        "OR"
+      ],
+      "examples": [
+        "EQUALS"
+      ]
+    },
+    "key": {
+      "$ref": "#/components/schemas/RoleCriteriaKey"
+    },
+    "stringValue": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "String value for comparison when operation is a leaf."
+    },
+    "children": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "Child criteria for compound operations (AND, OR).",
+      "items": {
+        "$ref": "#/components/schemas/RoleCriteriaLevel2"
+      }
+    }
+  }
+}

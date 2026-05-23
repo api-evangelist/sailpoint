@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RoleMembershipSelector",
+  "title": "RoleMembershipSelector",
+  "type": [
+    "object",
+    "null"
+  ],
+  "description": "Defines the criteria for role membership. When configured, Identity Security Cloud automatically assigns the role to qualifying identities.",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "The type of role membership selector.",
+      "enum": [
+        "STANDARD",
+        "IDENTITY_LIST"
+      ],
+      "examples": [
+        "STANDARD"
+      ]
+    },
+    "criteria": {
+      "$ref": "#/components/schemas/RoleCriteriaLevel1"
+    },
+    "identities": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "List of identities for IDENTITY_LIST membership type.",
+      "items": {
+        "$ref": "#/components/schemas/RoleMembershipIdentity"
+      }
+    }
+  }
+}

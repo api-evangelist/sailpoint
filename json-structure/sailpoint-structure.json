@@ -1,0 +1,598 @@
+{
+  "provider": "SailPoint",
+  "providerId": "sailpoint",
+  "kind": "json-structure",
+  "description": "Structural overview of the SailPoint API surface; extracted from openapi/.",
+  "schemaCount": 43,
+  "operationCount": 30,
+  "schemas": [
+    {
+      "name": "PublicIdentity",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "IdentityReference",
+      "type": [
+        "object",
+        "null"
+      ],
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "IdentityAttribute",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "IdentityProfile",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "name",
+        "authoritativeSource"
+      ]
+    },
+    {
+      "name": "OwnerReference",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "SourceReference",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "AccessProfile",
+      "type": "object",
+      "propertyCount": 13,
+      "required": [
+        "name",
+        "owner",
+        "source"
+      ]
+    },
+    {
+      "name": "AccessProfileSourceRef",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "EntitlementRef",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Entitlement",
+      "type": "object",
+      "propertyCount": 12,
+      "required": []
+    },
+    {
+      "name": "EntitlementSourceRef",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Requestability",
+      "type": [
+        "object",
+        "null"
+      ],
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Revocability",
+      "type": [
+        "object",
+        "null"
+      ],
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ApprovalScheme",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "AccessProfileRef",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Role",
+      "type": "object",
+      "propertyCount": 15,
+      "required": [
+        "name",
+        "owner"
+      ]
+    },
+    {
+      "name": "RoleMembershipSelector",
+      "type": [
+        "object",
+        "null"
+      ],
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "RoleCriteriaLevel1",
+      "type": [
+        "object",
+        "null"
+      ],
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "RoleCriteriaLevel2",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "RoleCriteriaLevel3",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "RoleCriteriaKey",
+      "type": [
+        "object",
+        "null"
+      ],
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "RoleMembershipIdentity",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "RoleIdentity",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "RequestabilityForRole",
+      "type": [
+        "object",
+        "null"
+      ],
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "RevocabilityForRole",
+      "type": [
+        "object",
+        "null"
+      ],
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "RoleBulkDeleteRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "roleIds"
+      ]
+    },
+    {
+      "name": "IdentityCertification",
+      "type": "object",
+      "propertyCount": 17,
+      "required": []
+    },
+    {
+      "name": "CampaignReference",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "id",
+        "name",
+        "type",
+        "campaignType"
+      ]
+    },
+    {
+      "name": "Reviewer",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "Reassignment",
+      "type": [
+        "object",
+        "null"
+      ],
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "AccessReviewItem",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "AccessSummary",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "CertificationIdentitySummary",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ReviewRecommendation",
+      "type": [
+        "object",
+        "null"
+      ],
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "CertificationDecision",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "id",
+        "decision"
+      ]
+    },
+    {
+      "name": "IdentityCertificationDecisionSummary",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ReviewReassign",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "reassign",
+        "reason"
+      ]
+    },
+    {
+      "name": "CertificationTask",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "AccessProfileBulkDeleteRequest",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "accessProfileIds"
+      ]
+    },
+    {
+      "name": "AccessProfileBulkDeleteResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "TaskResultSimplified",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "JsonPatchOperation",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "op",
+        "path"
+      ]
+    },
+    {
+      "name": "ErrorResponseDto",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/public-identities",
+      "operationId": "getPublicIdentities",
+      "summary": "List public identities",
+      "tags": [
+        "Identities"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/public-identities/{id}",
+      "operationId": "getPublicIdentity",
+      "summary": "Get a public identity",
+      "tags": [
+        "Identities"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/identity-profiles",
+      "operationId": "listIdentityProfiles",
+      "summary": "List identity profiles",
+      "tags": [
+        "Identities"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/identity-profiles",
+      "operationId": "createIdentityProfile",
+      "summary": "Create an identity profile",
+      "tags": [
+        "Identities"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/identity-profiles/{identity-profile-id}",
+      "operationId": "getIdentityProfile",
+      "summary": "Get an identity profile",
+      "tags": [
+        "Identities"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/identity-profiles/{identity-profile-id}",
+      "operationId": "deleteIdentityProfile",
+      "summary": "Delete an identity profile",
+      "tags": [
+        "Identities"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/identity-profiles/{identity-profile-id}",
+      "operationId": "updateIdentityProfile",
+      "summary": "Update an identity profile",
+      "tags": [
+        "Identities"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/access-profiles",
+      "operationId": "listAccessProfiles",
+      "summary": "List access profiles",
+      "tags": [
+        "Access Profiles"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/access-profiles",
+      "operationId": "createAccessProfile",
+      "summary": "Create an access profile",
+      "tags": [
+        "Access Profiles"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/access-profiles/{id}",
+      "operationId": "getAccessProfile",
+      "summary": "Get an access profile",
+      "tags": [
+        "Access Profiles"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/access-profiles/{id}",
+      "operationId": "deleteAccessProfile",
+      "summary": "Delete an access profile",
+      "tags": [
+        "Access Profiles"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/access-profiles/{id}",
+      "operationId": "patchAccessProfile",
+      "summary": "Patch an access profile",
+      "tags": [
+        "Access Profiles"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/access-profiles/{id}/entitlements",
+      "operationId": "listAccessProfileEntitlements",
+      "summary": "List access profile entitlements",
+      "tags": [
+        "Access Profiles"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/access-profiles/bulk-delete",
+      "operationId": "bulkDeleteAccessProfiles",
+      "summary": "Bulk delete access profiles",
+      "tags": [
+        "Access Profiles"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/roles",
+      "operationId": "listRoles",
+      "summary": "List roles",
+      "tags": [
+        "Roles"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/roles",
+      "operationId": "createRole",
+      "summary": "Create a role",
+      "tags": [
+        "Roles"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/roles/{id}",
+      "operationId": "getRole",
+      "summary": "Get a role",
+      "tags": [
+        "Roles"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/roles/{id}",
+      "operationId": "deleteRole",
+      "summary": "Delete a role",
+      "tags": [
+        "Roles"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/roles/{id}",
+      "operationId": "patchRole",
+      "summary": "Patch a role",
+      "tags": [
+        "Roles"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/roles/{id}/identities",
+      "operationId": "listRoleIdentities",
+      "summary": "List identities assigned a role",
+      "tags": [
+        "Roles"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/roles/bulk-delete",
+      "operationId": "bulkDeleteRoles",
+      "summary": "Bulk delete roles",
+      "tags": [
+        "Roles"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/certifications",
+      "operationId": "listIdentityCertifications",
+      "summary": "List identity campaign certifications",
+      "tags": [
+        "Certifications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/certifications/{id}",
+      "operationId": "getIdentityCertification",
+      "summary": "Get an identity certification",
+      "tags": [
+        "Certifications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/certifications/{id}/access-review-items",
+      "operationId": "listCertificationAccessReviewItems",
+      "summary": "List access review items",
+      "tags": [
+        "Certifications"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/certifications/{id}/decide",
+      "operationId": "makeCertificationDecision",
+      "summary": "Decide on a certification item",
+      "tags": [
+        "Certifications"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/certifications/{id}/reassign",
+      "operationId": "reassignIdentityCertification",
+      "summary": "Reassign identities or items",
+      "tags": [
+        "Certifications"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/certifications/{id}/sign-off",
+      "operationId": "signOffIdentityCertification",
+      "summary": "Finalize identity certification decisions",
+      "tags": [
+        "Certifications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/certifications/{id}/reviewers",
+      "operationId": "listCertificationReviewers",
+      "summary": "List certification reviewers",
+      "tags": [
+        "Certifications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/certifications/{id}/tasks",
+      "operationId": "listCertificationTasks",
+      "summary": "List pending certification tasks",
+      "tags": [
+        "Certifications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/certifications/{id}/tasks/{taskId}",
+      "operationId": "getCertificationTask",
+      "summary": "Get a certification task",
+      "tags": [
+        "Certifications"
+      ]
+    }
+  ]
+}

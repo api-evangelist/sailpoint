@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EntitlementRef",
+  "title": "EntitlementRef",
+  "type": "object",
+  "description": "Reference to an entitlement.",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "The entitlement object type.",
+      "enum": [
+        "ENTITLEMENT"
+      ],
+      "examples": [
+        "ENTITLEMENT"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "description": "The entitlement ID.",
+      "examples": [
+        "2c91809773dee32014e13e122092014e"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The entitlement display name.",
+      "examples": [
+        "CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local"
+      ]
+    }
+  }
+}

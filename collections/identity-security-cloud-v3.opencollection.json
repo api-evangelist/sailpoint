@@ -1,0 +1,1187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Identity Security Cloud V3 API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List public identities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/public-identities",
+            "params": [
+              {
+                "name": "add-core-filters",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to exclude incomplete identities and uncorrelated accounts from the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "name eq \"John Smith\"",
+                "type": "query",
+                "description": "Filter results using the standard syntax described in V3 API Standard Collection Parameters. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw, co), alias (eq, sw, co), email (eq, sw, co), status (eq)."
+              },
+              {
+                "name": "sorters",
+                "value": "name,-email",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, alias, email."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of public identities. This endpoint returns a paged list of public identity objects that can be filtered and sorted."
+        },
+        {
+          "info": {
+            "name": "Get a public identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/public-identities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c9180857182305e0171993735622948",
+                "type": "path",
+                "description": "The identity ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the details of a public identity by its ID."
+        },
+        {
+          "info": {
+            "name": "List identity profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/identity-profiles",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "name eq \"HR Profile\"",
+                "type": "query",
+                "description": "Filter results using the standard syntax. Filtering is supported for the following fields: id (eq, in), name (eq, sw), priority (eq, gt, lt, ge, le)."
+              },
+              {
+                "name": "sorters",
+                "value": "name,-priority",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, priority, created, modified."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of identity profiles. Identity profiles define how identity attributes are mapped from source account attributes and configure lifecycle states."
+        },
+        {
+          "info": {
+            "name": "Create an identity profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/identity-profiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create an identity profile. An identity profile defines the mapping between source account attributes and identity attributes and configures lifecycle states for identities."
+        },
+        {
+          "info": {
+            "name": "Get an identity profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/identity-profiles/:identity-profile-id",
+            "params": [
+              {
+                "name": "identity-profile-id",
+                "value": "2b838de9-db9b-abcf-e646-d4f274ad4238",
+                "type": "path",
+                "description": "The identity profile ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the details of an identity profile by its ID."
+        },
+        {
+          "info": {
+            "name": "Update an identity profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{tenant}.api.identitynow.com/v3/identity-profiles/:identity-profile-id",
+            "params": [
+              {
+                "name": "identity-profile-id",
+                "value": "2b838de9-db9b-abcf-e646-d4f274ad4238",
+                "type": "path",
+                "description": "The identity profile ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing identity profile using a JSON Patch document."
+        },
+        {
+          "info": {
+            "name": "Delete an identity profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.api.identitynow.com/v3/identity-profiles/:identity-profile-id",
+            "params": [
+              {
+                "name": "identity-profile-id",
+                "value": "2b838de9-db9b-abcf-e646-d4f274ad4238",
+                "type": "path",
+                "description": "The identity profile ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete an identity profile by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Access Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List access profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles",
+            "params": [
+              {
+                "name": "for-subadmin",
+                "value": "8c190e6787aa4ed9a90bd9d5344523fb",
+                "type": "query",
+                "description": "Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN or SOURCE_SUBADMIN identity. The value is either an identity ID or the special value 'me' for the calling identity's ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "name eq \"SailPoint Support\"",
+                "type": "query",
+                "description": "Filter results using the standard syntax. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw), created (gt, ge, le), modified (gt, lt, ge, le), owner.id (eq, in), requestable (eq), source.id (eq, in). Supported composite operators are 'and' and 'or'."
+              },
+              {
+                "name": "sorters",
+                "value": "name,-modified",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified."
+              },
+              {
+                "name": "for-segment-ids",
+                "value": "0b5c9f25-83c6-4762-9073-e38f7bb2ae26,2e8d8180-24bc-4d21-91c6-7affdb473b0d",
+                "type": "query",
+                "description": "Filters access profiles to only those assigned to the segment(s) with the specified IDs. If segmentation is unavailable, specifying this parameter results in an error."
+              },
+              {
+                "name": "include-unsegmented",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the response should include unsegmented access profiles. If for-segment-ids is absent or empty, specifying this as false results in an error."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of access profiles. When you filter for access profiles that have the '+' symbol in their names, the response is blank."
+        },
+        {
+          "info": {
+            "name": "Create an access profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create an access profile. A user with ROLE_SUBADMIN or SOURCE_SUBADMIN authority must be associated with the access profile's source. The maximum supported length for the description field is 2000 characters."
+        },
+        {
+          "info": {
+            "name": "Get an access profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c91808a7190d06e01719938fcd20792",
+                "type": "path",
+                "description": "The access profile ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get an access profile by its ID."
+        },
+        {
+          "info": {
+            "name": "Patch an access profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c91808a7190d06e01719938fcd20792",
+                "type": "path",
+                "description": "The access profile ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing access profile using a JSON Patch document. The maximum supported length for the description field is 2000 characters."
+        },
+        {
+          "info": {
+            "name": "Delete an access profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c91808a7190d06e01719938fcd20792",
+                "type": "path",
+                "description": "The access profile ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete an existing access profile by its ID. The access profile must not be in use by any roles."
+        },
+        {
+          "info": {
+            "name": "List access profile entitlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles/:id/entitlements",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c91808a7190d06e01719938fcd20792",
+                "type": "path",
+                "description": "The access profile ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw)."
+              },
+              {
+                "name": "sorters",
+                "value": "",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of entitlements associated with the specified access profile."
+        },
+        {
+          "info": {
+            "name": "Bulk delete access profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles/bulk-delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete one or more access profiles in a single request. The access profiles must not be in use by any roles or applications. Returns details about which profiles were deleted and which failed."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Roles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles",
+            "params": [
+              {
+                "name": "for-subadmin",
+                "value": "5168015d32f890ca15812c9180835d2e",
+                "type": "query",
+                "description": "Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN identity. The value is either an identity ID or 'me' for the calling identity."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "name sw \"Role\"",
+                "type": "query",
+                "description": "Filter results using the standard syntax. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw), created (gt, ge, le), modified (gt, lt, ge, le), owner.id (eq, in), requestable (eq)."
+              },
+              {
+                "name": "sorters",
+                "value": "name,-modified",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified."
+              },
+              {
+                "name": "for-segment-ids",
+                "value": "",
+                "type": "query",
+                "description": "Filters roles to only those assigned to the segment(s) with the specified IDs."
+              },
+              {
+                "name": "include-unsegmented",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the response should include unsegmented roles."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a paged list of roles. Roles represent the broadest level of access and group one or more access profiles."
+        },
+        {
+          "info": {
+            "name": "Create a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a role. The maximum supported length for the description field is 2000 characters. ROLE_SUBADMIN users cannot create roles with access profiles from sources outside their authorization scope."
+        },
+        {
+          "info": {
+            "name": "Get a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c918086749d78830174a1a40e121518",
+                "type": "path",
+                "description": "The role ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a role by its ID."
+        },
+        {
+          "info": {
+            "name": "Patch a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c918086749d78830174a1a40e121518",
+                "type": "path",
+                "description": "The role ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing role using a JSON Patch document. The maximum supported length for the description field is 2000 characters."
+        },
+        {
+          "info": {
+            "name": "Delete a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c918086749d78830174a1a40e121518",
+                "type": "path",
+                "description": "The role ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete a role by its ID."
+        },
+        {
+          "info": {
+            "name": "List identities assigned a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles/:id/identities",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c918086749d78830174a1a40e121518",
+                "type": "path",
+                "description": "The role ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw)."
+              },
+              {
+                "name": "sorters",
+                "value": "",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of identities that have been assigned the specified role."
+        },
+        {
+          "info": {
+            "name": "Bulk delete roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles/bulk-delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete one or more roles in a single request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Certifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List identity campaign certifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "campaign.id eq \"ef38f94347e94562b5bb8424a56397d8\"",
+                "type": "query",
+                "description": "Filter results using the standard syntax. Filtering is supported for the following fields: id (eq, in), campaign.id (eq, in), phase (eq), completed (eq)."
+              },
+              {
+                "name": "sorters",
+                "value": "name,-due",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, due, signed."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of identity campaign certifications for the current user. A token with ORG_ADMIN, CERT_ADMIN, or REPORT_ADMIN authority is required to call this API. Callers with CERT_ADMIN authority can only see certifications they own. Callers with REPORT_ADMIN or ORG_ADMIN authority can see all certifications."
+        },
+        {
+          "info": {
+            "name": "Get an identity certification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the details of an identity certification by its ID."
+        },
+        {
+          "info": {
+            "name": "List access review items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/access-review-items",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filter results using the standard syntax. Filtering is supported for the following fields: type (eq), status (eq)."
+              },
+              {
+                "name": "sorters",
+                "value": "",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, type, status."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of access review items for the specified certification. These items represent the access that is being reviewed and may be approved, revoked, or reassigned."
+        },
+        {
+          "info": {
+            "name": "Decide on a certification item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/decide",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Submit an approval, revocation, or acknowledgment decision for one or more access items in the specified certification."
+        },
+        {
+          "info": {
+            "name": "Reassign identities or items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/reassign",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Reassign one or more identities or access items in the specified certification to a different reviewer."
+        },
+        {
+          "info": {
+            "name": "Finalize identity certification decisions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/sign-off",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Sign off on a certification by its ID, finalizing all decisions. Once signed off, the certification is considered complete and all approved and revoked decisions will be processed."
+        },
+        {
+          "info": {
+            "name": "List certification reviewers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/reviewers",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of reviewers for the specified certification."
+        },
+        {
+          "info": {
+            "name": "List pending certification tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/tasks",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of pending certification tasks for the specified certification."
+        },
+        {
+          "info": {
+            "name": "Get a certification task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/tasks/:taskId",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              },
+              {
+                "name": "taskId",
+                "value": "2c918086749d78830174a1a40e121518",
+                "type": "path",
+                "description": "The certification task ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a specific certification task by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

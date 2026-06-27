@@ -170,7 +170,7 @@ common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/sailpoint-technologies
   - url: https://developer.sailpoint.com
-    type: Developer Portal
+    type: DeveloperPortal
   - url: https://developer.sailpoint.com/idn/api/getting-started
     type: GettingStarted
   - url: https://developer.sailpoint.com/idn/tools/sdk
@@ -190,11 +190,11 @@ common:
   - url: https://developer.sailpoint.com/docs/api/authentication/
     type: Authentication
   - url: https://developer.sailpoint.com/docs/api/postman-collections/
-    type: Postman Collection
+    type: PostmanCollection
   - url: https://developer.sailpoint.com/docs/api/getting-started/
     type: GettingStarted
   - url: https://developer.sailpoint.com/docs/api/api-versioning-strategy/
-    type: API Versioning
+    type: Versioning
   - url: https://github.com/sailpoint-oss/api-specs
     type: OpenAPI Source
   - url: https://github.com/sailpoint-oss
@@ -226,7 +226,7 @@ common:
   - url: https://community.sailpoint.com
     type: Compass Community
   - url: https://www.postman.com/sailpoint
-    type: Postman Workspace
+    type: PostmanWorkspace
   - url: https://developer.sailpoint.com/discuss/c/colab/59
     type: CoLab
   - url: https://sailpoint-oss.github.io/sailpoint-api-guidelines/

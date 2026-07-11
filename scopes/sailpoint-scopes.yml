@@ -1,0 +1,92 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/identity-security-cloud-v3.yml
+schemes:
+- name: oauth2
+  source: openapi/identity-security-cloud-v3.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://{tenant}.api.identitynow.com/oauth/token
+  - flow: authorizationCode
+    authorizationUrl: https://{tenant}.identitynow.com/oauth/authorize
+    tokenUrl: https://{tenant}.api.identitynow.com/oauth/token
+  description: OAuth 2.0 authentication. Use client credentials or authorization code flow to
+    obtain access tokens.
+scopes:
+- scope: idn:access-profile:manage
+  description: Manage access profiles
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/identity-security-cloud-v3.yml
+- scope: idn:access-profile:read
+  description: Read access profiles
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/identity-security-cloud-v3.yml
+- scope: idn:certification:manage
+  description: Manage certifications
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/identity-security-cloud-v3.yml
+- scope: idn:certification:read
+  description: Read certifications
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/identity-security-cloud-v3.yml
+- scope: idn:entitlement:read
+  description: Read entitlements
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/identity-security-cloud-v3.yml
+- scope: idn:identity-profile:manage
+  description: Manage identity profiles
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/identity-security-cloud-v3.yml
+- scope: idn:identity-profile:read
+  description: Read identity profiles
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/identity-security-cloud-v3.yml
+- scope: idn:identity:read
+  description: Read identity information
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/identity-security-cloud-v3.yml
+- scope: idn:role-unchecked:manage
+  description: Manage roles
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/identity-security-cloud-v3.yml
+- scope: idn:role-unchecked:read
+  description: Read roles
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/identity-security-cloud-v3.yml
+- scope: idn:sources:read
+  description: Read sources
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/identity-security-cloud-v3.yml

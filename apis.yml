@@ -167,6 +167,10 @@ maintainers:
     email: developer@sailpoint.com
     url: https://developer.sailpoint.com
 common:
+  - type: Authentication
+    url: authentication/sailpoint-authentication.yml
+  - type: OAuthScopes
+    url: scopes/sailpoint-scopes.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/sailpoint-technologies
   - url: https://developer.sailpoint.com

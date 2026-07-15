@@ -1,0 +1,463 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/identity-security-cloud-v3.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 30
+  by_action_class:
+    connected: 16
+    acting: 14
+  by_consequence:
+    read: 16
+    write: 14
+  human_in_the_loop_required: 0
+operations:
+- path: /public-identities
+  method: get
+  operationId: getPublicIdentities
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:identity:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /public-identities/{id}
+  method: get
+  operationId: getPublicIdentity
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:identity:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /identity-profiles
+  method: get
+  operationId: listIdentityProfiles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:identity-profile:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /identity-profiles
+  method: post
+  operationId: createIdentityProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:identity-profile:manage
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /identity-profiles/{identity-profile-id}
+  method: get
+  operationId: getIdentityProfile
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:identity-profile:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /identity-profiles/{identity-profile-id}
+  method: patch
+  operationId: updateIdentityProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:identity-profile:manage
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /identity-profiles/{identity-profile-id}
+  method: delete
+  operationId: deleteIdentityProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:identity-profile:manage
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /access-profiles
+  method: get
+  operationId: listAccessProfiles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:access-profile:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /access-profiles
+  method: post
+  operationId: createAccessProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:access-profile:manage
+    - idn:entitlement:read
+    - idn:identity:read
+    - idn:sources:read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /access-profiles/{id}
+  method: get
+  operationId: getAccessProfile
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:access-profile:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /access-profiles/{id}
+  method: patch
+  operationId: patchAccessProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:access-profile:manage
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /access-profiles/{id}
+  method: delete
+  operationId: deleteAccessProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:access-profile:manage
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /access-profiles/{id}/entitlements
+  method: get
+  operationId: listAccessProfileEntitlements
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:access-profile:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /access-profiles/bulk-delete
+  method: post
+  operationId: bulkDeleteAccessProfiles
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:access-profile:manage
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /roles
+  method: get
+  operationId: listRoles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:role-unchecked:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /roles
+  method: post
+  operationId: createRole
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:role-unchecked:manage
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /roles/{id}
+  method: get
+  operationId: getRole
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:role-unchecked:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /roles/{id}
+  method: patch
+  operationId: patchRole
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:role-unchecked:manage
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /roles/{id}
+  method: delete
+  operationId: deleteRole
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:role-unchecked:manage
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /roles/{id}/identities
+  method: get
+  operationId: listRoleIdentities
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:role-unchecked:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /roles/bulk-delete
+  method: post
+  operationId: bulkDeleteRoles
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:role-unchecked:manage
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /certifications
+  method: get
+  operationId: listIdentityCertifications
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:certification:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /certifications/{id}
+  method: get
+  operationId: getIdentityCertification
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:certification:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /certifications/{id}/access-review-items
+  method: get
+  operationId: listCertificationAccessReviewItems
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:certification:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /certifications/{id}/decide
+  method: post
+  operationId: makeCertificationDecision
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:certification:manage
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /certifications/{id}/reassign
+  method: post
+  operationId: reassignIdentityCertification
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:certification:manage
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /certifications/{id}/sign-off
+  method: post
+  operationId: signOffIdentityCertification
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - idn:certification:manage
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /certifications/{id}/reviewers
+  method: get
+  operationId: listCertificationReviewers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:certification:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /certifications/{id}/tasks
+  method: get
+  operationId: listCertificationTasks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:certification:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /certifications/{id}/tasks/{taskId}
+  method: get
+  operationId: getCertificationTask
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - idn:certification:read
+    token:
+      max-ttl: 3600
+    audit: none

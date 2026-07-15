@@ -167,6 +167,8 @@ maintainers:
     email: developer@sailpoint.com
     url: https://developer.sailpoint.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/sailpoint-agentic-access.yml
   - type: DomainSecurity
     url: security/sailpoint-domain-security.yml
   - type: Authentication

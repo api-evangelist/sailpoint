@@ -1,0 +1,971 @@
+openapi: 3.1.0
+info:
+  title: Identity Security Cloud V3 Access Profiles Roles API
+  description: Use these APIs to interact with the Identity Security Cloud platform to achieve repeatable, automated processes with greater scalability. The V3 APIs provide core endpoints covering access profiles, certifications, identities, roles, search, sources, transforms, workflows, and more. We encourage you to join the SailPoint Developer Community forum at https://developer.sailpoint.com/discuss to connect with other developers using our APIs.
+  termsOfService: https://developer.sailpoint.com/discuss/tos
+  contact:
+    name: Developer Relations
+    url: https://developer.sailpoint.com/discuss/api-help
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+    identifier: MIT
+  version: 3.0.0
+servers:
+- url: https://{tenant}.api.identitynow.com/v3
+  description: Production API server.
+  variables:
+    tenant:
+      default: sailpoint
+      description: The name of your tenant, typically your company's name.
+- url: https://{apiUrl}/v3
+  description: V3 API server.
+  variables:
+    apiUrl:
+      default: sailpoint.api.identitynow.com
+      description: The API URL of your tenant.
+security:
+- oauth2: []
+- personalAccessToken: []
+tags:
+- name: Roles
+  description: Use this API to implement and customize role functionality. Roles represent the broadest level of access and group one or more access profiles. When you create a role and configure it with role criteria, Identity Security Cloud can automatically assign the role to qualified identities. Roles simplify access management for organizational positions.
+  externalDocs:
+    description: SailPoint Roles Documentation
+    url: https://developer.sailpoint.com/docs/api/v3/roles/
+paths:
+  /roles:
+    get:
+      operationId: listRoles
+      tags:
+      - Roles
+      summary: List roles
+      description: Get a paged list of roles. Roles represent the broadest level of access and group one or more access profiles.
+      parameters:
+      - name: for-subadmin
+        in: query
+        description: Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN identity. The value is either an identity ID or 'me' for the calling identity.
+        required: false
+        schema:
+          type: string
+        example: 5168015d32f890ca15812c9180835d2e
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Count'
+      - name: filters
+        in: query
+        description: 'Filter results using the standard syntax. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw), created (gt, ge, le), modified (gt, lt, ge, le), owner.id (eq, in), requestable (eq).'
+        required: false
+        schema:
+          type: string
+        example: name sw "Role"
+      - name: sorters
+        in: query
+        description: 'Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.'
+        required: false
+        schema:
+          type: string
+        example: name,-modified
+      - name: for-segment-ids
+        in: query
+        description: Filters roles to only those assigned to the segment(s) with the specified IDs.
+        required: false
+        schema:
+          type: string
+      - name: include-unsegmented
+        in: query
+        description: Indicates whether the response should include unsegmented roles.
+        required: false
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: List of roles.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+          headers:
+            X-Total-Count:
+              description: Total number of results matching the query.
+              schema:
+                type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:role-unchecked:read
+    post:
+      operationId: createRole
+      tags:
+      - Roles
+      summary: Create a role
+      description: Create a role. The maximum supported length for the description field is 2000 characters. ROLE_SUBADMIN users cannot create roles with access profiles from sources outside their authorization scope.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+      responses:
+        '201':
+          description: Role created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:role-unchecked:manage
+  /roles/{id}:
+    get:
+      operationId: getRole
+      tags:
+      - Roles
+      summary: Get a role
+      description: Get a role by its ID.
+      parameters:
+      - name: id
+        in: path
+        description: The role ID.
+        required: true
+        schema:
+          type: string
+        example: 2c918086749d78830174a1a40e121518
+      responses:
+        '200':
+          description: A role object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:role-unchecked:read
+    patch:
+      operationId: patchRole
+      tags:
+      - Roles
+      summary: Patch a role
+      description: Update an existing role using a JSON Patch document. The maximum supported length for the description field is 2000 characters.
+      parameters:
+      - name: id
+        in: path
+        description: The role ID.
+        required: true
+        schema:
+          type: string
+        example: 2c918086749d78830174a1a40e121518
+      requestBody:
+        required: true
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+      responses:
+        '200':
+          description: Updated role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:role-unchecked:manage
+    delete:
+      operationId: deleteRole
+      tags:
+      - Roles
+      summary: Delete a role
+      description: Delete a role by its ID.
+      parameters:
+      - name: id
+        in: path
+        description: The role ID.
+        required: true
+        schema:
+          type: string
+        example: 2c918086749d78830174a1a40e121518
+      responses:
+        '204':
+          description: Role deleted successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:role-unchecked:manage
+  /roles/{id}/identities:
+    get:
+      operationId: listRoleIdentities
+      tags:
+      - Roles
+      summary: List identities assigned a role
+      description: Get a list of identities that have been assigned the specified role.
+      parameters:
+      - name: id
+        in: path
+        description: The role ID.
+        required: true
+        schema:
+          type: string
+        example: 2c918086749d78830174a1a40e121518
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Count'
+      - name: filters
+        in: query
+        description: 'Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw).'
+        required: false
+        schema:
+          type: string
+      - name: sorters
+        in: query
+        description: 'Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of identities assigned to the role.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoleIdentity'
+          headers:
+            X-Total-Count:
+              description: Total number of results matching the query.
+              schema:
+                type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:role-unchecked:read
+  /roles/bulk-delete:
+    post:
+      operationId: bulkDeleteRoles
+      tags:
+      - Roles
+      summary: Bulk delete roles
+      description: Delete one or more roles in a single request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleBulkDeleteRequest'
+      responses:
+        '200':
+          description: Bulk delete results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResultSimplified'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:role-unchecked:manage
+components:
+  schemas:
+    RevocabilityForRole:
+      type:
+      - object
+      - 'null'
+      description: Revocation request configuration for a role.
+      properties:
+        commentsRequired:
+          type: boolean
+          default: false
+          description: Whether comments are required for revocation requests.
+        denialCommentsRequired:
+          type: boolean
+          default: false
+          description: Whether comments are required for denial.
+        approvalSchemes:
+          type: array
+          description: List of approval schemes for revocation requests.
+          items:
+            $ref: '#/components/schemas/ApprovalScheme'
+    RoleCriteriaLevel3:
+      type: object
+      description: Third-level (leaf) role criteria expression.
+      properties:
+        operation:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - CONTAINS
+          - STARTS_WITH
+          - ENDS_WITH
+        key:
+          $ref: '#/components/schemas/RoleCriteriaKey'
+        stringValue:
+          type:
+          - string
+          - 'null'
+    RoleBulkDeleteRequest:
+      type: object
+      description: Request body for bulk deleting roles.
+      required:
+      - roleIds
+      properties:
+        roleIds:
+          type: array
+          description: List of role IDs to delete.
+          items:
+            type: string
+          examples:
+          - - 2c918086749d78830174a1a40e121518
+            - 2c918086749d78830174a1a40e121519
+    RoleMembershipSelector:
+      type:
+      - object
+      - 'null'
+      description: Defines the criteria for role membership. When configured, Identity Security Cloud automatically assigns the role to qualifying identities.
+      properties:
+        type:
+          type: string
+          description: The type of role membership selector.
+          enum:
+          - STANDARD
+          - IDENTITY_LIST
+          examples:
+          - STANDARD
+        criteria:
+          $ref: '#/components/schemas/RoleCriteriaLevel1'
+        identities:
+          type:
+          - array
+          - 'null'
+          description: List of identities for IDENTITY_LIST membership type.
+          items:
+            $ref: '#/components/schemas/RoleMembershipIdentity'
+    RoleCriteriaLevel2:
+      type: object
+      description: Second-level role criteria expression.
+      properties:
+        operation:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - CONTAINS
+          - STARTS_WITH
+          - ENDS_WITH
+          - AND
+          - OR
+        key:
+          $ref: '#/components/schemas/RoleCriteriaKey'
+        stringValue:
+          type:
+          - string
+          - 'null'
+        children:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RoleCriteriaLevel3'
+    ErrorResponseDto:
+      type: object
+      description: Error response body.
+      properties:
+        detailCode:
+          type: string
+          description: Fine-grained error code providing more detail.
+          examples:
+          - 400.1 Bad Request Content
+        trackingId:
+          type: string
+          description: Unique tracking ID for the error.
+          examples:
+          - e7eab60924f64aa284175b9fa3309599
+        messages:
+          type: array
+          description: Generic localized reason for error.
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                description: The locale for the message text.
+                examples:
+                - en-US
+              localeOrigin:
+                type: string
+                description: An indicator of how the locale was selected.
+                enum:
+                - DEFAULT
+                - REQUEST
+                examples:
+                - DEFAULT
+              text:
+                type: string
+                description: The actual text of the error message.
+                examples:
+                - The request was syntactically correct but its content is semantically invalid.
+        causes:
+          type: array
+          description: Plain-text descriptive reasons to provide additional detail to the text provided in the messages field.
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                examples:
+                - en-US
+              localeOrigin:
+                type: string
+                enum:
+                - DEFAULT
+                - REQUEST
+              text:
+                type: string
+    RequestabilityForRole:
+      type:
+      - object
+      - 'null'
+      description: Access request configuration for a role.
+      properties:
+        commentsRequired:
+          type: boolean
+          default: false
+          description: Whether comments are required for access requests.
+        denialCommentsRequired:
+          type: boolean
+          default: false
+          description: Whether comments are required for denial.
+        approvalSchemes:
+          type: array
+          description: List of approval schemes for access requests.
+          items:
+            $ref: '#/components/schemas/ApprovalScheme'
+    RoleMembershipIdentity:
+      type: object
+      description: An identity for role membership.
+      properties:
+        type:
+          type: string
+          description: The type of the identity.
+          enum:
+          - IDENTITY
+          examples:
+          - IDENTITY
+        id:
+          type: string
+          description: The identity ID.
+          examples:
+          - 2c9180a46faadee4016fb4e018c20639
+        name:
+          type: string
+          description: The identity name.
+          examples:
+          - Thomas Edison
+        aliasName:
+          type:
+          - string
+          - 'null'
+          description: The identity alias name.
+          examples:
+          - t.edison
+    Role:
+      type: object
+      description: A role represents the broadest level of access and groups one or more access profiles. Roles can be automatically assigned to qualified identities based on configured criteria.
+      required:
+      - name
+      - owner
+      properties:
+        id:
+          type: string
+          description: The role ID. This field must be left null when creating a role.
+          readOnly: true
+          examples:
+          - 2c918086749d78830174a1a40e121518
+        name:
+          type: string
+          description: Human-readable display name of the role.
+          maxLength: 128
+          examples:
+          - Role 2567
+        description:
+          type:
+          - string
+          - 'null'
+          description: A human-readable description of the role. Maximum supported length is 2000 characters.
+          maxLength: 2000
+          examples:
+          - This role grants developers access to the source code repository and CI/CD pipeline.
+        created:
+          type: string
+          format: date-time
+          description: Date the role was created.
+          readOnly: true
+          examples:
+          - '2021-03-01T22:32:58.104Z'
+        modified:
+          type: string
+          format: date-time
+          description: Date the role was last modified.
+          readOnly: true
+          examples:
+          - '2021-03-02T20:22:28.104Z'
+        owner:
+          $ref: '#/components/schemas/OwnerReference'
+        accessProfiles:
+          type:
+          - array
+          - 'null'
+          description: List of access profiles associated with the role.
+          items:
+            $ref: '#/components/schemas/AccessProfileRef'
+        entitlements:
+          type: array
+          description: List of entitlements directly associated with the role.
+          items:
+            $ref: '#/components/schemas/EntitlementRef'
+        membership:
+          $ref: '#/components/schemas/RoleMembershipSelector'
+        enabled:
+          type: boolean
+          default: false
+          description: Whether the role is enabled.
+          examples:
+          - true
+        requestable:
+          type: boolean
+          default: false
+          description: Whether the role can be the target of access requests.
+          examples:
+          - true
+        accessRequestConfig:
+          $ref: '#/components/schemas/RequestabilityForRole'
+        revocationRequestConfig:
+          $ref: '#/components/schemas/RevocabilityForRole'
+        segments:
+          type:
+          - array
+          - 'null'
+          description: List of IDs of segments the role is assigned to.
+          items:
+            type: string
+          examples:
+          - - f7b1b8a3-5fed-4fd4-ad29-82014e137e19
+            - 29cb6c06-1da8-43ea-8be4-b3125f248f2a
+        dimensional:
+          type:
+          - boolean
+          - 'null'
+          default: false
+          description: Whether the role is dimensional.
+    OwnerReference:
+      type: object
+      description: Reference to the owner of the object.
+      properties:
+        type:
+          type: string
+          description: Owner type. Must be either left null or set to IDENTITY on input, otherwise a 400 Bad Request error will result.
+          enum:
+          - IDENTITY
+          examples:
+          - IDENTITY
+        id:
+          type: string
+          description: The owner's identity ID.
+          examples:
+          - 2c9180a46faadee4016fb4e018c20639
+        name:
+          type: string
+          description: The owner's name. If set, it must match the current value of the owner's display name, otherwise a 400 Bad Request error will result.
+          examples:
+          - support
+    EntitlementRef:
+      type: object
+      description: Reference to an entitlement.
+      properties:
+        type:
+          type: string
+          description: The entitlement object type.
+          enum:
+          - ENTITLEMENT
+          examples:
+          - ENTITLEMENT
+        id:
+          type: string
+          description: The entitlement ID.
+          examples:
+          - 2c91809773dee32014e13e122092014e
+        name:
+          type: string
+          description: The entitlement display name.
+          examples:
+          - CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local
+    RoleIdentity:
+      type: object
+      description: An identity assigned to a role.
+      properties:
+        id:
+          type: string
+          description: The identity ID.
+          examples:
+          - 2c9180a46faadee4016fb4e018c20639
+        aliasName:
+          type:
+          - string
+          - 'null'
+          description: The identity alias.
+          examples:
+          - t.edison
+        name:
+          type: string
+          description: The identity display name.
+          examples:
+          - Thomas Edison
+        email:
+          type:
+          - string
+          - 'null'
+          description: The identity email.
+          examples:
+          - t.edison@example.com
+        roleAssignmentSource:
+          type: string
+          description: How the role was assigned.
+          enum:
+          - ROLE_MEMBERSHIP
+          - ACCESS_REQUEST
+          examples:
+          - ROLE_MEMBERSHIP
+    AccessProfileRef:
+      type: object
+      description: Reference to an access profile.
+      properties:
+        id:
+          type: string
+          description: The access profile ID.
+          examples:
+          - ff808081751e6e129f1518161919ecca
+        type:
+          type: string
+          description: The access profile object type.
+          enum:
+          - ACCESS_PROFILE
+          examples:
+          - ACCESS_PROFILE
+        name:
+          type: string
+          description: Human-readable display name of the access profile.
+          examples:
+          - Access Profile 2567
+    TaskResultSimplified:
+      type: object
+      description: A simplified task result for asynchronous operations.
+      properties:
+        id:
+          type: string
+          description: The task ID.
+          examples:
+          - 464ae7bf-791e-49fd-b746-06a2e4a89635
+        type:
+          type: string
+          description: The type of task.
+          examples:
+          - TASK_RESULT
+        name:
+          type:
+          - string
+          - 'null'
+          description: The task name.
+    ApprovalScheme:
+      type: object
+      description: An approval scheme defining the approval process.
+      properties:
+        approverType:
+          type: string
+          description: The type of approver. APP_OWNER is the application owner, OWNER is the access profile/role owner, SOURCE_OWNER is the source owner, MANAGER is the requesting user's manager, and GOVERNANCE_GROUP is a governance group.
+          enum:
+          - APP_OWNER
+          - OWNER
+          - SOURCE_OWNER
+          - MANAGER
+          - GOVERNANCE_GROUP
+          examples:
+          - MANAGER
+        approverId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the approver. Only required when approverType is GOVERNANCE_GROUP.
+          examples:
+          - 46c79c6399252b1a80dbdff5e2b1d4b7
+    RoleCriteriaKey:
+      type:
+      - object
+      - 'null'
+      description: The key element for role criteria.
+      properties:
+        type:
+          type: string
+          description: The type of criteria key.
+          enum:
+          - IDENTITY
+          - ACCOUNT
+          - ENTITLEMENT
+          examples:
+          - IDENTITY
+        property:
+          type: string
+          description: The property name for the criteria.
+          examples:
+          - attribute.department
+        sourceId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the source. Required for ACCOUNT and ENTITLEMENT types.
+          examples:
+          - 2c9180867427f3a301745aec18211519
+    JsonPatchOperation:
+      type: object
+      description: A JSON Patch operation as defined in RFC 6902.
+      required:
+      - op
+      - path
+      properties:
+        op:
+          type: string
+          description: The operation to perform.
+          enum:
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          - test
+          examples:
+          - replace
+        path:
+          type: string
+          description: The JSON pointer path for the operation.
+          examples:
+          - /description
+        value:
+          description: The value for the operation (required for add, replace, test).
+    RoleCriteriaLevel1:
+      type:
+      - object
+      - 'null'
+      description: Top-level role criteria expression.
+      properties:
+        operation:
+          type: string
+          description: The logical operation for combining criteria.
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - CONTAINS
+          - STARTS_WITH
+          - ENDS_WITH
+          - AND
+          - OR
+          examples:
+          - EQUALS
+        key:
+          $ref: '#/components/schemas/RoleCriteriaKey'
+        stringValue:
+          type:
+          - string
+          - 'null'
+          description: String value for comparison when operation is a leaf.
+        children:
+          type:
+          - array
+          - 'null'
+          description: Child criteria for compound operations (AND, OR).
+          items:
+            $ref: '#/components/schemas/RoleCriteriaLevel2'
+  responses:
+    InternalServerError:
+      description: Internal Server Error - Returned if there is an unexpected error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    BadRequest:
+      description: Client Error - Returned if the request body is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    TooManyRequests:
+      description: Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.
+      headers:
+        Retry-After:
+          description: Number of seconds to wait before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    NotFound:
+      description: Not Found - Returned if the specified resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    Forbidden:
+      description: Forbidden - Returned if the user you are running as does not have access to this endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    Unauthorized:
+      description: Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+  parameters:
+    Count:
+      name: count
+      in: query
+      description: If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.
+      required: false
+      schema:
+        type: boolean
+        default: false
+    Offset:
+      name: offset
+      in: query
+      description: Offset into the full result set. Usually specified with limit to paginate through the results.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return. Maximum value is 250.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 250
+        default: 250
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication. Use client credentials or authorization code flow to obtain access tokens.
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.api.identitynow.com/oauth/token
+          scopes:
+            idn:identity:read: Read identity information
+            idn:identity-profile:read: Read identity profiles
+            idn:identity-profile:manage: Manage identity profiles
+            idn:access-profile:read: Read access profiles
+            idn:access-profile:manage: Manage access profiles
+            idn:entitlement:read: Read entitlements
+            idn:sources:read: Read sources
+            idn:role-unchecked:read: Read roles
+            idn:role-unchecked:manage: Manage roles
+            idn:certification:read: Read certifications
+            idn:certification:manage: Manage certifications
+        authorizationCode:
+          authorizationUrl: https://{tenant}.identitynow.com/oauth/authorize
+          tokenUrl: https://{tenant}.api.identitynow.com/oauth/token
+          scopes:
+            idn:identity:read: Read identity information
+            idn:identity-profile:read: Read identity profiles
+            idn:identity-profile:manage: Manage identity profiles
+            idn:access-profile:read: Read access profiles
+            idn:access-profile:manage: Manage access profiles
+            idn:entitlement:read: Read entitlements
+            idn:sources:read: Read sources
+            idn:role-unchecked:read: Read roles
+            idn:role-unchecked:manage: Manage roles
+            idn:certification:read: Read certifications
+            idn:certification:manage: Manage certifications
+    personalAccessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Personal access token (PAT) authentication. Generate a PAT in Identity Security Cloud and use it as a bearer token.

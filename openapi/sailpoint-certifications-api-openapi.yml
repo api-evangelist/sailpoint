@@ -1,0 +1,1093 @@
+openapi: 3.1.0
+info:
+  title: Identity Security Cloud V3 Access Profiles Certifications API
+  description: Use these APIs to interact with the Identity Security Cloud platform to achieve repeatable, automated processes with greater scalability. The V3 APIs provide core endpoints covering access profiles, certifications, identities, roles, search, sources, transforms, workflows, and more. We encourage you to join the SailPoint Developer Community forum at https://developer.sailpoint.com/discuss to connect with other developers using our APIs.
+  termsOfService: https://developer.sailpoint.com/discuss/tos
+  contact:
+    name: Developer Relations
+    url: https://developer.sailpoint.com/discuss/api-help
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+    identifier: MIT
+  version: 3.0.0
+servers:
+- url: https://{tenant}.api.identitynow.com/v3
+  description: Production API server.
+  variables:
+    tenant:
+      default: sailpoint
+      description: The name of your tenant, typically your company's name.
+- url: https://{apiUrl}/v3
+  description: V3 API server.
+  variables:
+    apiUrl:
+      default: sailpoint.api.identitynow.com
+      description: The API URL of your tenant.
+security:
+- oauth2: []
+- personalAccessToken: []
+tags:
+- name: Certifications
+  description: Use this API to implement certification functionality. Certifications enable administrators and designated reviewers to review users' access to entitlements and decide whether to approve, revoke, or reassign the review. Certification campaigns provide a structured process for periodic access reviews and compliance verification.
+  externalDocs:
+    description: SailPoint Certifications Documentation
+    url: https://developer.sailpoint.com/docs/api/v3/certifications/
+paths:
+  /certifications:
+    get:
+      operationId: listIdentityCertifications
+      tags:
+      - Certifications
+      summary: List identity campaign certifications
+      description: Get a list of identity campaign certifications for the current user. A token with ORG_ADMIN, CERT_ADMIN, or REPORT_ADMIN authority is required to call this API. Callers with CERT_ADMIN authority can only see certifications they own. Callers with REPORT_ADMIN or ORG_ADMIN authority can see all certifications.
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Count'
+      - name: filters
+        in: query
+        description: 'Filter results using the standard syntax. Filtering is supported for the following fields: id (eq, in), campaign.id (eq, in), phase (eq), completed (eq).'
+        required: false
+        schema:
+          type: string
+        example: campaign.id eq "ef38f94347e94562b5bb8424a56397d8"
+      - name: sorters
+        in: query
+        description: 'Sort results using the standard syntax. Sorting is supported for the following fields: name, due, signed.'
+        required: false
+        schema:
+          type: string
+        example: name,-due
+      responses:
+        '200':
+          description: List of certification objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IdentityCertification'
+          headers:
+            X-Total-Count:
+              description: Total number of results matching the query.
+              schema:
+                type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:certification:read
+  /certifications/{id}:
+    get:
+      operationId: getIdentityCertification
+      tags:
+      - Certifications
+      summary: Get an identity certification
+      description: Get the details of an identity certification by its ID.
+      parameters:
+      - name: id
+        in: path
+        description: The certification ID.
+        required: true
+        schema:
+          type: string
+        example: ef38f94347e94562b5bb8424a56397d8
+      responses:
+        '200':
+          description: An identity certification object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityCertification'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:certification:read
+  /certifications/{id}/access-review-items:
+    get:
+      operationId: listCertificationAccessReviewItems
+      tags:
+      - Certifications
+      summary: List access review items
+      description: Get a list of access review items for the specified certification. These items represent the access that is being reviewed and may be approved, revoked, or reassigned.
+      parameters:
+      - name: id
+        in: path
+        description: The certification ID.
+        required: true
+        schema:
+          type: string
+        example: ef38f94347e94562b5bb8424a56397d8
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Count'
+      - name: filters
+        in: query
+        description: 'Filter results using the standard syntax. Filtering is supported for the following fields: type (eq), status (eq).'
+        required: false
+        schema:
+          type: string
+      - name: sorters
+        in: query
+        description: 'Sort results using the standard syntax. Sorting is supported for the following fields: name, type, status.'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of access review items.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessReviewItem'
+          headers:
+            X-Total-Count:
+              description: Total number of results matching the query.
+              schema:
+                type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:certification:read
+  /certifications/{id}/decide:
+    post:
+      operationId: makeCertificationDecision
+      tags:
+      - Certifications
+      summary: Decide on a certification item
+      description: Submit an approval, revocation, or acknowledgment decision for one or more access items in the specified certification.
+      parameters:
+      - name: id
+        in: path
+        description: The certification ID.
+        required: true
+        schema:
+          type: string
+        example: ef38f94347e94562b5bb8424a56397d8
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CertificationDecision'
+      responses:
+        '200':
+          description: Certification decisions submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityCertificationDecisionSummary'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:certification:manage
+  /certifications/{id}/reassign:
+    post:
+      operationId: reassignIdentityCertification
+      tags:
+      - Certifications
+      summary: Reassign identities or items
+      description: Reassign one or more identities or access items in the specified certification to a different reviewer.
+      parameters:
+      - name: id
+        in: path
+        description: The certification ID.
+        required: true
+        schema:
+          type: string
+        example: ef38f94347e94562b5bb8424a56397d8
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewReassign'
+      responses:
+        '200':
+          description: Reassignment completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityCertification'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:certification:manage
+  /certifications/{id}/sign-off:
+    post:
+      operationId: signOffIdentityCertification
+      tags:
+      - Certifications
+      summary: Finalize identity certification decisions
+      description: Sign off on a certification by its ID, finalizing all decisions. Once signed off, the certification is considered complete and all approved and revoked decisions will be processed.
+      parameters:
+      - name: id
+        in: path
+        description: The certification ID.
+        required: true
+        schema:
+          type: string
+        example: ef38f94347e94562b5bb8424a56397d8
+      responses:
+        '200':
+          description: Certification signed off.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityCertification'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:certification:manage
+  /certifications/{id}/reviewers:
+    get:
+      operationId: listCertificationReviewers
+      tags:
+      - Certifications
+      summary: List certification reviewers
+      description: Get a list of reviewers for the specified certification.
+      parameters:
+      - name: id
+        in: path
+        description: The certification ID.
+        required: true
+        schema:
+          type: string
+        example: ef38f94347e94562b5bb8424a56397d8
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Count'
+      responses:
+        '200':
+          description: List of certification reviewers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reviewer'
+          headers:
+            X-Total-Count:
+              description: Total number of results matching the query.
+              schema:
+                type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:certification:read
+  /certifications/{id}/tasks:
+    get:
+      operationId: listCertificationTasks
+      tags:
+      - Certifications
+      summary: List pending certification tasks
+      description: Get a list of pending certification tasks for the specified certification.
+      parameters:
+      - name: id
+        in: path
+        description: The certification ID.
+        required: true
+        schema:
+          type: string
+        example: ef38f94347e94562b5bb8424a56397d8
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Count'
+      responses:
+        '200':
+          description: List of pending certification tasks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CertificationTask'
+          headers:
+            X-Total-Count:
+              description: Total number of results matching the query.
+              schema:
+                type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:certification:read
+  /certifications/{id}/tasks/{taskId}:
+    get:
+      operationId: getCertificationTask
+      tags:
+      - Certifications
+      summary: Get a certification task
+      description: Get a specific certification task by its ID.
+      parameters:
+      - name: id
+        in: path
+        description: The certification ID.
+        required: true
+        schema:
+          type: string
+        example: ef38f94347e94562b5bb8424a56397d8
+      - name: taskId
+        in: path
+        description: The certification task ID.
+        required: true
+        schema:
+          type: string
+        example: 2c918086749d78830174a1a40e121518
+      responses:
+        '200':
+          description: A certification task object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificationTask'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - idn:certification:read
+components:
+  schemas:
+    Reassignment:
+      type:
+      - object
+      - 'null'
+      description: Information about a certification reassignment, if applicable.
+      properties:
+        from:
+          $ref: '#/components/schemas/IdentityReference'
+        comment:
+          type:
+          - string
+          - 'null'
+          description: The comment provided when reassigning.
+          examples:
+          - Reassigning to the new team lead
+    AccessReviewItem:
+      type: object
+      description: An access review item within a certification, representing access that is being reviewed.
+      properties:
+        id:
+          type: string
+          description: The access review item ID.
+          examples:
+          - 2c9180857182305e0171993735622948
+        accessSummary:
+          $ref: '#/components/schemas/AccessSummary'
+        identitySummary:
+          $ref: '#/components/schemas/CertificationIdentitySummary'
+        decision:
+          type: string
+          description: The current decision for this item.
+          enum:
+          - APPROVE
+          - REVOKE
+          - ACKNOWLEDGE
+          examples:
+          - APPROVE
+        recommendation:
+          $ref: '#/components/schemas/ReviewRecommendation'
+        comments:
+          type:
+          - string
+          - 'null'
+          description: Comments provided with the decision.
+        completed:
+          type: boolean
+          description: Whether a decision has been made on this item.
+          examples:
+          - false
+    AccessSummary:
+      type: object
+      description: Summary of the access being reviewed.
+      properties:
+        access:
+          type: object
+          description: The access item being reviewed.
+          properties:
+            type:
+              type: string
+              description: The type of access.
+              enum:
+              - ROLE
+              - ACCESS_PROFILE
+              - ENTITLEMENT
+              examples:
+              - ACCESS_PROFILE
+            id:
+              type: string
+              description: The ID of the access item.
+              examples:
+              - 2c91808568c529c60168cee9c85a015f
+            name:
+              type: string
+              description: The name of the access item.
+              examples:
+              - Cloud Engineering Access
+        entitlement:
+          type:
+          - object
+          - 'null'
+          description: The entitlement associated with this access item.
+          properties:
+            id:
+              type: string
+              description: The entitlement ID.
+            name:
+              type: string
+              description: The entitlement name.
+    CertificationIdentitySummary:
+      type: object
+      description: Summary of the identity being certified.
+      properties:
+        id:
+          type: string
+          description: The identity ID.
+          examples:
+          - 2c9180857182305e0171993735622948
+        name:
+          type: string
+          description: The identity name.
+          examples:
+          - Alison Ferguso
+        identityId:
+          type: string
+          description: The identity unique identifier.
+          examples:
+          - ALF01
+        completed:
+          type: boolean
+          description: Whether all decisions have been made for this identity.
+          examples:
+          - false
+    IdentityCertification:
+      type: object
+      description: An identity certification used in access review campaigns to review a user's access to entitlements and approve or remove that access.
+      properties:
+        id:
+          type: string
+          description: The certification ID.
+          examples:
+          - 2c9180835d2e5168015d32f890ca1581
+        name:
+          type: string
+          description: The certification name.
+          examples:
+          - Source Owner Access Review for Employees [source]
+        campaign:
+          $ref: '#/components/schemas/CampaignReference'
+        completed:
+          type: boolean
+          description: Whether all decisions have been made.
+          examples:
+          - true
+        identitiesCompleted:
+          type: integer
+          format: int32
+          description: The number of identities for whom all decisions have been made and are complete.
+          examples:
+          - 5
+        identitiesTotal:
+          type: integer
+          format: int32
+          description: The total number of identities in the certification, both complete and incomplete.
+          examples:
+          - 10
+        created:
+          type: string
+          format: date-time
+          description: Date and time the certification was created.
+          examples:
+          - '2018-06-25T20:22:28.104Z'
+        modified:
+          type: string
+          format: date-time
+          description: Date and time the certification was last modified.
+          examples:
+          - '2018-06-25T20:22:28.104Z'
+        decisionsMade:
+          type: integer
+          format: int32
+          description: The number of approve/revoke/acknowledge decisions that have been made.
+          examples:
+          - 20
+        decisionsTotal:
+          type: integer
+          format: int32
+          description: The total number of approve/revoke/acknowledge decisions.
+          examples:
+          - 40
+        due:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The due date of the certification.
+          examples:
+          - '2018-10-19T13:49:37.385Z'
+        signed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date the reviewer signed off on the certification.
+          examples:
+          - '2018-10-19T13:49:37.385Z'
+        reviewer:
+          $ref: '#/components/schemas/Reviewer'
+        reassignment:
+          $ref: '#/components/schemas/Reassignment'
+        hasErrors:
+          type: boolean
+          description: Whether the certification has an error.
+          examples:
+          - false
+        errorMessage:
+          type:
+          - string
+          - 'null'
+          description: Description of the certification error.
+          examples:
+          - The certification has an error
+        phase:
+          type: string
+          description: The current phase of the campaign. STAGED means the campaign is waiting to be activated. ACTIVE means the campaign is active. SIGNED means the reviewer has signed off and it is complete.
+          enum:
+          - STAGED
+          - ACTIVE
+          - SIGNED
+          examples:
+          - ACTIVE
+    ReviewRecommendation:
+      type:
+      - object
+      - 'null'
+      description: AI-driven recommendation for the review item.
+      properties:
+        recommendation:
+          type:
+          - string
+          - 'null'
+          description: The recommended decision.
+          enum:
+          - APPROVE
+          - REVOKE
+          - null
+          examples:
+          - APPROVE
+        reasons:
+          type: array
+          description: Reasons for the recommendation.
+          items:
+            type: string
+        timestamp:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date the recommendation was generated.
+    ErrorResponseDto:
+      type: object
+      description: Error response body.
+      properties:
+        detailCode:
+          type: string
+          description: Fine-grained error code providing more detail.
+          examples:
+          - 400.1 Bad Request Content
+        trackingId:
+          type: string
+          description: Unique tracking ID for the error.
+          examples:
+          - e7eab60924f64aa284175b9fa3309599
+        messages:
+          type: array
+          description: Generic localized reason for error.
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                description: The locale for the message text.
+                examples:
+                - en-US
+              localeOrigin:
+                type: string
+                description: An indicator of how the locale was selected.
+                enum:
+                - DEFAULT
+                - REQUEST
+                examples:
+                - DEFAULT
+              text:
+                type: string
+                description: The actual text of the error message.
+                examples:
+                - The request was syntactically correct but its content is semantically invalid.
+        causes:
+          type: array
+          description: Plain-text descriptive reasons to provide additional detail to the text provided in the messages field.
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                examples:
+                - en-US
+              localeOrigin:
+                type: string
+                enum:
+                - DEFAULT
+                - REQUEST
+              text:
+                type: string
+    CertificationTask:
+      type: object
+      description: A pending certification task.
+      properties:
+        id:
+          type: string
+          description: The certification task ID.
+          examples:
+          - 2c918086749d78830174a1a40e121518
+        type:
+          type: string
+          description: The type of the task.
+          examples:
+          - ADMIN_REASSIGN
+        targetType:
+          type: string
+          description: The type of the target.
+          enum:
+          - CAMPAIGN
+          - CERTIFICATION
+          examples:
+          - CERTIFICATION
+        targetId:
+          type: string
+          description: The ID of the target.
+          examples:
+          - ef38f94347e94562b5bb8424a56397d8
+        status:
+          type: string
+          description: The status of the task.
+          enum:
+          - QUEUED
+          - IN_PROGRESS
+          - SUCCESS
+          - ERROR
+          examples:
+          - QUEUED
+        created:
+          type: string
+          format: date-time
+          description: When the task was created.
+    Reviewer:
+      type: object
+      description: The reviewer of a certification.
+      properties:
+        id:
+          type: string
+          description: The reviewer ID.
+          examples:
+          - ef38f94347e94562b5bb8424a56397d8
+        name:
+          type: string
+          description: The reviewer name.
+          examples:
+          - Reviewer Name
+        email:
+          type: string
+          description: The reviewer email address.
+          examples:
+          - reviewer@test.com
+        type:
+          type: string
+          description: The type of the reviewing identity.
+          enum:
+          - IDENTITY
+          examples:
+          - IDENTITY
+        created:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date the reviewing identity was created.
+          examples:
+          - '2018-06-25T20:22:28.104Z'
+        modified:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date the reviewing identity was last modified.
+          examples:
+          - '2018-06-25T20:22:28.104Z'
+    CampaignReference:
+      type: object
+      description: Reference to the campaign associated with the certification.
+      required:
+      - id
+      - name
+      - type
+      - campaignType
+      properties:
+        id:
+          type: string
+          description: The unique ID of the campaign.
+          examples:
+          - ef38f94347e94562b5bb8424a56397d8
+        name:
+          type: string
+          description: The name of the campaign.
+          examples:
+          - Campaign Name
+        type:
+          type: string
+          description: The type of object being referenced.
+          enum:
+          - CAMPAIGN
+          examples:
+          - CAMPAIGN
+        campaignType:
+          type: string
+          description: The type of the campaign.
+          enum:
+          - MANAGER
+          - SOURCE_OWNER
+          - SEARCH
+          examples:
+          - MANAGER
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the campaign.
+          examples:
+          - A description of the campaign
+        correlatedStatus:
+          type: string
+          description: The correlated status of the campaign. Only SOURCE_OWNER campaigns can be Uncorrelated. An Uncorrelated campaign only includes uncorrelated identities.
+          enum:
+          - CORRELATED
+          - UNCORRELATED
+          examples:
+          - CORRELATED
+        mandatoryCommentRequirement:
+          type: string
+          description: Determines whether comments are required for decisions during certification reviews. By default, comments are not required.
+          enum:
+          - ALL_DECISIONS
+          - REVOKE_ONLY_DECISIONS
+          - NO_DECISIONS
+          examples:
+          - NO_DECISIONS
+    CertificationDecision:
+      type: object
+      description: A decision made on a certification item, approving, revoking, or acknowledging access.
+      required:
+      - id
+      - decision
+      properties:
+        id:
+          type: string
+          description: The ID of the access review item being decided.
+          examples:
+          - 2c9180857182305e0171993735622948
+        decision:
+          type: string
+          description: The decision for the certification item.
+          enum:
+          - APPROVE
+          - REVOKE
+          - ACKNOWLEDGE
+          examples:
+          - APPROVE
+        bulk:
+          type: boolean
+          default: false
+          description: Whether this is a bulk decision applying to multiple items.
+        comments:
+          type:
+          - string
+          - 'null'
+          description: Comments to accompany the decision.
+          examples:
+          - Access is still required for this project
+    IdentityCertificationDecisionSummary:
+      type: object
+      description: Summary of certification decisions.
+      properties:
+        entitiesCertified:
+          type: integer
+          format: int32
+          description: Number of entities certified.
+        entitiesCompleted:
+          type: integer
+          format: int32
+          description: Number of entities completed.
+        entitiesTotalCount:
+          type: integer
+          format: int32
+          description: Total count of entities.
+    IdentityReference:
+      type:
+      - object
+      - 'null'
+      description: Reference to an identity.
+      properties:
+        type:
+          type: string
+          description: The type of the referenced object.
+          enum:
+          - IDENTITY
+          examples:
+          - IDENTITY
+        id:
+          type: string
+          description: The identity ID.
+          examples:
+          - 2c9180a46faadee4016fb4e018c20639
+        name:
+          type: string
+          description: Human-readable display name of the identity.
+          examples:
+          - Thomas Edison
+    ReviewReassign:
+      type: object
+      description: Request body to reassign a certification review.
+      required:
+      - reassign
+      - reason
+      properties:
+        reassign:
+          type: array
+          description: List of reassignment items.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the item or identity to reassign.
+              type:
+                type: string
+                description: The type of item to reassign.
+                enum:
+                - TARGET_SUMMARY
+                - ACCESS_REVIEW_ITEM
+        reassignTo:
+          $ref: '#/components/schemas/IdentityReference'
+        reason:
+          type: string
+          description: The reason for the reassignment.
+          examples:
+          - Reassigning to the appropriate reviewer
+  responses:
+    InternalServerError:
+      description: Internal Server Error - Returned if there is an unexpected error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    BadRequest:
+      description: Client Error - Returned if the request body is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    TooManyRequests:
+      description: Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.
+      headers:
+        Retry-After:
+          description: Number of seconds to wait before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    NotFound:
+      description: Not Found - Returned if the specified resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    Forbidden:
+      description: Forbidden - Returned if the user you are running as does not have access to this endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    Unauthorized:
+      description: Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+  parameters:
+    Count:
+      name: count
+      in: query
+      description: If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.
+      required: false
+      schema:
+        type: boolean
+        default: false
+    Offset:
+      name: offset
+      in: query
+      description: Offset into the full result set. Usually specified with limit to paginate through the results.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return. Maximum value is 250.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 250
+        default: 250
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication. Use client credentials or authorization code flow to obtain access tokens.
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.api.identitynow.com/oauth/token
+          scopes:
+            idn:identity:read: Read identity information
+            idn:identity-profile:read: Read identity profiles
+            idn:identity-profile:manage: Manage identity profiles
+            idn:access-profile:read: Read access profiles
+            idn:access-profile:manage: Manage access profiles
+            idn:entitlement:read: Read entitlements
+            idn:sources:read: Read sources
+            idn:role-unchecked:read: Read roles
+            idn:role-unchecked:manage: Manage roles
+            idn:certification:read: Read certifications
+            idn:certification:manage: Manage certifications
+        authorizationCode:
+          authorizationUrl: https://{tenant}.identitynow.com/oauth/authorize
+          tokenUrl: https://{tenant}.api.identitynow.com/oauth/token
+          scopes:
+            idn:identity:read: Read identity information
+            idn:identity-profile:read: Read identity profiles
+            idn:identity-profile:manage: Manage identity profiles
+            idn:access-profile:read: Read access profiles
+            idn:access-profile:manage: Manage access profiles
+            idn:entitlement:read: Read entitlements
+            idn:sources:read: Read sources
+            idn:role-unchecked:read: Read roles
+            idn:role-unchecked:manage: Manage roles
+            idn:certification:read: Read certifications
+            idn:certification:manage: Manage certifications
+    personalAccessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Personal access token (PAT) authentication. Generate a PAT in Identity Security Cloud and use it as a bearer token.

@@ -1,0 +1,3277 @@
+{
+  "info": {
+    "_postman_id": "b26da321-09b2-463a-b534-9182ff1b0604",
+    "name": "Identity Security Cloud V3 Access Profiles Identities API",
+    "description": "Use these APIs to interact with the Identity Security Cloud platform to achieve repeatable, automated processes with greater scalability. The V3 APIs provide core endpoints covering access profiles, certifications, identities, roles, search, sources, transforms, workflows, and more. We encourage you to join the SailPoint Developer Community forum at https://developer.sailpoint.com/discuss to connect with other developers using our APIs.\n\nContact Support:\n Name: Developer Relations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:47.000Z",
+    "updatedAt": "2026-07-28T02:49:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b26da321-09b2-463a-b534-9182ff1b0604"
+  },
+  "item": [
+    {
+      "name": "public-identities",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get a public identity",
+              "id": "244213fe-89f2-436a-8839-bf500b572b1d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/public-identities/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public-identities",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "390c91eb-9507-4050-8993-2fc8accb5d44",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The identity ID."
+                    }
+                  ]
+                },
+                "description": "Get the details of a public identity by its ID."
+              },
+              "response": [
+                {
+                  "id": "349e69bc-76a2-4066-bc4c-f832461720ce",
+                  "name": "A public identity object.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public-identities/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public-identities",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"email\": \"<string,null>\",\n  \"status\": \"<string,null>\",\n  \"identityState\": \"ACTIVE\",\n  \"manager\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"attributes\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"value\": \"<string,null>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"value\": \"<string,null>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-349e69bc-76a2-4066-bc4c-f832461720ce"
+                },
+                {
+                  "id": "58e27744-eb97-4c39-aaf8-6530136e490e",
+                  "name": "Client Error - Returned if the request body is invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public-identities/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public-identities",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-58e27744-eb97-4c39-aaf8-6530136e490e"
+                },
+                {
+                  "id": "10a85919-e036-4fe9-abce-45278b5c9d8e",
+                  "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public-identities/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public-identities",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-10a85919-e036-4fe9-abce-45278b5c9d8e"
+                },
+                {
+                  "id": "910e8022-65cd-46cb-918e-6b08c9e90363",
+                  "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public-identities/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public-identities",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-910e8022-65cd-46cb-918e-6b08c9e90363"
+                },
+                {
+                  "id": "faf5145b-b169-477f-9b22-990450b2bf54",
+                  "name": "Not Found - Returned if the specified resource does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public-identities/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public-identities",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-faf5145b-b169-477f-9b22-990450b2bf54"
+                },
+                {
+                  "id": "81448982-28a9-440d-a873-b4054657dd48",
+                  "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public-identities/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public-identities",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-81448982-28a9-440d-a873-b4054657dd48"
+                },
+                {
+                  "id": "184b4063-f1dd-4782-a47a-728efce5aed2",
+                  "name": "Internal Server Error - Returned if there is an unexpected error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public-identities/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public-identities",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-184b4063-f1dd-4782-a47a-728efce5aed2"
+                }
+              ],
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-244213fe-89f2-436a-8839-bf500b572b1d"
+            }
+          ],
+          "id": "64bb97bb-5219-4437-b109-282c1bb04395",
+          "createdAt": "2026-07-28T02:49:48.000Z",
+          "updatedAt": "2026-07-28T02:49:48.000Z",
+          "uid": "35240-64bb97bb-5219-4437-b109-282c1bb04395"
+        },
+        {
+          "name": "List public identities",
+          "id": "62755600-011e-4f2a-9442-226cf8fee09b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/public-identities?add-core-filters=false&limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "public-identities"
+              ],
+              "query": [
+                {
+                  "description": "Set to true to exclude incomplete identities and uncorrelated accounts from the results.",
+                  "key": "add-core-filters",
+                  "value": "false"
+                },
+                {
+                  "description": "Maximum number of results to return. Maximum value is 250.",
+                  "key": "limit",
+                  "value": "250"
+                },
+                {
+                  "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                  "key": "count",
+                  "value": "false"
+                },
+                {
+                  "description": "Filter results using the standard syntax described in V3 API Standard Collection Parameters. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw, co), alias (eq, sw, co), email (eq, sw, co), status (eq).",
+                  "key": "filters",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, alias, email.",
+                  "key": "sorters",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Get a list of public identities. This endpoint returns a paged list of public identity objects that can be filtered and sorted."
+          },
+          "response": [
+            {
+              "id": "25e82102-45a0-47f6-a35e-8254f4e7032d",
+              "name": "List of public identities.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/public-identities?add-core-filters=false&limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public-identities"
+                  ],
+                  "query": [
+                    {
+                      "description": "Set to true to exclude incomplete identities and uncorrelated accounts from the results.",
+                      "key": "add-core-filters",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax described in V3 API Standard Collection Parameters. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw, co), alias (eq, sw, co), email (eq, sw, co), status (eq).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, alias, email.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Total number of results matching the query.",
+                    "type": "text/plain"
+                  },
+                  "key": "X-Total-Count",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"alias\": \"<string>\",\n    \"email\": \"<string,null>\",\n    \"status\": \"<string,null>\",\n    \"identityState\": \"INACTIVE_SHORT_TERM\",\n    \"manager\": null,\n    \"attributes\": [\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"value\": \"<string,null>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"value\": \"<string,null>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"alias\": \"<string>\",\n    \"email\": \"<string,null>\",\n    \"status\": \"<string,null>\",\n    \"identityState\": \"ACTIVE\",\n    \"manager\": {\n      \"type\": \"IDENTITY\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    \"attributes\": [\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"value\": \"<string,null>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"value\": \"<string,null>\"\n      }\n    ]\n  }\n]",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-25e82102-45a0-47f6-a35e-8254f4e7032d"
+            },
+            {
+              "id": "f4d67d34-1b71-41a0-9a54-0fe7db924842",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/public-identities?add-core-filters=false&limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public-identities"
+                  ],
+                  "query": [
+                    {
+                      "description": "Set to true to exclude incomplete identities and uncorrelated accounts from the results.",
+                      "key": "add-core-filters",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax described in V3 API Standard Collection Parameters. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw, co), alias (eq, sw, co), email (eq, sw, co), status (eq).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, alias, email.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-f4d67d34-1b71-41a0-9a54-0fe7db924842"
+            },
+            {
+              "id": "82a872d3-c737-4dc5-8460-2c7364d12976",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/public-identities?add-core-filters=false&limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public-identities"
+                  ],
+                  "query": [
+                    {
+                      "description": "Set to true to exclude incomplete identities and uncorrelated accounts from the results.",
+                      "key": "add-core-filters",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax described in V3 API Standard Collection Parameters. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw, co), alias (eq, sw, co), email (eq, sw, co), status (eq).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, alias, email.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-82a872d3-c737-4dc5-8460-2c7364d12976"
+            },
+            {
+              "id": "e47b4f10-127c-4478-8946-990603f2c208",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/public-identities?add-core-filters=false&limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public-identities"
+                  ],
+                  "query": [
+                    {
+                      "description": "Set to true to exclude incomplete identities and uncorrelated accounts from the results.",
+                      "key": "add-core-filters",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax described in V3 API Standard Collection Parameters. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw, co), alias (eq, sw, co), email (eq, sw, co), status (eq).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, alias, email.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-e47b4f10-127c-4478-8946-990603f2c208"
+            },
+            {
+              "id": "931b45c7-df9f-4948-a3b3-2f1aa60b6bf1",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/public-identities?add-core-filters=false&limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public-identities"
+                  ],
+                  "query": [
+                    {
+                      "description": "Set to true to exclude incomplete identities and uncorrelated accounts from the results.",
+                      "key": "add-core-filters",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax described in V3 API Standard Collection Parameters. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw, co), alias (eq, sw, co), email (eq, sw, co), status (eq).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, alias, email.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Number of seconds to wait before retrying.",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-931b45c7-df9f-4948-a3b3-2f1aa60b6bf1"
+            },
+            {
+              "id": "24708985-b3e0-4a95-aa43-75b5b2411ce5",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/public-identities?add-core-filters=false&limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public-identities"
+                  ],
+                  "query": [
+                    {
+                      "description": "Set to true to exclude incomplete identities and uncorrelated accounts from the results.",
+                      "key": "add-core-filters",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax described in V3 API Standard Collection Parameters. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw, co), alias (eq, sw, co), email (eq, sw, co), status (eq).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, alias, email.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-24708985-b3e0-4a95-aa43-75b5b2411ce5"
+            }
+          ],
+          "createdAt": "2026-07-28T02:49:48.000Z",
+          "updatedAt": "2026-07-28T02:49:48.000Z",
+          "uid": "35240-62755600-011e-4f2a-9442-226cf8fee09b"
+        }
+      ],
+      "id": "0c891098-c16b-45db-853d-bac9d8612ff1",
+      "createdAt": "2026-07-28T02:49:48.000Z",
+      "updatedAt": "2026-07-28T02:49:48.000Z",
+      "uid": "35240-0c891098-c16b-45db-853d-bac9d8612ff1"
+    },
+    {
+      "name": "identity-profiles",
+      "item": [
+        {
+          "name": "{identity-profile-id}",
+          "item": [
+            {
+              "name": "Get an identity profile",
+              "id": "7e3fa903-18c5-4a22-ae57-361159241d24",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8a641335-376c-4126-aa83-7f52ce01317d",
+                      "key": "identity-profile-id",
+                      "value": "<string>",
+                      "description": "(Required) The identity profile ID."
+                    }
+                  ]
+                },
+                "description": "Get the details of an identity profile by its ID."
+              },
+              "response": [
+                {
+                  "id": "7c371e1f-862e-41e9-a622-ea1dddab27c1",
+                  "name": "An identity profile object.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"priority\": \"<long>\",\n  \"identityRefreshRequired\": false,\n  \"identityCount\": \"<integer>\",\n  \"hasTimeBasedAttr\": false,\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-7c371e1f-862e-41e9-a622-ea1dddab27c1"
+                },
+                {
+                  "id": "4751bfcf-ff21-43e1-a032-9c1778045854",
+                  "name": "Client Error - Returned if the request body is invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-4751bfcf-ff21-43e1-a032-9c1778045854"
+                },
+                {
+                  "id": "6a40ac8c-973b-44aa-8d7b-4b13fb8eae70",
+                  "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-6a40ac8c-973b-44aa-8d7b-4b13fb8eae70"
+                },
+                {
+                  "id": "5c24576e-3186-4497-89ec-997d4fea6ede",
+                  "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-5c24576e-3186-4497-89ec-997d4fea6ede"
+                },
+                {
+                  "id": "29632a69-5a60-4364-aa85-c8016e6f93ed",
+                  "name": "Not Found - Returned if the specified resource does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-29632a69-5a60-4364-aa85-c8016e6f93ed"
+                },
+                {
+                  "id": "c56b2517-7ff3-412d-ad6d-588bdc510254",
+                  "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-c56b2517-7ff3-412d-ad6d-588bdc510254"
+                },
+                {
+                  "id": "71aa742b-7939-40c0-a344-e2f07d2d24f6",
+                  "name": "Internal Server Error - Returned if there is an unexpected error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-71aa742b-7939-40c0-a344-e2f07d2d24f6"
+                }
+              ],
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-7e3fa903-18c5-4a22-ae57-361159241d24"
+            },
+            {
+              "name": "Update an identity profile",
+              "id": "79be9b1f-7ebd-4702-ab9a-06a5db8f374d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json-patch+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"move\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2f7d4694-1bb2-4b1f-a71f-424bc58ddb90",
+                      "key": "identity-profile-id",
+                      "value": "<string>",
+                      "description": "(Required) The identity profile ID."
+                    }
+                  ]
+                },
+                "description": "Update an existing identity profile using a JSON Patch document."
+              },
+              "response": [
+                {
+                  "id": "d7340686-8523-475e-8346-59782de30dc6",
+                  "name": "Updated identity profile.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"move\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"priority\": \"<long>\",\n  \"identityRefreshRequired\": false,\n  \"identityCount\": \"<integer>\",\n  \"hasTimeBasedAttr\": false,\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-d7340686-8523-475e-8346-59782de30dc6"
+                },
+                {
+                  "id": "a2a24921-bf85-494d-a9ce-2a318487c4fc",
+                  "name": "Client Error - Returned if the request body is invalid.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"move\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-a2a24921-bf85-494d-a9ce-2a318487c4fc"
+                },
+                {
+                  "id": "f80f48a8-919f-449a-b0d8-d69b9c929588",
+                  "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"move\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-f80f48a8-919f-449a-b0d8-d69b9c929588"
+                },
+                {
+                  "id": "867dafb0-df8f-4dcd-9050-bc5aa84942e6",
+                  "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"move\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-867dafb0-df8f-4dcd-9050-bc5aa84942e6"
+                },
+                {
+                  "id": "27500ef2-fb64-4983-8e9c-f480c194bf7a",
+                  "name": "Not Found - Returned if the specified resource does not exist.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"move\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-27500ef2-fb64-4983-8e9c-f480c194bf7a"
+                },
+                {
+                  "id": "2a7303cd-9430-45f3-bf9b-080ac6a4fc48",
+                  "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"move\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-2a7303cd-9430-45f3-bf9b-080ac6a4fc48"
+                },
+                {
+                  "id": "4894f0a0-b69c-41ae-af07-c30cd419a61c",
+                  "name": "Internal Server Error - Returned if there is an unexpected error.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"move\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-4894f0a0-b69c-41ae-af07-c30cd419a61c"
+                }
+              ],
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-79be9b1f-7ebd-4702-ab9a-06a5db8f374d"
+            },
+            {
+              "name": "Delete an identity profile",
+              "id": "7fc326ef-e512-4758-9db5-cd6a0ed5d055",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d8d9625a-013a-45ba-9668-c44c75b63149",
+                      "key": "identity-profile-id",
+                      "value": "<string>",
+                      "description": "(Required) The identity profile ID."
+                    }
+                  ]
+                },
+                "description": "Delete an identity profile by its ID."
+              },
+              "response": [
+                {
+                  "id": "f2738120-7247-407a-84a7-c09845200849",
+                  "name": "Identity profile delete request accepted. This is a long-running asynchronous operation.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"name\": \"<string,null>\"\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-f2738120-7247-407a-84a7-c09845200849"
+                },
+                {
+                  "id": "407d2b8c-b1e7-4053-ab04-d3b254ac0b34",
+                  "name": "Client Error - Returned if the request body is invalid.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-407d2b8c-b1e7-4053-ab04-d3b254ac0b34"
+                },
+                {
+                  "id": "97ec701b-7625-4a50-af85-b6d54987988a",
+                  "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-97ec701b-7625-4a50-af85-b6d54987988a"
+                },
+                {
+                  "id": "59f60f13-4e37-4e50-823b-4926e5088df9",
+                  "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-59f60f13-4e37-4e50-823b-4926e5088df9"
+                },
+                {
+                  "id": "4d8a1b4b-2722-4bec-a53c-6ed271f6777d",
+                  "name": "Not Found - Returned if the specified resource does not exist.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-4d8a1b4b-2722-4bec-a53c-6ed271f6777d"
+                },
+                {
+                  "id": "ed5a67fe-c021-4455-a431-e873b8b76e97",
+                  "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-ed5a67fe-c021-4455-a431-e873b8b76e97"
+                },
+                {
+                  "id": "52144013-3a68-4e2c-9520-3565533f7964",
+                  "name": "Internal Server Error - Returned if there is an unexpected error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-profiles/:identity-profile-id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-profiles",
+                        ":identity-profile-id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "identity-profile-id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:48.000Z",
+                  "updatedAt": "2026-07-28T02:49:48.000Z",
+                  "uid": "35240-52144013-3a68-4e2c-9520-3565533f7964"
+                }
+              ],
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-7fc326ef-e512-4758-9db5-cd6a0ed5d055"
+            }
+          ],
+          "id": "9041d934-fe4b-4fb8-b588-832a2d493cac",
+          "createdAt": "2026-07-28T02:49:48.000Z",
+          "updatedAt": "2026-07-28T02:49:48.000Z",
+          "uid": "35240-9041d934-fe4b-4fb8-b588-832a2d493cac"
+        },
+        {
+          "name": "List identity profiles",
+          "id": "b894d7c9-f8cc-4b9f-b169-c37392d480da",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/identity-profiles?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "identity-profiles"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of results to return. Maximum value is 250.",
+                  "key": "limit",
+                  "value": "250"
+                },
+                {
+                  "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                  "key": "count",
+                  "value": "false"
+                },
+                {
+                  "description": "Filter results using the standard syntax. Filtering is supported for the following fields: id (eq, in), name (eq, sw), priority (eq, gt, lt, ge, le).",
+                  "key": "filters",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, priority, created, modified.",
+                  "key": "sorters",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Get a list of identity profiles. Identity profiles define how identity attributes are mapped from source account attributes and configure lifecycle states."
+          },
+          "response": [
+            {
+              "id": "5811f9d5-e191-4cb7-abcb-45e761eb3d1f",
+              "name": "List of identity profiles.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax. Filtering is supported for the following fields: id (eq, in), name (eq, sw), priority (eq, gt, lt, ge, le).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, priority, created, modified.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Total number of results matching the query.",
+                    "type": "text/plain"
+                  },
+                  "key": "X-Total-Count",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"name\": \"<string>\",\n    \"authoritativeSource\": {\n      \"type\": \"SOURCE\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"description\": \"<string,null>\",\n    \"owner\": {\n      \"type\": \"IDENTITY\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    \"priority\": \"<long>\",\n    \"identityRefreshRequired\": false,\n    \"identityCount\": \"<integer>\",\n    \"hasTimeBasedAttr\": false,\n    \"created\": \"<dateTime>\",\n    \"modified\": \"<dateTime>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"authoritativeSource\": {\n      \"type\": \"SOURCE\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"description\": \"<string,null>\",\n    \"owner\": {\n      \"type\": \"IDENTITY\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    \"priority\": \"<long>\",\n    \"identityRefreshRequired\": false,\n    \"identityCount\": \"<integer>\",\n    \"hasTimeBasedAttr\": false,\n    \"created\": \"<dateTime>\",\n    \"modified\": \"<dateTime>\"\n  }\n]",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-5811f9d5-e191-4cb7-abcb-45e761eb3d1f"
+            },
+            {
+              "id": "d2f2399f-b270-437d-b726-504d51f20668",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax. Filtering is supported for the following fields: id (eq, in), name (eq, sw), priority (eq, gt, lt, ge, le).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, priority, created, modified.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-d2f2399f-b270-437d-b726-504d51f20668"
+            },
+            {
+              "id": "6758c3a9-b71c-4393-bfdd-fb91847f4826",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax. Filtering is supported for the following fields: id (eq, in), name (eq, sw), priority (eq, gt, lt, ge, le).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, priority, created, modified.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-6758c3a9-b71c-4393-bfdd-fb91847f4826"
+            },
+            {
+              "id": "2d98b108-594a-4da6-9017-9c7d6936b0d4",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax. Filtering is supported for the following fields: id (eq, in), name (eq, sw), priority (eq, gt, lt, ge, le).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, priority, created, modified.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-2d98b108-594a-4da6-9017-9c7d6936b0d4"
+            },
+            {
+              "id": "ff47a489-1cc4-4748-a7da-ab3b86b9c4f4",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax. Filtering is supported for the following fields: id (eq, in), name (eq, sw), priority (eq, gt, lt, ge, le).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, priority, created, modified.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Number of seconds to wait before retrying.",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-ff47a489-1cc4-4748-a7da-ab3b86b9c4f4"
+            },
+            {
+              "id": "0445759b-337e-482d-8841-4de2a51ee379",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax. Filtering is supported for the following fields: id (eq, in), name (eq, sw), priority (eq, gt, lt, ge, le).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, priority, created, modified.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-0445759b-337e-482d-8841-4de2a51ee379"
+            }
+          ],
+          "createdAt": "2026-07-28T02:49:48.000Z",
+          "updatedAt": "2026-07-28T02:49:48.000Z",
+          "uid": "35240-b894d7c9-f8cc-4b9f-b169-c37392d480da"
+        },
+        {
+          "name": "Create an identity profile",
+          "id": "3eec3467-1d18-44a1-937f-c94fe29e0605",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"priority\": \"<long>\",\n  \"identityRefreshRequired\": false,\n  \"identityCount\": \"<integer>\",\n  \"hasTimeBasedAttr\": false,\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/identity-profiles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "identity-profiles"
+              ]
+            },
+            "description": "Create an identity profile. An identity profile defines the mapping between source account attributes and identity attributes and configures lifecycle states for identities."
+          },
+          "response": [
+            {
+              "id": "21f6cc80-6a42-4abd-9e25-03e0af9ec778",
+              "name": "Identity profile created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"priority\": \"<long>\",\n  \"identityRefreshRequired\": false,\n  \"identityCount\": \"<integer>\",\n  \"hasTimeBasedAttr\": false,\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"name\": \"<string>\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"priority\": \"<long>\",\n  \"identityRefreshRequired\": false,\n  \"identityCount\": \"<integer>\",\n  \"hasTimeBasedAttr\": false,\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-21f6cc80-6a42-4abd-9e25-03e0af9ec778"
+            },
+            {
+              "id": "7f43cbd1-5cd7-4f48-b1a5-91c3abf9894a",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"priority\": \"<long>\",\n  \"identityRefreshRequired\": false,\n  \"identityCount\": \"<integer>\",\n  \"hasTimeBasedAttr\": false,\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-7f43cbd1-5cd7-4f48-b1a5-91c3abf9894a"
+            },
+            {
+              "id": "7b01b80d-b741-46f4-a8cb-6496d8481c00",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"priority\": \"<long>\",\n  \"identityRefreshRequired\": false,\n  \"identityCount\": \"<integer>\",\n  \"hasTimeBasedAttr\": false,\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-7b01b80d-b741-46f4-a8cb-6496d8481c00"
+            },
+            {
+              "id": "589c9627-99d0-46b2-9f1f-af5b05e0987d",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"priority\": \"<long>\",\n  \"identityRefreshRequired\": false,\n  \"identityCount\": \"<integer>\",\n  \"hasTimeBasedAttr\": false,\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-589c9627-99d0-46b2-9f1f-af5b05e0987d"
+            },
+            {
+              "id": "c522811b-5fc1-489a-952a-3b1b52c24715",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"priority\": \"<long>\",\n  \"identityRefreshRequired\": false,\n  \"identityCount\": \"<integer>\",\n  \"hasTimeBasedAttr\": false,\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Number of seconds to wait before retrying.",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-c522811b-5fc1-489a-952a-3b1b52c24715"
+            },
+            {
+              "id": "5601d543-e93d-4d7a-bc1b-a89ff5eacdc3",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"priority\": \"<long>\",\n  \"identityRefreshRequired\": false,\n  \"identityCount\": \"<integer>\",\n  \"hasTimeBasedAttr\": false,\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/identity-profiles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-profiles"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:48.000Z",
+              "updatedAt": "2026-07-28T02:49:48.000Z",
+              "uid": "35240-5601d543-e93d-4d7a-bc1b-a89ff5eacdc3"
+            }
+          ],
+          "createdAt": "2026-07-28T02:49:48.000Z",
+          "updatedAt": "2026-07-28T02:49:48.000Z",
+          "uid": "35240-3eec3467-1d18-44a1-937f-c94fe29e0605"
+        }
+      ],
+      "id": "9806c82c-e226-4022-af79-c714de097254",
+      "createdAt": "2026-07-28T02:49:48.000Z",
+      "updatedAt": "2026-07-28T02:49:48.000Z",
+      "uid": "35240-9806c82c-e226-4022-af79-c714de097254"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{tenant}.api.identitynow.com/oauth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "tenant",
+      "value": "sailpoint"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{tenant}}.api.identitynow.com/v3"
+    }
+  ]
+}

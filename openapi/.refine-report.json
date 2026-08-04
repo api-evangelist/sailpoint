@@ -1,0 +1,20 @@
+{
+  "provider": "sailpoint",
+  "sources": [
+    "sailpoint-access-profiles-api-openapi.yml",
+    "sailpoint-certifications-api-openapi.yml",
+    "sailpoint-identities-api-openapi.yml",
+    "sailpoint-roles-api-openapi.yml"
+  ],
+  "outputs": [
+    "sailpoint-access-profiles-api-openapi.yml",
+    "sailpoint-certifications-api-openapi.yml",
+    "sailpoint-identities-api-openapi.yml",
+    "sailpoint-roles-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

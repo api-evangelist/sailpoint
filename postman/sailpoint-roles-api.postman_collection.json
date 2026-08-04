@@ -1,0 +1,3430 @@
+{
+  "info": {
+    "_postman_id": "f6b09b84-72e3-47a6-9bc8-fea98fc2ff58",
+    "name": "Identity Security Cloud V3 Access Profiles Roles API",
+    "description": "Use these APIs to interact with the Identity Security Cloud platform to achieve repeatable, automated processes with greater scalability. The V3 APIs provide core endpoints covering access profiles, certifications, identities, roles, search, sources, transforms, workflows, and more. We encourage you to join the SailPoint Developer Community forum at https://developer.sailpoint.com/discuss to connect with other developers using our APIs.\n\nContact Support:\n Name: Developer Relations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:49.000Z",
+    "updatedAt": "2026-07-28T02:49:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f6b09b84-72e3-47a6-9bc8-fea98fc2ff58"
+  },
+  "item": [
+    {
+      "name": "roles",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "identities",
+              "item": [
+                {
+                  "name": "List identities assigned a role",
+                  "id": "b365be66-a940-451d-b688-2ee66925983d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id/identities?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id",
+                        "identities"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return. Maximum value is 250.",
+                          "key": "limit",
+                          "value": "250"
+                        },
+                        {
+                          "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                          "key": "count",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw).",
+                          "key": "filters",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                          "key": "sorters",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "4537f5bd-17d2-4f7f-86d9-707fb8a3d277",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The role ID."
+                        }
+                      ]
+                    },
+                    "description": "Get a list of identities that have been assigned the specified role."
+                  },
+                  "response": [
+                    {
+                      "id": "050a2ba2-d281-4dd8-8987-de04608f94f5",
+                      "name": "List of identities assigned to the role.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/roles/:id/identities?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "roles",
+                            ":id",
+                            "identities"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return. Maximum value is 250.",
+                              "key": "limit",
+                              "value": "250"
+                            },
+                            {
+                              "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                              "key": "count",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw).",
+                              "key": "filters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                              "key": "sorters",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "Total number of results matching the query.",
+                            "type": "text/plain"
+                          },
+                          "key": "X-Total-Count",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"aliasName\": \"<string,null>\",\n    \"name\": \"<string>\",\n    \"email\": \"<string,null>\",\n    \"roleAssignmentSource\": \"ACCESS_REQUEST\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"aliasName\": \"<string,null>\",\n    \"name\": \"<string>\",\n    \"email\": \"<string,null>\",\n    \"roleAssignmentSource\": \"ACCESS_REQUEST\"\n  }\n]",
+                      "createdAt": "2026-07-28T02:49:49.000Z",
+                      "updatedAt": "2026-07-28T02:49:49.000Z",
+                      "uid": "35240-050a2ba2-d281-4dd8-8987-de04608f94f5"
+                    },
+                    {
+                      "id": "93a40708-7e16-48a6-9505-80b00703f45c",
+                      "name": "Client Error - Returned if the request body is invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/roles/:id/identities?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "roles",
+                            ":id",
+                            "identities"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return. Maximum value is 250.",
+                              "key": "limit",
+                              "value": "250"
+                            },
+                            {
+                              "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                              "key": "count",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw).",
+                              "key": "filters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                              "key": "sorters",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:49:49.000Z",
+                      "updatedAt": "2026-07-28T02:49:49.000Z",
+                      "uid": "35240-93a40708-7e16-48a6-9505-80b00703f45c"
+                    },
+                    {
+                      "id": "76c74ff3-4d32-425e-9307-063b088e044d",
+                      "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/roles/:id/identities?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "roles",
+                            ":id",
+                            "identities"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return. Maximum value is 250.",
+                              "key": "limit",
+                              "value": "250"
+                            },
+                            {
+                              "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                              "key": "count",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw).",
+                              "key": "filters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                              "key": "sorters",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:49:49.000Z",
+                      "updatedAt": "2026-07-28T02:49:49.000Z",
+                      "uid": "35240-76c74ff3-4d32-425e-9307-063b088e044d"
+                    },
+                    {
+                      "id": "cfc5f84f-d043-42fa-b8d3-817c786a52d4",
+                      "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/roles/:id/identities?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "roles",
+                            ":id",
+                            "identities"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return. Maximum value is 250.",
+                              "key": "limit",
+                              "value": "250"
+                            },
+                            {
+                              "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                              "key": "count",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw).",
+                              "key": "filters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                              "key": "sorters",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:49:49.000Z",
+                      "updatedAt": "2026-07-28T02:49:49.000Z",
+                      "uid": "35240-cfc5f84f-d043-42fa-b8d3-817c786a52d4"
+                    },
+                    {
+                      "id": "621725da-1c77-41b0-8843-452fad2f4e7b",
+                      "name": "Not Found - Returned if the specified resource does not exist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/roles/:id/identities?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "roles",
+                            ":id",
+                            "identities"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return. Maximum value is 250.",
+                              "key": "limit",
+                              "value": "250"
+                            },
+                            {
+                              "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                              "key": "count",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw).",
+                              "key": "filters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                              "key": "sorters",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:49:49.000Z",
+                      "updatedAt": "2026-07-28T02:49:49.000Z",
+                      "uid": "35240-621725da-1c77-41b0-8843-452fad2f4e7b"
+                    },
+                    {
+                      "id": "24963c81-bb52-4421-9868-13c8af11adca",
+                      "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/roles/:id/identities?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "roles",
+                            ":id",
+                            "identities"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return. Maximum value is 250.",
+                              "key": "limit",
+                              "value": "250"
+                            },
+                            {
+                              "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                              "key": "count",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw).",
+                              "key": "filters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                              "key": "sorters",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "Number of seconds to wait before retrying.",
+                            "type": "text/plain"
+                          },
+                          "key": "Retry-After",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:49:49.000Z",
+                      "updatedAt": "2026-07-28T02:49:49.000Z",
+                      "uid": "35240-24963c81-bb52-4421-9868-13c8af11adca"
+                    },
+                    {
+                      "id": "6c81d276-8d54-4f3b-afdd-223661fd6c29",
+                      "name": "Internal Server Error - Returned if there is an unexpected error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/roles/:id/identities?limit=250&offset=0&count=false&filters=<string>&sorters=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "roles",
+                            ":id",
+                            "identities"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return. Maximum value is 250.",
+                              "key": "limit",
+                              "value": "250"
+                            },
+                            {
+                              "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                              "key": "count",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw).",
+                              "key": "filters",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                              "key": "sorters",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:49:49.000Z",
+                      "updatedAt": "2026-07-28T02:49:49.000Z",
+                      "uid": "35240-6c81d276-8d54-4f3b-afdd-223661fd6c29"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-b365be66-a940-451d-b688-2ee66925983d"
+                }
+              ],
+              "id": "d72566ae-e70f-4c14-954e-bb8c506c0286",
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-d72566ae-e70f-4c14-954e-bb8c506c0286"
+            },
+            {
+              "name": "Get a role",
+              "id": "2cbc0b72-796c-4b20-bf86-3ee6f69a8b0c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/roles/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "6972060e-1252-4c82-afaf-0bb7d7427fda",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The role ID."
+                    }
+                  ]
+                },
+                "description": "Get a role by its ID."
+              },
+              "response": [
+                {
+                  "id": "3038d73b-6425-40fb-b556-f6719a01cc11",
+                  "name": "A role object.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"accessProfiles\": null,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"membership\": null,\n  \"enabled\": false,\n  \"requestable\": false,\n  \"accessRequestConfig\": null,\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"GOVERNANCE_GROUP\",\n        \"approverId\": \"<string,null>\"\n      },\n      {\n        \"approverType\": \"APP_OWNER\",\n        \"approverId\": \"<string,null>\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dimensional\": false\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-3038d73b-6425-40fb-b556-f6719a01cc11"
+                },
+                {
+                  "id": "ca3567da-05a4-4a93-9c94-1498646c2534",
+                  "name": "Client Error - Returned if the request body is invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-ca3567da-05a4-4a93-9c94-1498646c2534"
+                },
+                {
+                  "id": "8b058799-2795-4241-a0cc-2d530bfc0a27",
+                  "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-8b058799-2795-4241-a0cc-2d530bfc0a27"
+                },
+                {
+                  "id": "c1eaa948-f99d-4711-a5f5-285d61192494",
+                  "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-c1eaa948-f99d-4711-a5f5-285d61192494"
+                },
+                {
+                  "id": "d9a23e2a-f5ba-41bf-a426-20a7d6b86cbb",
+                  "name": "Not Found - Returned if the specified resource does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-d9a23e2a-f5ba-41bf-a426-20a7d6b86cbb"
+                },
+                {
+                  "id": "5361750f-54fd-4abc-9afa-04ad93e9ecd9",
+                  "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-5361750f-54fd-4abc-9afa-04ad93e9ecd9"
+                },
+                {
+                  "id": "fe198255-caf3-4df7-919d-5fd5975cff3f",
+                  "name": "Internal Server Error - Returned if there is an unexpected error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-fe198255-caf3-4df7-919d-5fd5975cff3f"
+                }
+              ],
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-2cbc0b72-796c-4b20-bf86-3ee6f69a8b0c"
+            },
+            {
+              "name": "Patch a role",
+              "id": "c85aec99-3bf1-45ae-9833-09013f72a6c0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json-patch+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/roles/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2d02bcf6-b4e4-4f5d-94ea-9c03989fc8d3",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The role ID."
+                    }
+                  ]
+                },
+                "description": "Update an existing role using a JSON Patch document. The maximum supported length for the description field is 2000 characters."
+              },
+              "response": [
+                {
+                  "id": "8fb5ad7e-3031-42b6-8516-33fc0dc9e089",
+                  "name": "Updated role.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"accessProfiles\": null,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"membership\": null,\n  \"enabled\": false,\n  \"requestable\": false,\n  \"accessRequestConfig\": null,\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"GOVERNANCE_GROUP\",\n        \"approverId\": \"<string,null>\"\n      },\n      {\n        \"approverType\": \"APP_OWNER\",\n        \"approverId\": \"<string,null>\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dimensional\": false\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-8fb5ad7e-3031-42b6-8516-33fc0dc9e089"
+                },
+                {
+                  "id": "999be9c8-6e4b-4fba-8572-d374d2bfa6d8",
+                  "name": "Client Error - Returned if the request body is invalid.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-999be9c8-6e4b-4fba-8572-d374d2bfa6d8"
+                },
+                {
+                  "id": "8a6387e7-73b4-4d25-bac2-0803a77b0d4a",
+                  "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-8a6387e7-73b4-4d25-bac2-0803a77b0d4a"
+                },
+                {
+                  "id": "c34dcf58-ff0b-46c6-a27f-d1cb308d934f",
+                  "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-c34dcf58-ff0b-46c6-a27f-d1cb308d934f"
+                },
+                {
+                  "id": "f54cacd4-d5ae-4b5b-a23c-4bdd89333a7f",
+                  "name": "Not Found - Returned if the specified resource does not exist.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-f54cacd4-d5ae-4b5b-a23c-4bdd89333a7f"
+                },
+                {
+                  "id": "6acec166-12a0-48a4-84b6-170a62af6bea",
+                  "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-6acec166-12a0-48a4-84b6-170a62af6bea"
+                },
+                {
+                  "id": "ce8fd527-dba1-4488-aba9-d2a23c33c060",
+                  "name": "Internal Server Error - Returned if there is an unexpected error.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json-patch+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"copy\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation (required for add, replace, test).\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-ce8fd527-dba1-4488-aba9-d2a23c33c060"
+                }
+              ],
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-c85aec99-3bf1-45ae-9833-09013f72a6c0"
+            },
+            {
+              "name": "Delete a role",
+              "id": "384eca0c-5bb2-4e3b-9e96-4f6e0b6e6dd3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/roles/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d8a5fbde-205b-4d15-b5bf-57179edb7647",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The role ID."
+                    }
+                  ]
+                },
+                "description": "Delete a role by its ID."
+              },
+              "response": [
+                {
+                  "id": "8d5b7e37-448c-4694-a6f5-1c0398813711",
+                  "name": "Role deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-8d5b7e37-448c-4694-a6f5-1c0398813711"
+                },
+                {
+                  "id": "ce62f581-a002-4b9e-b6b4-7266759516bc",
+                  "name": "Client Error - Returned if the request body is invalid.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-ce62f581-a002-4b9e-b6b4-7266759516bc"
+                },
+                {
+                  "id": "3b6701af-8fbe-4f44-b51a-211671521ff3",
+                  "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-3b6701af-8fbe-4f44-b51a-211671521ff3"
+                },
+                {
+                  "id": "7584cf00-9a0e-47c8-8146-55c9ad0a9204",
+                  "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-7584cf00-9a0e-47c8-8146-55c9ad0a9204"
+                },
+                {
+                  "id": "7ae132ca-c86a-48e2-9f31-aec12b1aaf83",
+                  "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-7ae132ca-c86a-48e2-9f31-aec12b1aaf83"
+                },
+                {
+                  "id": "e2f62293-7220-448d-af02-c12e98c109a0",
+                  "name": "Internal Server Error - Returned if there is an unexpected error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-e2f62293-7220-448d-af02-c12e98c109a0"
+                }
+              ],
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-384eca0c-5bb2-4e3b-9e96-4f6e0b6e6dd3"
+            }
+          ],
+          "id": "44776cce-0a84-41ea-9745-c15fc52a9ebe",
+          "createdAt": "2026-07-28T02:49:49.000Z",
+          "updatedAt": "2026-07-28T02:49:49.000Z",
+          "uid": "35240-44776cce-0a84-41ea-9745-c15fc52a9ebe"
+        },
+        {
+          "name": "bulk-delete",
+          "item": [
+            {
+              "name": "Bulk delete roles",
+              "id": "d030e2a4-3e40-4403-b6c4-0f2454002d9f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"roleIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/roles/bulk-delete",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles",
+                    "bulk-delete"
+                  ]
+                },
+                "description": "Delete one or more roles in a single request."
+              },
+              "response": [
+                {
+                  "id": "28d13f5d-e53a-4186-9d6f-89f4349a2e25",
+                  "name": "Bulk delete results.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"roleIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/bulk-delete",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "bulk-delete"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"name\": \"<string,null>\"\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-28d13f5d-e53a-4186-9d6f-89f4349a2e25"
+                },
+                {
+                  "id": "479af59b-8db2-4ac4-b555-9d251c795dc2",
+                  "name": "Client Error - Returned if the request body is invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"roleIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/bulk-delete",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "bulk-delete"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-479af59b-8db2-4ac4-b555-9d251c795dc2"
+                },
+                {
+                  "id": "dc399a02-0705-4ab9-8d14-b638874012ae",
+                  "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"roleIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/bulk-delete",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "bulk-delete"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-dc399a02-0705-4ab9-8d14-b638874012ae"
+                },
+                {
+                  "id": "92a2e9b9-d9c0-4839-8147-db62e7080915",
+                  "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"roleIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/bulk-delete",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "bulk-delete"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-92a2e9b9-d9c0-4839-8147-db62e7080915"
+                },
+                {
+                  "id": "bbec3649-493a-4aa5-b171-fdfde5532ee8",
+                  "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"roleIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/bulk-delete",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "bulk-delete"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-bbec3649-493a-4aa5-b171-fdfde5532ee8"
+                },
+                {
+                  "id": "e3eb79c8-98d2-4346-9340-487041bc7928",
+                  "name": "Internal Server Error - Returned if there is an unexpected error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"roleIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/bulk-delete",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "bulk-delete"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:49:49.000Z",
+                  "updatedAt": "2026-07-28T02:49:49.000Z",
+                  "uid": "35240-e3eb79c8-98d2-4346-9340-487041bc7928"
+                }
+              ],
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-d030e2a4-3e40-4403-b6c4-0f2454002d9f"
+            }
+          ],
+          "id": "71a59513-2b57-4a4d-93d4-4d139e9e94a3",
+          "createdAt": "2026-07-28T02:49:49.000Z",
+          "updatedAt": "2026-07-28T02:49:49.000Z",
+          "uid": "35240-71a59513-2b57-4a4d-93d4-4d139e9e94a3"
+        },
+        {
+          "name": "List roles",
+          "id": "d34632ac-d958-46bd-b811-06695df07147",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/roles?for-subadmin=<string>&limit=250&offset=0&count=false&filters=<string>&sorters=<string>&for-segment-ids=<string>&include-unsegmented=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "roles"
+              ],
+              "query": [
+                {
+                  "description": "Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN identity. The value is either an identity ID or 'me' for the calling identity.",
+                  "key": "for-subadmin",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of results to return. Maximum value is 250.",
+                  "key": "limit",
+                  "value": "250"
+                },
+                {
+                  "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                  "key": "count",
+                  "value": "false"
+                },
+                {
+                  "description": "Filter results using the standard syntax. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw), created (gt, ge, le), modified (gt, lt, ge, le), owner.id (eq, in), requestable (eq).",
+                  "key": "filters",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                  "key": "sorters",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filters roles to only those assigned to the segment(s) with the specified IDs.",
+                  "key": "for-segment-ids",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Indicates whether the response should include unsegmented roles.",
+                  "key": "include-unsegmented",
+                  "value": "true"
+                }
+              ]
+            },
+            "description": "Get a paged list of roles. Roles represent the broadest level of access and group one or more access profiles."
+          },
+          "response": [
+            {
+              "id": "9a5bb4c6-df40-474d-8331-49563ea56416",
+              "name": "List of roles.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/roles?for-subadmin=<string>&limit=250&offset=0&count=false&filters=<string>&sorters=<string>&for-segment-ids=<string>&include-unsegmented=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN identity. The value is either an identity ID or 'me' for the calling identity.",
+                      "key": "for-subadmin",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw), created (gt, ge, le), modified (gt, lt, ge, le), owner.id (eq, in), requestable (eq).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters roles to only those assigned to the segment(s) with the specified IDs.",
+                      "key": "for-segment-ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates whether the response should include unsegmented roles.",
+                      "key": "include-unsegmented",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Total number of results matching the query.",
+                    "type": "text/plain"
+                  },
+                  "key": "X-Total-Count",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"name\": \"<string>\",\n    \"owner\": {\n      \"type\": \"IDENTITY\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"description\": \"<string,null>\",\n    \"created\": \"<dateTime>\",\n    \"modified\": \"<dateTime>\",\n    \"accessProfiles\": [\n      {\n        \"id\": \"<string>\",\n        \"type\": \"ACCESS_PROFILE\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"type\": \"ACCESS_PROFILE\",\n        \"name\": \"<string>\"\n      }\n    ],\n    \"entitlements\": [\n      {\n        \"type\": \"ENTITLEMENT\",\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"type\": \"ENTITLEMENT\",\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      }\n    ],\n    \"membership\": {\n      \"type\": \"IDENTITY_LIST\",\n      \"criteria\": null,\n      \"identities\": null\n    },\n    \"enabled\": false,\n    \"requestable\": false,\n    \"accessRequestConfig\": {\n      \"commentsRequired\": false,\n      \"denialCommentsRequired\": false,\n      \"approvalSchemes\": [\n        {\n          \"approverType\": \"OWNER\",\n          \"approverId\": \"<string,null>\"\n        },\n        {\n          \"approverType\": \"GOVERNANCE_GROUP\",\n          \"approverId\": \"<string,null>\"\n        }\n      ]\n    },\n    \"revocationRequestConfig\": {\n      \"commentsRequired\": false,\n      \"denialCommentsRequired\": false,\n      \"approvalSchemes\": [\n        {\n          \"approverType\": \"APP_OWNER\",\n          \"approverId\": \"<string,null>\"\n        },\n        {\n          \"approverType\": \"MANAGER\",\n          \"approverId\": \"<string,null>\"\n        }\n      ]\n    },\n    \"segments\": null,\n    \"dimensional\": false\n  },\n  {\n    \"name\": \"<string>\",\n    \"owner\": {\n      \"type\": \"IDENTITY\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"description\": \"<string,null>\",\n    \"created\": \"<dateTime>\",\n    \"modified\": \"<dateTime>\",\n    \"accessProfiles\": [\n      {\n        \"id\": \"<string>\",\n        \"type\": \"ACCESS_PROFILE\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"type\": \"ACCESS_PROFILE\",\n        \"name\": \"<string>\"\n      }\n    ],\n    \"entitlements\": [\n      {\n        \"type\": \"ENTITLEMENT\",\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"type\": \"ENTITLEMENT\",\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      }\n    ],\n    \"membership\": {\n      \"type\": \"STANDARD\",\n      \"criteria\": null,\n      \"identities\": [\n        {\n          \"type\": \"IDENTITY\",\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"aliasName\": \"<string,null>\"\n        },\n        {\n          \"type\": \"IDENTITY\",\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"aliasName\": \"<string,null>\"\n        }\n      ]\n    },\n    \"enabled\": false,\n    \"requestable\": false,\n    \"accessRequestConfig\": {\n      \"commentsRequired\": false,\n      \"denialCommentsRequired\": false,\n      \"approvalSchemes\": [\n        {\n          \"approverType\": \"APP_OWNER\",\n          \"approverId\": \"<string,null>\"\n        },\n        {\n          \"approverType\": \"APP_OWNER\",\n          \"approverId\": \"<string,null>\"\n        }\n      ]\n    },\n    \"revocationRequestConfig\": {\n      \"commentsRequired\": false,\n      \"denialCommentsRequired\": false,\n      \"approvalSchemes\": [\n        {\n          \"approverType\": \"OWNER\",\n          \"approverId\": \"<string,null>\"\n        },\n        {\n          \"approverType\": \"APP_OWNER\",\n          \"approverId\": \"<string,null>\"\n        }\n      ]\n    },\n    \"segments\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"dimensional\": false\n  }\n]",
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-9a5bb4c6-df40-474d-8331-49563ea56416"
+            },
+            {
+              "id": "36445c2f-c744-4a79-9b37-50824db54cf7",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/roles?for-subadmin=<string>&limit=250&offset=0&count=false&filters=<string>&sorters=<string>&for-segment-ids=<string>&include-unsegmented=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN identity. The value is either an identity ID or 'me' for the calling identity.",
+                      "key": "for-subadmin",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw), created (gt, ge, le), modified (gt, lt, ge, le), owner.id (eq, in), requestable (eq).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters roles to only those assigned to the segment(s) with the specified IDs.",
+                      "key": "for-segment-ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates whether the response should include unsegmented roles.",
+                      "key": "include-unsegmented",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-36445c2f-c744-4a79-9b37-50824db54cf7"
+            },
+            {
+              "id": "5f515f6f-9fa4-4145-aa84-d495b1d883ec",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/roles?for-subadmin=<string>&limit=250&offset=0&count=false&filters=<string>&sorters=<string>&for-segment-ids=<string>&include-unsegmented=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN identity. The value is either an identity ID or 'me' for the calling identity.",
+                      "key": "for-subadmin",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw), created (gt, ge, le), modified (gt, lt, ge, le), owner.id (eq, in), requestable (eq).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters roles to only those assigned to the segment(s) with the specified IDs.",
+                      "key": "for-segment-ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates whether the response should include unsegmented roles.",
+                      "key": "include-unsegmented",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-5f515f6f-9fa4-4145-aa84-d495b1d883ec"
+            },
+            {
+              "id": "d219b7be-f1bc-4b0b-b73f-e58643ca77cb",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/roles?for-subadmin=<string>&limit=250&offset=0&count=false&filters=<string>&sorters=<string>&for-segment-ids=<string>&include-unsegmented=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN identity. The value is either an identity ID or 'me' for the calling identity.",
+                      "key": "for-subadmin",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw), created (gt, ge, le), modified (gt, lt, ge, le), owner.id (eq, in), requestable (eq).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters roles to only those assigned to the segment(s) with the specified IDs.",
+                      "key": "for-segment-ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates whether the response should include unsegmented roles.",
+                      "key": "include-unsegmented",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-d219b7be-f1bc-4b0b-b73f-e58643ca77cb"
+            },
+            {
+              "id": "970314cb-7d76-4733-9456-c6527c28c546",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/roles?for-subadmin=<string>&limit=250&offset=0&count=false&filters=<string>&sorters=<string>&for-segment-ids=<string>&include-unsegmented=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN identity. The value is either an identity ID or 'me' for the calling identity.",
+                      "key": "for-subadmin",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw), created (gt, ge, le), modified (gt, lt, ge, le), owner.id (eq, in), requestable (eq).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters roles to only those assigned to the segment(s) with the specified IDs.",
+                      "key": "for-segment-ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates whether the response should include unsegmented roles.",
+                      "key": "include-unsegmented",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Number of seconds to wait before retrying.",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-970314cb-7d76-4733-9456-c6527c28c546"
+            },
+            {
+              "id": "ef32f987-760f-48cb-af1b-f5c3b5566dda",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/roles?for-subadmin=<string>&limit=250&offset=0&count=false&filters=<string>&sorters=<string>&for-segment-ids=<string>&include-unsegmented=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN identity. The value is either an identity ID or 'me' for the calling identity.",
+                      "key": "for-subadmin",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return. Maximum value is 250.",
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "description": "Offset into the full result set. Usually specified with limit to paginate through the results.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.",
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter results using the standard syntax. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw), created (gt, ge, le), modified (gt, lt, ge, le), owner.id (eq, in), requestable (eq).",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified.",
+                      "key": "sorters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters roles to only those assigned to the segment(s) with the specified IDs.",
+                      "key": "for-segment-ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates whether the response should include unsegmented roles.",
+                      "key": "include-unsegmented",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-ef32f987-760f-48cb-af1b-f5c3b5566dda"
+            }
+          ],
+          "createdAt": "2026-07-28T02:49:49.000Z",
+          "updatedAt": "2026-07-28T02:49:49.000Z",
+          "uid": "35240-d34632ac-d958-46bd-b811-06695df07147"
+        },
+        {
+          "name": "Create a role",
+          "id": "51bbb971-52a8-4988-b337-3de64acc9144",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"accessProfiles\": null,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"membership\": null,\n  \"enabled\": false,\n  \"requestable\": false,\n  \"accessRequestConfig\": null,\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"GOVERNANCE_GROUP\",\n        \"approverId\": \"<string,null>\"\n      },\n      {\n        \"approverType\": \"APP_OWNER\",\n        \"approverId\": \"<string,null>\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dimensional\": false\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "roles"
+              ]
+            },
+            "description": "Create a role. The maximum supported length for the description field is 2000 characters. ROLE_SUBADMIN users cannot create roles with access profiles from sources outside their authorization scope."
+          },
+          "response": [
+            {
+              "id": "8de70c4a-359d-4435-877c-f89b3afcab87",
+              "name": "Role created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"accessProfiles\": null,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"membership\": null,\n  \"enabled\": false,\n  \"requestable\": false,\n  \"accessRequestConfig\": null,\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"GOVERNANCE_GROUP\",\n        \"approverId\": \"<string,null>\"\n      },\n      {\n        \"approverType\": \"APP_OWNER\",\n        \"approverId\": \"<string,null>\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dimensional\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/roles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"accessProfiles\": null,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"membership\": null,\n  \"enabled\": false,\n  \"requestable\": false,\n  \"accessRequestConfig\": null,\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"GOVERNANCE_GROUP\",\n        \"approverId\": \"<string,null>\"\n      },\n      {\n        \"approverType\": \"APP_OWNER\",\n        \"approverId\": \"<string,null>\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dimensional\": false\n}",
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-8de70c4a-359d-4435-877c-f89b3afcab87"
+            },
+            {
+              "id": "c7b02e44-bcca-49e9-aa8f-9832ca1618e6",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"accessProfiles\": null,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"membership\": null,\n  \"enabled\": false,\n  \"requestable\": false,\n  \"accessRequestConfig\": null,\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"GOVERNANCE_GROUP\",\n        \"approverId\": \"<string,null>\"\n      },\n      {\n        \"approverType\": \"APP_OWNER\",\n        \"approverId\": \"<string,null>\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dimensional\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/roles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-c7b02e44-bcca-49e9-aa8f-9832ca1618e6"
+            },
+            {
+              "id": "21a07b3d-7ca1-45e4-911b-c240dd54b514",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"accessProfiles\": null,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"membership\": null,\n  \"enabled\": false,\n  \"requestable\": false,\n  \"accessRequestConfig\": null,\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"GOVERNANCE_GROUP\",\n        \"approverId\": \"<string,null>\"\n      },\n      {\n        \"approverType\": \"APP_OWNER\",\n        \"approverId\": \"<string,null>\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dimensional\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/roles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-21a07b3d-7ca1-45e4-911b-c240dd54b514"
+            },
+            {
+              "id": "b8de3ef3-2ec4-4ecb-a735-9e3c984f6d79",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"accessProfiles\": null,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"membership\": null,\n  \"enabled\": false,\n  \"requestable\": false,\n  \"accessRequestConfig\": null,\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"GOVERNANCE_GROUP\",\n        \"approverId\": \"<string,null>\"\n      },\n      {\n        \"approverType\": \"APP_OWNER\",\n        \"approverId\": \"<string,null>\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dimensional\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/roles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-b8de3ef3-2ec4-4ecb-a735-9e3c984f6d79"
+            },
+            {
+              "id": "f0d2f7f8-b0be-40c1-9bff-cbf23217c3c8",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"accessProfiles\": null,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"membership\": null,\n  \"enabled\": false,\n  \"requestable\": false,\n  \"accessRequestConfig\": null,\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"GOVERNANCE_GROUP\",\n        \"approverId\": \"<string,null>\"\n      },\n      {\n        \"approverType\": \"APP_OWNER\",\n        \"approverId\": \"<string,null>\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dimensional\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/roles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Number of seconds to wait before retrying.",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-f0d2f7f8-b0be-40c1-9bff-cbf23217c3c8"
+            },
+            {
+              "id": "4b1eb161-a80b-4616-a816-fe45168c4ae4",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"created\": \"<dateTime>\",\n  \"modified\": \"<dateTime>\",\n  \"accessProfiles\": null,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"membership\": null,\n  \"enabled\": false,\n  \"requestable\": false,\n  \"accessRequestConfig\": null,\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"GOVERNANCE_GROUP\",\n        \"approverId\": \"<string,null>\"\n      },\n      {\n        \"approverType\": \"APP_OWNER\",\n        \"approverId\": \"<string,null>\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dimensional\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/roles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"detailCode\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"messages\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"locale\": \"<string>\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:49:49.000Z",
+              "updatedAt": "2026-07-28T02:49:49.000Z",
+              "uid": "35240-4b1eb161-a80b-4616-a816-fe45168c4ae4"
+            }
+          ],
+          "createdAt": "2026-07-28T02:49:49.000Z",
+          "updatedAt": "2026-07-28T02:49:49.000Z",
+          "uid": "35240-51bbb971-52a8-4988-b337-3de64acc9144"
+        }
+      ],
+      "id": "812311e0-b9fd-4296-843e-3dd1c84f036f",
+      "createdAt": "2026-07-28T02:49:49.000Z",
+      "updatedAt": "2026-07-28T02:49:49.000Z",
+      "uid": "35240-812311e0-b9fd-4296-843e-3dd1c84f036f"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{tenant}.api.identitynow.com/oauth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "tenant",
+      "value": "sailpoint"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{tenant}}.api.identitynow.com/v3"
+    }
+  ]
+}

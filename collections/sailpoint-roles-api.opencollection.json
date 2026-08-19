@@ -1,0 +1,293 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Identity Security Cloud V3 Access Profiles Roles API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Roles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles",
+            "params": [
+              {
+                "name": "for-subadmin",
+                "value": "5168015d32f890ca15812c9180835d2e",
+                "type": "query",
+                "description": "Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN identity. The value is either an identity ID or 'me' for the calling identity."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "name sw \"Role\"",
+                "type": "query",
+                "description": "Filter results using the standard syntax. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw), created (gt, ge, le), modified (gt, lt, ge, le), owner.id (eq, in), requestable (eq)."
+              },
+              {
+                "name": "sorters",
+                "value": "name,-modified",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified."
+              },
+              {
+                "name": "for-segment-ids",
+                "value": "",
+                "type": "query",
+                "description": "Filters roles to only those assigned to the segment(s) with the specified IDs."
+              },
+              {
+                "name": "include-unsegmented",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the response should include unsegmented roles."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a paged list of roles. Roles represent the broadest level of access and group one or more access profiles."
+        },
+        {
+          "info": {
+            "name": "Create a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a role. The maximum supported length for the description field is 2000 characters. ROLE_SUBADMIN users cannot create roles with access profiles from sources outside their authorization scope."
+        },
+        {
+          "info": {
+            "name": "Get a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c918086749d78830174a1a40e121518",
+                "type": "path",
+                "description": "The role ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a role by its ID."
+        },
+        {
+          "info": {
+            "name": "Patch a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c918086749d78830174a1a40e121518",
+                "type": "path",
+                "description": "The role ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing role using a JSON Patch document. The maximum supported length for the description field is 2000 characters."
+        },
+        {
+          "info": {
+            "name": "Delete a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c918086749d78830174a1a40e121518",
+                "type": "path",
+                "description": "The role ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete a role by its ID."
+        },
+        {
+          "info": {
+            "name": "List identities assigned a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles/:id/identities",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c918086749d78830174a1a40e121518",
+                "type": "path",
+                "description": "The role ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw)."
+              },
+              {
+                "name": "sorters",
+                "value": "",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of identities that have been assigned the specified role."
+        },
+        {
+          "info": {
+            "name": "Bulk delete roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/roles/bulk-delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete one or more roles in a single request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

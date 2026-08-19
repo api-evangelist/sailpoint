@@ -1,0 +1,3643 @@
+{
+  "item": [
+    {
+      "id": "49e396ed-9e9f-4c2f-9669-cc269cbd5e29",
+      "name": "Access Profiles",
+      "description": {
+        "content": "Use this API to implement and customize access profile functionality. Access profiles group entitlements, which represent access rights on sources. For example, an Active Directory source can have multiple entitlements grouped into an access profile such as 'AD Developers' combining 'Employees' and 'Developers' entitlements. Access profiles are used in provisioning, certifications, access requests, and roles.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bf30b1ac-349b-478b-8439-243da39d2564",
+          "name": "List access profiles",
+          "request": {
+            "name": "List access profiles",
+            "description": {
+              "content": "Get a list of access profiles. When you filter for access profiles that have the '+' symbol in their names, the response is blank.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access-profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "for-subadmin",
+                  "value": "<string>",
+                  "description": "Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN or SOURCE_SUBADMIN identity. The value is either an identity ID or the special value 'me' for the calling identity's ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "250",
+                  "description": "Maximum number of results to return. Maximum value is 250."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "false",
+                  "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "Filter results using the standard syntax. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw), created (gt, ge, le), modified (gt, lt, ge, le), owner.id (eq, in), requestable (eq), source.id (eq, in). Supported composite operators are 'and' and 'or'."
+                },
+                {
+                  "disabled": false,
+                  "key": "sorters",
+                  "value": "<string>",
+                  "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified."
+                },
+                {
+                  "disabled": false,
+                  "key": "for-segment-ids",
+                  "value": "<string>",
+                  "description": "Filters access profiles to only those assigned to the segment(s) with the specified IDs. If segmentation is unavailable, specifying this parameter results in an error."
+                },
+                {
+                  "disabled": false,
+                  "key": "include-unsegmented",
+                  "value": "true",
+                  "description": "Indicates whether the response should include unsegmented access profiles. If for-segment-ids is absent or empty, specifying this as false results in an error."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8f906859-beac-427f-b21b-047a2b389440",
+              "name": "List of access profiles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "for-subadmin",
+                      "value": "8c190e6787aa4ed9a90bd9d5344523fb"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"SailPoint Support\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-modified"
+                    },
+                    {
+                      "key": "for-segment-ids",
+                      "value": "0b5c9f25-83c6-4762-9073-e38f7bb2ae26,2e8d8180-24bc-4d21-91c6-7affdb473b0d"
+                    },
+                    {
+                      "key": "include-unsegmented",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Total number of results matching the query.",
+                  "key": "X-Total-Count",
+                  "value": "9850"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"Employee-database-read-write\",\n    \"owner\": {\n      \"type\": \"IDENTITY\",\n      \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n      \"name\": \"support\"\n    },\n    \"source\": {\n      \"id\": \"2c91809773dee3610173fdb1b6969d4e\",\n      \"type\": \"SOURCE\",\n      \"name\": \"ODS-AD-SOURCE\"\n    },\n    \"id\": \"2c91808a7190d06e01719938fcd20792\",\n    \"description\": \"Collection of entitlements to read/write the employee database\",\n    \"created\": \"2021-03-01T22:32:58.104Z\",\n    \"modified\": \"2021-03-02T20:22:28.104Z\",\n    \"enabled\": true,\n    \"entitlements\": [\n      {\n        \"type\": \"ENTITLEMENT\",\n        \"id\": \"2c91809773dee32014e13e122092014e\",\n        \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n      },\n      {\n        \"type\": \"ENTITLEMENT\",\n        \"id\": \"2c91809773dee32014e13e122092014e\",\n        \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n      }\n    ],\n    \"requestable\": true,\n    \"accessRequestConfig\": {\n      \"commentsRequired\": false,\n      \"denialCommentsRequired\": false,\n      \"approvalSchemes\": [\n        {\n          \"approverType\": \"MANAGER\",\n          \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n        },\n        {\n          \"approverType\": \"MANAGER\",\n          \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n        }\n      ]\n    },\n    \"revocationRequestConfig\": {\n      \"commentsRequired\": false,\n      \"denialCommentsRequired\": false,\n      \"approvalSchemes\": [\n        {\n          \"approverType\": \"MANAGER\",\n          \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n        },\n        {\n          \"approverType\": \"MANAGER\",\n          \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n        }\n      ]\n    },\n    \"segments\": [\n      \"f7b1b8a3-5fed-4fd4-ad29-82014e137e19\",\n      \"29cb6c06-1da8-43ea-8be4-b3125f248f2a\"\n    ]\n  },\n  {\n    \"name\": \"Employee-database-read-write\",\n    \"owner\": {\n      \"type\": \"IDENTITY\",\n      \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n      \"name\": \"support\"\n    },\n    \"source\": {\n      \"id\": \"2c91809773dee3610173fdb1b6969d4e\",\n      \"type\": \"SOURCE\",\n      \"name\": \"ODS-AD-SOURCE\"\n    },\n    \"id\": \"2c91808a7190d06e01719938fcd20792\",\n    \"description\": \"Collection of entitlements to read/write the employee database\",\n    \"created\": \"2021-03-01T22:32:58.104Z\",\n    \"modified\": \"2021-03-02T20:22:28.104Z\",\n    \"enabled\": true,\n    \"entitlements\": [\n      {\n        \"type\": \"ENTITLEMENT\",\n        \"id\": \"2c91809773dee32014e13e122092014e\",\n        \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n      },\n      {\n        \"type\": \"ENTITLEMENT\",\n        \"id\": \"2c91809773dee32014e13e122092014e\",\n        \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n      }\n    ],\n    \"requestable\": true,\n    \"accessRequestConfig\": {\n      \"commentsRequired\": false,\n      \"denialCommentsRequired\": false,\n      \"approvalSchemes\": [\n        {\n          \"approverType\": \"MANAGER\",\n          \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n        },\n        {\n          \"approverType\": \"MANAGER\",\n          \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n        }\n      ]\n    },\n    \"revocationRequestConfig\": {\n      \"commentsRequired\": false,\n      \"denialCommentsRequired\": false,\n      \"approvalSchemes\": [\n        {\n          \"approverType\": \"MANAGER\",\n          \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n        },\n        {\n          \"approverType\": \"MANAGER\",\n          \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n        }\n      ]\n    },\n    \"segments\": [\n      \"f7b1b8a3-5fed-4fd4-ad29-82014e137e19\",\n      \"29cb6c06-1da8-43ea-8be4-b3125f248f2a\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a3fac44-16f3-4dcd-8e0a-9a6d9ea20d55",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "for-subadmin",
+                      "value": "8c190e6787aa4ed9a90bd9d5344523fb"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"SailPoint Support\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-modified"
+                    },
+                    {
+                      "key": "for-segment-ids",
+                      "value": "0b5c9f25-83c6-4762-9073-e38f7bb2ae26,2e8d8180-24bc-4d21-91c6-7affdb473b0d"
+                    },
+                    {
+                      "key": "include-unsegmented",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf5e8dd5-7744-4d77-97a6-f62fc199e781",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "for-subadmin",
+                      "value": "8c190e6787aa4ed9a90bd9d5344523fb"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"SailPoint Support\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-modified"
+                    },
+                    {
+                      "key": "for-segment-ids",
+                      "value": "0b5c9f25-83c6-4762-9073-e38f7bb2ae26,2e8d8180-24bc-4d21-91c6-7affdb473b0d"
+                    },
+                    {
+                      "key": "include-unsegmented",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d50a3b8-ab6b-43d0-bb46-cc12368dbe7c",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "for-subadmin",
+                      "value": "8c190e6787aa4ed9a90bd9d5344523fb"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"SailPoint Support\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-modified"
+                    },
+                    {
+                      "key": "for-segment-ids",
+                      "value": "0b5c9f25-83c6-4762-9073-e38f7bb2ae26,2e8d8180-24bc-4d21-91c6-7affdb473b0d"
+                    },
+                    {
+                      "key": "include-unsegmented",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afba5911-33bb-4412-ad7e-608bfe430f37",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "for-subadmin",
+                      "value": "8c190e6787aa4ed9a90bd9d5344523fb"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"SailPoint Support\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-modified"
+                    },
+                    {
+                      "key": "for-segment-ids",
+                      "value": "0b5c9f25-83c6-4762-9073-e38f7bb2ae26,2e8d8180-24bc-4d21-91c6-7affdb473b0d"
+                    },
+                    {
+                      "key": "include-unsegmented",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "9850"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be586413-5f22-42cd-9783-1032c7d512b6",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "for-subadmin",
+                      "value": "8c190e6787aa4ed9a90bd9d5344523fb"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"SailPoint Support\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-modified"
+                    },
+                    {
+                      "key": "for-segment-ids",
+                      "value": "0b5c9f25-83c6-4762-9073-e38f7bb2ae26,2e8d8180-24bc-4d21-91c6-7affdb473b0d"
+                    },
+                    {
+                      "key": "include-unsegmented",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ce68bd7-953c-44a4-9a83-92d777b5a4fc",
+          "name": "Create an access profile",
+          "request": {
+            "name": "Create an access profile",
+            "description": {
+              "content": "Create an access profile. A user with ROLE_SUBADMIN or SOURCE_SUBADMIN authority must be associated with the access profile's source. The maximum supported length for the description field is 2000 characters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access-profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"source\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"description\": \"<string,null>\",\n  \"enabled\": false,\n  \"entitlements\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"requestable\": true,\n  \"accessRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"<string>\",\n        \"approverId\": \"<string,null>\"\n      },\n      {\n        \"approverType\": \"<string>\",\n        \"approverId\": \"<string,null>\"\n      }\n    ]\n  },\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"<string>\",\n        \"approverId\": \"<string,null>\"\n      },\n      {\n        \"approverType\": \"<string>\",\n        \"approverId\": \"<string,null>\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1ca6114d-f040-4a59-83bd-23a02ca5a2cd",
+              "name": "Access profile created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Employee-database-read-write\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"source\": {\n    \"id\": \"2c91809773dee3610173fdb1b6969d4e\",\n    \"type\": \"SOURCE\",\n    \"name\": \"ODS-AD-SOURCE\"\n  },\n  \"description\": \"Collection of entitlements to read/write the employee database\",\n  \"enabled\": true,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    }\n  ],\n  \"requestable\": true,\n  \"accessRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"f7b1b8a3-5fed-4fd4-ad29-82014e137e19\",\n    \"29cb6c06-1da8-43ea-8be4-b3125f248f2a\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Employee-database-read-write\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"source\": {\n    \"id\": \"2c91809773dee3610173fdb1b6969d4e\",\n    \"type\": \"SOURCE\",\n    \"name\": \"ODS-AD-SOURCE\"\n  },\n  \"id\": \"2c91808a7190d06e01719938fcd20792\",\n  \"description\": \"Collection of entitlements to read/write the employee database\",\n  \"created\": \"2021-03-01T22:32:58.104Z\",\n  \"modified\": \"2021-03-02T20:22:28.104Z\",\n  \"enabled\": true,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    }\n  ],\n  \"requestable\": true,\n  \"accessRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"f7b1b8a3-5fed-4fd4-ad29-82014e137e19\",\n    \"29cb6c06-1da8-43ea-8be4-b3125f248f2a\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d19ccfad-5376-4bed-9487-8863f7de05c8",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Employee-database-read-write\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"source\": {\n    \"id\": \"2c91809773dee3610173fdb1b6969d4e\",\n    \"type\": \"SOURCE\",\n    \"name\": \"ODS-AD-SOURCE\"\n  },\n  \"description\": \"Collection of entitlements to read/write the employee database\",\n  \"enabled\": true,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    }\n  ],\n  \"requestable\": true,\n  \"accessRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"f7b1b8a3-5fed-4fd4-ad29-82014e137e19\",\n    \"29cb6c06-1da8-43ea-8be4-b3125f248f2a\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9e5899b-29a7-4368-8f12-2b044ca1c0d5",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Employee-database-read-write\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"source\": {\n    \"id\": \"2c91809773dee3610173fdb1b6969d4e\",\n    \"type\": \"SOURCE\",\n    \"name\": \"ODS-AD-SOURCE\"\n  },\n  \"description\": \"Collection of entitlements to read/write the employee database\",\n  \"enabled\": true,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    }\n  ],\n  \"requestable\": true,\n  \"accessRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"f7b1b8a3-5fed-4fd4-ad29-82014e137e19\",\n    \"29cb6c06-1da8-43ea-8be4-b3125f248f2a\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3397671e-2229-40e3-92f5-bdfb3c8fe8b6",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Employee-database-read-write\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"source\": {\n    \"id\": \"2c91809773dee3610173fdb1b6969d4e\",\n    \"type\": \"SOURCE\",\n    \"name\": \"ODS-AD-SOURCE\"\n  },\n  \"description\": \"Collection of entitlements to read/write the employee database\",\n  \"enabled\": true,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    }\n  ],\n  \"requestable\": true,\n  \"accessRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"f7b1b8a3-5fed-4fd4-ad29-82014e137e19\",\n    \"29cb6c06-1da8-43ea-8be4-b3125f248f2a\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e703cd0c-4fe2-453d-96dd-d83215914815",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Employee-database-read-write\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"source\": {\n    \"id\": \"2c91809773dee3610173fdb1b6969d4e\",\n    \"type\": \"SOURCE\",\n    \"name\": \"ODS-AD-SOURCE\"\n  },\n  \"description\": \"Collection of entitlements to read/write the employee database\",\n  \"enabled\": true,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    }\n  ],\n  \"requestable\": true,\n  \"accessRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"f7b1b8a3-5fed-4fd4-ad29-82014e137e19\",\n    \"29cb6c06-1da8-43ea-8be4-b3125f248f2a\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "9850"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63d6d248-b49b-4887-9542-30691ba5b502",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Employee-database-read-write\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"source\": {\n    \"id\": \"2c91809773dee3610173fdb1b6969d4e\",\n    \"type\": \"SOURCE\",\n    \"name\": \"ODS-AD-SOURCE\"\n  },\n  \"description\": \"Collection of entitlements to read/write the employee database\",\n  \"enabled\": true,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    }\n  ],\n  \"requestable\": true,\n  \"accessRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"f7b1b8a3-5fed-4fd4-ad29-82014e137e19\",\n    \"29cb6c06-1da8-43ea-8be4-b3125f248f2a\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b704ed5-cee2-4c0c-9024-171f3b64e96a",
+          "name": "Get an access profile",
+          "request": {
+            "name": "Get an access profile",
+            "description": {
+              "content": "Get an access profile by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access-profiles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The access profile ID."
+                },
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0cb40c83-77c9-427c-b12f-b3ee0febe5cc",
+              "name": "An access profile object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Employee-database-read-write\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"source\": {\n    \"id\": \"2c91809773dee3610173fdb1b6969d4e\",\n    \"type\": \"SOURCE\",\n    \"name\": \"ODS-AD-SOURCE\"\n  },\n  \"id\": \"2c91808a7190d06e01719938fcd20792\",\n  \"description\": \"Collection of entitlements to read/write the employee database\",\n  \"created\": \"2021-03-01T22:32:58.104Z\",\n  \"modified\": \"2021-03-02T20:22:28.104Z\",\n  \"enabled\": true,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    }\n  ],\n  \"requestable\": true,\n  \"accessRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"f7b1b8a3-5fed-4fd4-ad29-82014e137e19\",\n    \"29cb6c06-1da8-43ea-8be4-b3125f248f2a\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55f46f62-8ef7-4cf5-8829-a66d018928ef",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7d67172-7054-420e-a32e-c376a1fe2730",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5333ab92-b7ed-4000-875d-828586524f41",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a5958f2-3399-4cb7-891d-d522955f7cd1",
+              "name": "Not Found - Returned if the specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c292ca25-27ec-49da-bab9-c037e61f83cd",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "9850"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b15461d2-5112-4d36-a77f-79da8e31d4d5",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5bbfacb2-7712-41d0-bdf7-1b74a557b887",
+          "name": "Patch an access profile",
+          "request": {
+            "name": "Patch an access profile",
+            "description": {
+              "content": "Update an existing access profile using a JSON Patch document. The maximum supported length for the description field is 2000 characters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access-profiles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The access profile ID."
+                },
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json-patch+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"value\": {}\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "868314e2-dfac-4d9d-b952-c38b4d214fbd",
+              "name": "Updated access profile.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Employee-database-read-write\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"source\": {\n    \"id\": \"2c91809773dee3610173fdb1b6969d4e\",\n    \"type\": \"SOURCE\",\n    \"name\": \"ODS-AD-SOURCE\"\n  },\n  \"id\": \"2c91808a7190d06e01719938fcd20792\",\n  \"description\": \"Collection of entitlements to read/write the employee database\",\n  \"created\": \"2021-03-01T22:32:58.104Z\",\n  \"modified\": \"2021-03-02T20:22:28.104Z\",\n  \"enabled\": true,\n  \"entitlements\": [\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    },\n    {\n      \"type\": \"ENTITLEMENT\",\n      \"id\": \"2c91809773dee32014e13e122092014e\",\n      \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\"\n    }\n  ],\n  \"requestable\": true,\n  \"accessRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"revocationRequestConfig\": {\n    \"commentsRequired\": false,\n    \"denialCommentsRequired\": false,\n    \"approvalSchemes\": [\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      },\n      {\n        \"approverType\": \"MANAGER\",\n        \"approverId\": \"46c79c6399252b1a80dbdff5e2b1d4b7\"\n      }\n    ]\n  },\n  \"segments\": [\n    \"f7b1b8a3-5fed-4fd4-ad29-82014e137e19\",\n    \"29cb6c06-1da8-43ea-8be4-b3125f248f2a\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "810328d3-6ef3-4d2c-acaa-04035402f112",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e62c659-6f16-4538-88c7-70511e00aeb3",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64464547-dc78-4b53-81d1-0eb28afa20aa",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b69e3f7-d45e-4b67-a756-0c2296bd3f40",
+              "name": "Not Found - Returned if the specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "299241fa-4fed-4aed-94a2-bc00fa1820ff",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "9850"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af0d459d-aae3-4f46-ab42-8f940a43ed96",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cebf7ec-1995-479b-b179-ce0ca25de9d5",
+          "name": "Delete an access profile",
+          "request": {
+            "name": "Delete an access profile",
+            "description": {
+              "content": "Delete an existing access profile by its ID. The access profile must not be in use by any roles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access-profiles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The access profile ID."
+                },
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f8fe450e-ee32-48a8-a8db-a693451f2f3c",
+              "name": "Access profile deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa1c64fb-e498-490b-86ba-eca27b8f1c16",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e49accba-4150-494a-bb2b-b385a99cbc66",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81a75aa5-9dee-48fa-b19c-e50e1dcd6fa4",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92ed89ee-50e4-454e-a76c-1c1d7e597fe2",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "9850"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7448476b-95e6-45c0-9ab7-f17eed96ff6c",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82d724ed-849a-4da5-b07c-0aa51deefb2c",
+          "name": "List access profile entitlements",
+          "request": {
+            "name": "List access profile entitlements",
+            "description": {
+              "content": "Get a list of entitlements associated with the specified access profile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access-profiles",
+                ":id",
+                "entitlements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "250",
+                  "description": "Maximum number of results to return. Maximum value is 250."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "false",
+                  "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sorters",
+                  "value": "<string>",
+                  "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The access profile ID."
+                },
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bd614143-b4bb-4c8b-b1cd-75b5b2f8b657",
+              "name": "List of entitlements for the access profile.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id",
+                    "entitlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Total number of results matching the query.",
+                  "key": "X-Total-Count",
+                  "value": "9850"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"2c91809773dee32014e13e122092014e\",\n    \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\",\n    \"description\": \"Entitlement granting access to the developer tools\",\n    \"attribute\": \"memberOf\",\n    \"value\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\",\n    \"sourceSchemaObjectType\": \"group\",\n    \"privileged\": false,\n    \"cloudGoverned\": false,\n    \"created\": \"2026-06-26T20:53:00.452Z\",\n    \"modified\": \"1994-04-18T20:30:45.037Z\",\n    \"source\": {\n      \"id\": \"2c9180835d191a86015d28455b4b232a\",\n      \"type\": \"SOURCE\",\n      \"name\": \"ODS-AD-SOURCE\"\n    },\n    \"owner\": {\n      \"type\": \"IDENTITY\",\n      \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n      \"name\": \"support\"\n    }\n  },\n  {\n    \"id\": \"2c91809773dee32014e13e122092014e\",\n    \"name\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\",\n    \"description\": \"Entitlement granting access to the developer tools\",\n    \"attribute\": \"memberOf\",\n    \"value\": \"CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local\",\n    \"sourceSchemaObjectType\": \"group\",\n    \"privileged\": false,\n    \"cloudGoverned\": false,\n    \"created\": \"1951-11-11T10:16:33.884Z\",\n    \"modified\": \"1950-12-14T13:55:46.455Z\",\n    \"source\": {\n      \"id\": \"2c9180835d191a86015d28455b4b232a\",\n      \"type\": \"SOURCE\",\n      \"name\": \"ODS-AD-SOURCE\"\n    },\n    \"owner\": {\n      \"type\": \"IDENTITY\",\n      \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n      \"name\": \"support\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ed6b018-f5d9-43e0-bbec-31937bb69914",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id",
+                    "entitlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fd61d68-f55a-40c8-929a-6173a0421288",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id",
+                    "entitlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "491ebe86-2aa8-4e25-bf1d-f4bc3dbb6f00",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id",
+                    "entitlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bb1ea0e-74a5-4e15-baee-60e85c823494",
+              "name": "Not Found - Returned if the specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id",
+                    "entitlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f515c848-34e4-4220-9b48-d27702411969",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id",
+                    "entitlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "9850"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a7cae2f-d877-496a-a57e-982a9454554b",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    ":id",
+                    "entitlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The access profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c63f651-36ad-4f47-8960-9c1a47fa36a5",
+          "name": "Bulk delete access profiles",
+          "request": {
+            "name": "Bulk delete access profiles",
+            "description": {
+              "content": "Delete one or more access profiles in a single request. The access profiles must not be in use by any roles or applications. Returns details about which profiles were deleted and which failed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access-profiles",
+                "bulk-delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accessProfileIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bestEffortOnly\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "91b40eee-5211-424c-a401-8bed8ccb8dd4",
+              "name": "Bulk delete results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessProfileIds\": [\n    \"2c91808a7190d06e01719938fcd20792\",\n    \"2c91808a7190d06e01719938fcd20793\"\n  ],\n  \"bestEffortOnly\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pending\": [\n    \"string\",\n    \"string\"\n  ],\n  \"inUse\": [\n    {\n      \"accessProfileId\": \"string\",\n      \"usedBy\": [\n        {\n          \"type\": \"string\",\n          \"id\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"id\": \"string\",\n          \"name\": \"string\"\n        }\n      ]\n    },\n    {\n      \"accessProfileId\": \"string\",\n      \"usedBy\": [\n        {\n          \"type\": \"string\",\n          \"id\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"id\": \"string\",\n          \"name\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c0da796-9ec6-4c7d-84f9-bbc72e957fd1",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessProfileIds\": [\n    \"2c91808a7190d06e01719938fcd20792\",\n    \"2c91808a7190d06e01719938fcd20793\"\n  ],\n  \"bestEffortOnly\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6c1687c-0e03-4d80-be03-935e46bcd099",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessProfileIds\": [\n    \"2c91808a7190d06e01719938fcd20792\",\n    \"2c91808a7190d06e01719938fcd20793\"\n  ],\n  \"bestEffortOnly\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "321fbb1b-428c-4e26-9b45-a9761e6ebd5f",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessProfileIds\": [\n    \"2c91808a7190d06e01719938fcd20792\",\n    \"2c91808a7190d06e01719938fcd20793\"\n  ],\n  \"bestEffortOnly\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ceba3593-d27b-4bf3-ac8e-157d4886acc3",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessProfileIds\": [\n    \"2c91808a7190d06e01719938fcd20792\",\n    \"2c91808a7190d06e01719938fcd20793\"\n  ],\n  \"bestEffortOnly\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "9850"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "781c698a-070b-42d3-b1a1-f71d7e6340c5",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-profiles",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessProfileIds\": [\n    \"2c91808a7190d06e01719938fcd20792\",\n    \"2c91808a7190d06e01719938fcd20793\"\n  ],\n  \"bestEffortOnly\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The name of your tenant, typically your company's name.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "sailpoint",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.api.identitynow.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{tenant}.api.identitynow.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "17af8804-052d-4ae0-92c2-8862960d6380",
+    "name": "Identity Security Cloud V3 Access Profiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Use these APIs to interact with the Identity Security Cloud platform to achieve repeatable, automated processes with greater scalability. The V3 APIs provide core endpoints covering access profiles, certifications, identities, roles, search, sources, transforms, workflows, and more. We encourage you to join the SailPoint Developer Community forum at https://developer.sailpoint.com/discuss to connect with other developers using our APIs.\n\nContact Support:\n Name: Developer Relations",
+      "type": "text/plain"
+    }
+  }
+}

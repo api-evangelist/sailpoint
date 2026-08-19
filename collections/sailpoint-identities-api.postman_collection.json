@@ -1,0 +1,3548 @@
+{
+  "item": [
+    {
+      "id": "7330e0b2-1d49-458b-b3bc-92d8f540a063",
+      "name": "Identities",
+      "description": {
+        "content": "Use this API to retrieve and manage public identity information. Public identities represent users within the Identity Security Cloud platform, including their attributes, lifecycle state, and manager relationships.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "827b46a2-f6ba-4cf4-bed0-3a24fd44dae6",
+          "name": "List public identities",
+          "request": {
+            "name": "List public identities",
+            "description": {
+              "content": "Get a list of public identities. This endpoint returns a paged list of public identity objects that can be filtered and sorted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public-identities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "add-core-filters",
+                  "value": "false",
+                  "description": "Set to true to exclude incomplete identities and uncorrelated accounts from the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "250",
+                  "description": "Maximum number of results to return. Maximum value is 250."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "false",
+                  "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "Filter results using the standard syntax described in V3 API Standard Collection Parameters. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw, co), alias (eq, sw, co), email (eq, sw, co), status (eq)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sorters",
+                  "value": "<string>",
+                  "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, alias, email."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "42e9d9d0-7078-4767-8603-6bafc4430655",
+              "name": "List of public identities.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public-identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "add-core-filters",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"John Smith\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-email"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Total number of results matching the query.",
+                  "key": "X-Total-Count",
+                  "value": "6996"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"2c9180857182305e0171993735622948\",\n    \"name\": \"Alison Ferguso\",\n    \"alias\": \"alison.ferguso\",\n    \"email\": \"alison.ferguso@acme-solar.com\",\n    \"status\": \"Active\",\n    \"identityState\": \"ACTIVE\",\n    \"manager\": {\n      \"type\": \"IDENTITY\",\n      \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n      \"name\": \"Thomas Edison\"\n    },\n    \"attributes\": [\n      {\n        \"key\": \"country\",\n        \"name\": \"Country\",\n        \"value\": \"US\"\n      },\n      {\n        \"key\": \"country\",\n        \"name\": \"Country\",\n        \"value\": \"US\"\n      }\n    ]\n  },\n  {\n    \"id\": \"2c9180857182305e0171993735622948\",\n    \"name\": \"Alison Ferguso\",\n    \"alias\": \"alison.ferguso\",\n    \"email\": \"alison.ferguso@acme-solar.com\",\n    \"status\": \"Active\",\n    \"identityState\": \"ACTIVE\",\n    \"manager\": {\n      \"type\": \"IDENTITY\",\n      \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n      \"name\": \"Thomas Edison\"\n    },\n    \"attributes\": [\n      {\n        \"key\": \"country\",\n        \"name\": \"Country\",\n        \"value\": \"US\"\n      },\n      {\n        \"key\": \"country\",\n        \"name\": \"Country\",\n        \"value\": \"US\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6145b828-ca77-4c6c-8435-9737c8287f2f",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public-identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "add-core-filters",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"John Smith\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-email"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58510aa7-9870-49c6-add2-4a0328150bea",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public-identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "add-core-filters",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"John Smith\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-email"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3323bdda-8a7f-4f30-bdcb-90019df18808",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public-identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "add-core-filters",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"John Smith\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-email"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba674899-2422-4ee9-a23f-85636dbe4787",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public-identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "add-core-filters",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"John Smith\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-email"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "6996"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b60b3006-8f8b-4bcc-9936-e2d38ca0a8f9",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public-identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "add-core-filters",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"John Smith\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-email"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10882882-ad15-4add-80d8-c21e36b92942",
+          "name": "Get a public identity",
+          "request": {
+            "name": "Get a public identity",
+            "description": {
+              "content": "Get the details of a public identity by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public-identities",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The identity ID."
+                },
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "94f6d2c6-b707-4ee2-b8f7-27c59828f6d1",
+              "name": "A public identity object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public-identities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The identity ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"2c9180857182305e0171993735622948\",\n  \"name\": \"Alison Ferguso\",\n  \"alias\": \"alison.ferguso\",\n  \"email\": \"alison.ferguso@acme-solar.com\",\n  \"status\": \"Active\",\n  \"identityState\": \"ACTIVE\",\n  \"manager\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"Thomas Edison\"\n  },\n  \"attributes\": [\n    {\n      \"key\": \"country\",\n      \"name\": \"Country\",\n      \"value\": \"US\"\n    },\n    {\n      \"key\": \"country\",\n      \"name\": \"Country\",\n      \"value\": \"US\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a757cfc9-4a7c-4388-b318-5604b03e1936",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public-identities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The identity ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02268102-2b35-42cc-b300-fc09ed961236",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public-identities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The identity ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75b25ddb-976a-4a14-818f-38d977f29f86",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public-identities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The identity ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9005341a-3bd7-41a8-bdeb-ccd8d20f1147",
+              "name": "Not Found - Returned if the specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public-identities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The identity ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5550808e-8503-4cc3-b1ea-a016c37fb961",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public-identities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The identity ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "6996"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9aa9be8a-f24f-4940-bb3a-0250defbdb8f",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public-identities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The identity ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f58016d-ec08-4bba-815f-43a7f8f123dd",
+          "name": "List identity profiles",
+          "request": {
+            "name": "List identity profiles",
+            "description": {
+              "content": "Get a list of identity profiles. Identity profiles define how identity attributes are mapped from source account attributes and configure lifecycle states.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identity-profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "250",
+                  "description": "Maximum number of results to return. Maximum value is 250."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "false",
+                  "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "Filter results using the standard syntax. Filtering is supported for the following fields: id (eq, in), name (eq, sw), priority (eq, gt, lt, ge, le)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sorters",
+                  "value": "<string>",
+                  "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, priority, created, modified."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a389d45f-fc9c-4151-9878-2bc86fafba5d",
+              "name": "List of identity profiles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"HR Profile\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-priority"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Total number of results matching the query.",
+                  "key": "X-Total-Count",
+                  "value": "6996"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"HR Employees\",\n    \"authoritativeSource\": {\n      \"type\": \"SOURCE\",\n      \"id\": \"2c9180835d191a86015d28455b4b232a\",\n      \"name\": \"HR Active Directory\"\n    },\n    \"id\": \"2b838de9-db9b-abcf-e646-d4f274ad4238\",\n    \"description\": \"My custom flat file profile\",\n    \"owner\": {\n      \"type\": \"IDENTITY\",\n      \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n      \"name\": \"support\"\n    },\n    \"priority\": 10,\n    \"identityRefreshRequired\": true,\n    \"identityCount\": 8,\n    \"hasTimeBasedAttr\": true,\n    \"created\": \"2023-01-03T21:16:22.432Z\",\n    \"modified\": \"2023-01-05T18:40:35.772Z\"\n  },\n  {\n    \"name\": \"HR Employees\",\n    \"authoritativeSource\": {\n      \"type\": \"SOURCE\",\n      \"id\": \"2c9180835d191a86015d28455b4b232a\",\n      \"name\": \"HR Active Directory\"\n    },\n    \"id\": \"2b838de9-db9b-abcf-e646-d4f274ad4238\",\n    \"description\": \"My custom flat file profile\",\n    \"owner\": {\n      \"type\": \"IDENTITY\",\n      \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n      \"name\": \"support\"\n    },\n    \"priority\": 10,\n    \"identityRefreshRequired\": true,\n    \"identityCount\": 8,\n    \"hasTimeBasedAttr\": true,\n    \"created\": \"2023-01-03T21:16:22.432Z\",\n    \"modified\": \"2023-01-05T18:40:35.772Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcebc8dc-90aa-4e0d-a35c-fe109e37039d",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"HR Profile\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-priority"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4469872f-2736-4140-81c9-13c91b45504c",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"HR Profile\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-priority"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ae368ab-3cbd-48b2-9c27-ea2bbd8caba7",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"HR Profile\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-priority"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "616f9096-1ff0-40df-9ed4-a771d632bd3e",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"HR Profile\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-priority"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "6996"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99778e51-84cc-42e1-94c8-272c521f197f",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "250"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "name eq \"HR Profile\""
+                    },
+                    {
+                      "key": "sorters",
+                      "value": "name,-priority"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7c7a39d-1d83-497f-b2e4-36a093d86d5a",
+          "name": "Create an identity profile",
+          "request": {
+            "name": "Create an identity profile",
+            "description": {
+              "content": "Create an identity profile. An identity profile defines the mapping between source account attributes and identity attributes and configures lifecycle states for identities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identity-profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"authoritativeSource\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"description\": \"<string,null>\",\n  \"owner\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"priority\": \"<long>\",\n  \"identityRefreshRequired\": false,\n  \"hasTimeBasedAttr\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3eca6460-4ba9-4c62-8f00-59a5d8afa5a7",
+              "name": "Identity profile created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"HR Employees\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"2c9180835d191a86015d28455b4b232a\",\n    \"name\": \"HR Active Directory\"\n  },\n  \"description\": \"My custom flat file profile\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"priority\": 10,\n  \"identityRefreshRequired\": true,\n  \"hasTimeBasedAttr\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"HR Employees\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"2c9180835d191a86015d28455b4b232a\",\n    \"name\": \"HR Active Directory\"\n  },\n  \"id\": \"2b838de9-db9b-abcf-e646-d4f274ad4238\",\n  \"description\": \"My custom flat file profile\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"priority\": 10,\n  \"identityRefreshRequired\": true,\n  \"identityCount\": 8,\n  \"hasTimeBasedAttr\": true,\n  \"created\": \"2023-01-03T21:16:22.432Z\",\n  \"modified\": \"2023-01-05T18:40:35.772Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "006a570a-f833-4c72-af98-9ed1e61ad9ef",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"HR Employees\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"2c9180835d191a86015d28455b4b232a\",\n    \"name\": \"HR Active Directory\"\n  },\n  \"description\": \"My custom flat file profile\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"priority\": 10,\n  \"identityRefreshRequired\": true,\n  \"hasTimeBasedAttr\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8109415-fb42-4e64-afc7-fc2e4c6d0534",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"HR Employees\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"2c9180835d191a86015d28455b4b232a\",\n    \"name\": \"HR Active Directory\"\n  },\n  \"description\": \"My custom flat file profile\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"priority\": 10,\n  \"identityRefreshRequired\": true,\n  \"hasTimeBasedAttr\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ebb037d-2522-4602-afb9-8de125ca900a",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"HR Employees\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"2c9180835d191a86015d28455b4b232a\",\n    \"name\": \"HR Active Directory\"\n  },\n  \"description\": \"My custom flat file profile\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"priority\": 10,\n  \"identityRefreshRequired\": true,\n  \"hasTimeBasedAttr\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e724ea58-ba53-4708-8902-5a2c358732a9",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"HR Employees\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"2c9180835d191a86015d28455b4b232a\",\n    \"name\": \"HR Active Directory\"\n  },\n  \"description\": \"My custom flat file profile\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"priority\": 10,\n  \"identityRefreshRequired\": true,\n  \"hasTimeBasedAttr\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "6996"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "955d13ec-aba9-4ac1-9f82-6e6c4bc2a751",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"HR Employees\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"2c9180835d191a86015d28455b4b232a\",\n    \"name\": \"HR Active Directory\"\n  },\n  \"description\": \"My custom flat file profile\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"priority\": 10,\n  \"identityRefreshRequired\": true,\n  \"hasTimeBasedAttr\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "088184ce-2505-4ac4-a814-9b61ecf4714c",
+          "name": "Get an identity profile",
+          "request": {
+            "name": "Get an identity profile",
+            "description": {
+              "content": "Get the details of an identity profile by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identity-profiles",
+                ":identity-profile-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identity-profile-id",
+                  "description": "(Required) The identity profile ID."
+                },
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "37bb6f7d-6b3b-413f-8724-875ce7efbb26",
+              "name": "An identity profile object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"HR Employees\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"2c9180835d191a86015d28455b4b232a\",\n    \"name\": \"HR Active Directory\"\n  },\n  \"id\": \"2b838de9-db9b-abcf-e646-d4f274ad4238\",\n  \"description\": \"My custom flat file profile\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"priority\": 10,\n  \"identityRefreshRequired\": true,\n  \"identityCount\": 8,\n  \"hasTimeBasedAttr\": true,\n  \"created\": \"2023-01-03T21:16:22.432Z\",\n  \"modified\": \"2023-01-05T18:40:35.772Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82dfd4e6-b8eb-4909-b89a-b866944859c1",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01d6065a-9ae8-4d7a-a0a9-d10aa6b1463e",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "740e0f96-2e8e-45b0-ae56-fb22423b0292",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aec36010-4e4b-41ca-8744-cbd2b63fbb37",
+              "name": "Not Found - Returned if the specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4eaafaaf-a687-41a8-a2e2-cee1cdaae224",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "6996"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "074ceace-aa12-493a-aee9-5195c5948197",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b6492ca-c432-48b9-b75a-04ae0aff1ed6",
+          "name": "Update an identity profile",
+          "request": {
+            "name": "Update an identity profile",
+            "description": {
+              "content": "Update an existing identity profile using a JSON Patch document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identity-profiles",
+                ":identity-profile-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identity-profile-id",
+                  "description": "(Required) The identity profile ID."
+                },
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json-patch+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"value\": {}\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "99b29924-f73a-4e74-b56e-727f760a0204",
+              "name": "Updated identity profile.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"HR Employees\",\n  \"authoritativeSource\": {\n    \"type\": \"SOURCE\",\n    \"id\": \"2c9180835d191a86015d28455b4b232a\",\n    \"name\": \"HR Active Directory\"\n  },\n  \"id\": \"2b838de9-db9b-abcf-e646-d4f274ad4238\",\n  \"description\": \"My custom flat file profile\",\n  \"owner\": {\n    \"type\": \"IDENTITY\",\n    \"id\": \"2c9180a46faadee4016fb4e018c20639\",\n    \"name\": \"support\"\n  },\n  \"priority\": 10,\n  \"identityRefreshRequired\": true,\n  \"identityCount\": 8,\n  \"hasTimeBasedAttr\": true,\n  \"created\": \"2023-01-03T21:16:22.432Z\",\n  \"modified\": \"2023-01-05T18:40:35.772Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9122222e-c268-4280-9e7d-eecbffa26025",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fa32715-e638-41da-be7a-1f71cd2a7037",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f9f3a70-f655-4a2b-95e8-6998427a169b",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "254da6f9-dca8-4594-8d7b-67842eb304d5",
+              "name": "Not Found - Returned if the specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9c96b76-0e00-4de0-a6e1-2e7a216013f1",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "6996"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11880cdf-b623-4cea-8a89-549ab40c45ef",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/description\",\n    \"value\": {}\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01f5f198-870e-4d2a-8d11-845d0250619c",
+          "name": "Delete an identity profile",
+          "request": {
+            "name": "Delete an identity profile",
+            "description": {
+              "content": "Delete an identity profile by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identity-profiles",
+                ":identity-profile-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identity-profile-id",
+                  "description": "(Required) The identity profile ID."
+                },
+                {
+                  "description": "The name of your tenant, typically your company's name.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://{tenant}.api.identitynow.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "40614766-cd68-447c-9993-1b991796e351",
+              "name": "Identity profile delete request accepted. This is a long-running asynchronous operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"464ae7bf-791e-49fd-b746-06a2e4a89635\",\n  \"type\": \"TASK_RESULT\",\n  \"name\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f66a5d7b-9940-4d0f-a0b8-a47b12590d56",
+              "name": "Client Error - Returned if the request body is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5db7da3-58b3-4d0e-98b5-d09a38c648fe",
+              "name": "Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "067742e8-9a6f-4d3e-918d-b343a221b98f",
+              "name": "Forbidden - Returned if the user you are running as does not have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a18f422b-46de-4493-999e-2b5a973a860f",
+              "name": "Not Found - Returned if the specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f985fd3d-528e-4b07-8336-13d195ee3ba7",
+              "name": "Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "6996"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81421b2f-d8b4-4d86-89cf-9f882c5db3b4",
+              "name": "Internal Server Error - Returned if there is an unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-profiles",
+                    ":identity-profile-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identity-profile-id",
+                      "description": "(Required) The identity profile ID."
+                    },
+                    {
+                      "description": "The name of your tenant, typically your company's name.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailCode\": \"400.1 Bad Request Content\",\n  \"trackingId\": \"e7eab60924f64aa284175b9fa3309599\",\n  \"messages\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"The request was syntactically correct but its content is semantically invalid.\"\n    }\n  ],\n  \"causes\": [\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"REQUEST\",\n      \"text\": \"string\"\n    },\n    {\n      \"locale\": \"en-US\",\n      \"localeOrigin\": \"DEFAULT\",\n      \"text\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The name of your tenant, typically your company's name.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "sailpoint",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.api.identitynow.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "idn:identity:read idn:identity-profile:read idn:identity-profile:manage idn:access-profile:read idn:access-profile:manage idn:entitlement:read idn:sources:read idn:role-unchecked:read idn:role-unchecked:manage idn:certification:read idn:certification:manage"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{tenant}.api.identitynow.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "54a51eb3-d71f-4528-97a5-e0c9bbab39d3",
+    "name": "Identity Security Cloud V3 Access Profiles Identities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Use these APIs to interact with the Identity Security Cloud platform to achieve repeatable, automated processes with greater scalability. The V3 APIs provide core endpoints covering access profiles, certifications, identities, roles, search, sources, transforms, workflows, and more. We encourage you to join the SailPoint Developer Community forum at https://developer.sailpoint.com/discuss to connect with other developers using our APIs.\n\nContact Support:\n Name: Developer Relations",
+      "type": "text/plain"
+    }
+  }
+}

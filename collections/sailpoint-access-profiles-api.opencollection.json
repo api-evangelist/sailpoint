@@ -1,0 +1,293 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Identity Security Cloud V3 Access Profiles API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Access Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List access profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles",
+            "params": [
+              {
+                "name": "for-subadmin",
+                "value": "8c190e6787aa4ed9a90bd9d5344523fb",
+                "type": "query",
+                "description": "Filters the returned list according to what is visible to the indicated ROLE_SUBADMIN or SOURCE_SUBADMIN identity. The value is either an identity ID or the special value 'me' for the calling identity's ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "name eq \"SailPoint Support\"",
+                "type": "query",
+                "description": "Filter results using the standard syntax. Filtering is supported for the following fields and operators: id (eq, in), name (eq, sw), created (gt, ge, le), modified (gt, lt, ge, le), owner.id (eq, in), requestable (eq), source.id (eq, in). Supported composite operators are 'and' and 'or'."
+              },
+              {
+                "name": "sorters",
+                "value": "name,-modified",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified."
+              },
+              {
+                "name": "for-segment-ids",
+                "value": "0b5c9f25-83c6-4762-9073-e38f7bb2ae26,2e8d8180-24bc-4d21-91c6-7affdb473b0d",
+                "type": "query",
+                "description": "Filters access profiles to only those assigned to the segment(s) with the specified IDs. If segmentation is unavailable, specifying this parameter results in an error."
+              },
+              {
+                "name": "include-unsegmented",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the response should include unsegmented access profiles. If for-segment-ids is absent or empty, specifying this as false results in an error."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of access profiles. When you filter for access profiles that have the '+' symbol in their names, the response is blank."
+        },
+        {
+          "info": {
+            "name": "Create an access profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create an access profile. A user with ROLE_SUBADMIN or SOURCE_SUBADMIN authority must be associated with the access profile's source. The maximum supported length for the description field is 2000 characters."
+        },
+        {
+          "info": {
+            "name": "Get an access profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c91808a7190d06e01719938fcd20792",
+                "type": "path",
+                "description": "The access profile ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get an access profile by its ID."
+        },
+        {
+          "info": {
+            "name": "Patch an access profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c91808a7190d06e01719938fcd20792",
+                "type": "path",
+                "description": "The access profile ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing access profile using a JSON Patch document. The maximum supported length for the description field is 2000 characters."
+        },
+        {
+          "info": {
+            "name": "Delete an access profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c91808a7190d06e01719938fcd20792",
+                "type": "path",
+                "description": "The access profile ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete an existing access profile by its ID. The access profile must not be in use by any roles."
+        },
+        {
+          "info": {
+            "name": "List access profile entitlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles/:id/entitlements",
+            "params": [
+              {
+                "name": "id",
+                "value": "2c91808a7190d06e01719938fcd20792",
+                "type": "path",
+                "description": "The access profile ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filter results using the standard syntax. Filtering is supported for the following fields: name (eq, sw)."
+              },
+              {
+                "name": "sorters",
+                "value": "",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, created, modified."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of entitlements associated with the specified access profile."
+        },
+        {
+          "info": {
+            "name": "Bulk delete access profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/access-profiles/bulk-delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete one or more access profiles in a single request. The access profiles must not be in use by any roles or applications. Returns details about which profiles were deleted and which failed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

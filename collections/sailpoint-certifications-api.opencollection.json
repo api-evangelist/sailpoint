@@ -1,0 +1,385 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Identity Security Cloud V3 Access Profiles Certifications API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Certifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List identity campaign certifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "campaign.id eq \"ef38f94347e94562b5bb8424a56397d8\"",
+                "type": "query",
+                "description": "Filter results using the standard syntax. Filtering is supported for the following fields: id (eq, in), campaign.id (eq, in), phase (eq), completed (eq)."
+              },
+              {
+                "name": "sorters",
+                "value": "name,-due",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, due, signed."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of identity campaign certifications for the current user. A token with ORG_ADMIN, CERT_ADMIN, or REPORT_ADMIN authority is required to call this API. Callers with CERT_ADMIN authority can only see certifications they own. Callers with REPORT_ADMIN or ORG_ADMIN authority can see all certifications."
+        },
+        {
+          "info": {
+            "name": "Get an identity certification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the details of an identity certification by its ID."
+        },
+        {
+          "info": {
+            "name": "List access review items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/access-review-items",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filter results using the standard syntax. Filtering is supported for the following fields: type (eq), status (eq)."
+              },
+              {
+                "name": "sorters",
+                "value": "",
+                "type": "query",
+                "description": "Sort results using the standard syntax. Sorting is supported for the following fields: name, type, status."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of access review items for the specified certification. These items represent the access that is being reviewed and may be approved, revoked, or reassigned."
+        },
+        {
+          "info": {
+            "name": "Decide on a certification item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/decide",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Submit an approval, revocation, or acknowledgment decision for one or more access items in the specified certification."
+        },
+        {
+          "info": {
+            "name": "Reassign identities or items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/reassign",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Reassign one or more identities or access items in the specified certification to a different reviewer."
+        },
+        {
+          "info": {
+            "name": "Finalize identity certification decisions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/sign-off",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Sign off on a certification by its ID, finalizing all decisions. Once signed off, the certification is considered complete and all approved and revoked decisions will be processed."
+        },
+        {
+          "info": {
+            "name": "List certification reviewers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/reviewers",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of reviewers for the specified certification."
+        },
+        {
+          "info": {
+            "name": "List pending certification tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/tasks",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the full result set. Usually specified with limit to paginate through the results."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of pending certification tasks for the specified certification."
+        },
+        {
+          "info": {
+            "name": "Get a certification task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.api.identitynow.com/v3/certifications/:id/tasks/:taskId",
+            "params": [
+              {
+                "name": "id",
+                "value": "ef38f94347e94562b5bb8424a56397d8",
+                "type": "path",
+                "description": "The certification ID."
+              },
+              {
+                "name": "taskId",
+                "value": "2c918086749d78830174a1a40e121518",
+                "type": "path",
+                "description": "The certification task ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://{tenant}.api.identitynow.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a specific certification task by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

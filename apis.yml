@@ -221,6 +221,8 @@ maintainers:
     email: developer@sailpoint.com
     url: https://developer.sailpoint.com
 common:
+  - type: Website
+    url: https://www.sailpoint.com/
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/sailpoint/overview
   - type: AgenticAccess

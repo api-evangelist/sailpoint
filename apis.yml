@@ -37,6 +37,13 @@ image: https://www.sailpoint.com/wp-content/uploads/2021/02/sailpoint-logo.svg
 tags:
   - Access Governance
   - Compliance
+  - Identity and Access Management
+  - Identity Management
+  - Identity Security
+  - Security
+tags_raw:
+  - Access Governance
+  - Compliance
   - IAM
   - Identity Management
   - Identity Security
@@ -125,6 +132,8 @@ apis:
     verification.
   humanURL: ' https://developer.sailpoint.com/'
   tags:
+  - Certification
+  tags_raw:
   - Certifications
   properties:
   - type: OpenAPI

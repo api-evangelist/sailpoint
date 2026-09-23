@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Identity Security Cloud V3 Access Profiles Identities API
+  title: Identity Security Cloud V3 Identities API
   description: Use these APIs to interact with the Identity Security Cloud platform to achieve repeatable, automated processes with greater scalability. The V3 APIs provide core endpoints covering access profiles, certifications, identities, roles, search, sources, transforms, workflows, and more. We encourage you to join the SailPoint Developer Community forum at https://developer.sailpoint.com/discuss to connect with other developers using our APIs.
   termsOfService: https://developer.sailpoint.com/discuss/tos
   contact:
@@ -332,188 +332,7 @@ paths:
       - oauth2:
         - idn:identity-profile:manage
 components:
-  responses:
-    Forbidden:
-      description: Forbidden - Returned if the user you are running as does not have access to this endpoint.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
-    NotFound:
-      description: Not Found - Returned if the specified resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
-    InternalServerError:
-      description: Internal Server Error - Returned if there is an unexpected error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
-    Unauthorized:
-      description: Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
-    TooManyRequests:
-      description: Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.
-      headers:
-        Retry-After:
-          description: Number of seconds to wait before retrying.
-          schema:
-            type: integer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
-    BadRequest:
-      description: Client Error - Returned if the request body is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
   schemas:
-    TaskResultSimplified:
-      type: object
-      description: A simplified task result for asynchronous operations.
-      properties:
-        id:
-          type: string
-          description: The task ID.
-          examples:
-          - 464ae7bf-791e-49fd-b746-06a2e4a89635
-        type:
-          type: string
-          description: The type of task.
-          examples:
-          - TASK_RESULT
-        name:
-          type:
-          - string
-          - 'null'
-          description: The task name.
-    ErrorResponseDto:
-      type: object
-      description: Error response body.
-      properties:
-        detailCode:
-          type: string
-          description: Fine-grained error code providing more detail.
-          examples:
-          - 400.1 Bad Request Content
-        trackingId:
-          type: string
-          description: Unique tracking ID for the error.
-          examples:
-          - e7eab60924f64aa284175b9fa3309599
-        messages:
-          type: array
-          description: Generic localized reason for error.
-          items:
-            type: object
-            properties:
-              locale:
-                type: string
-                description: The locale for the message text.
-                examples:
-                - en-US
-              localeOrigin:
-                type: string
-                description: An indicator of how the locale was selected.
-                enum:
-                - DEFAULT
-                - REQUEST
-                examples:
-                - DEFAULT
-              text:
-                type: string
-                description: The actual text of the error message.
-                examples:
-                - The request was syntactically correct but its content is semantically invalid.
-        causes:
-          type: array
-          description: Plain-text descriptive reasons to provide additional detail to the text provided in the messages field.
-          items:
-            type: object
-            properties:
-              locale:
-                type: string
-                examples:
-                - en-US
-              localeOrigin:
-                type: string
-                enum:
-                - DEFAULT
-                - REQUEST
-              text:
-                type: string
-    OwnerReference:
-      type: object
-      description: Reference to the owner of the object.
-      properties:
-        type:
-          type: string
-          description: Owner type. Must be either left null or set to IDENTITY on input, otherwise a 400 Bad Request error will result.
-          enum:
-          - IDENTITY
-          examples:
-          - IDENTITY
-        id:
-          type: string
-          description: The owner's identity ID.
-          examples:
-          - 2c9180a46faadee4016fb4e018c20639
-        name:
-          type: string
-          description: The owner's name. If set, it must match the current value of the owner's display name, otherwise a 400 Bad Request error will result.
-          examples:
-          - support
-    SourceReference:
-      type: object
-      description: Reference to a source.
-      properties:
-        type:
-          type: string
-          description: The source object type.
-          enum:
-          - SOURCE
-          examples:
-          - SOURCE
-        id:
-          type: string
-          description: The source ID.
-          examples:
-          - 2c9180835d191a86015d28455b4b232a
-        name:
-          type: string
-          description: The source name.
-          examples:
-          - HR Active Directory
-    IdentityReference:
-      type:
-      - object
-      - 'null'
-      description: Reference to an identity.
-      properties:
-        type:
-          type: string
-          description: The type of the referenced object.
-          enum:
-          - IDENTITY
-          examples:
-          - IDENTITY
-        id:
-          type: string
-          description: The identity ID.
-          examples:
-          - 2c9180a46faadee4016fb4e018c20639
-        name:
-          type: string
-          description: Human-readable display name of the identity.
-          examples:
-          - Thomas Edison
     IdentityProfile:
       type: object
       description: An identity profile defines the mapping between source account attributes and identity attributes and configures lifecycle states for identities.
@@ -582,53 +401,61 @@ components:
           readOnly: true
           examples:
           - '2023-01-05T18:40:35.772Z'
-    JsonPatchOperation:
+    ErrorResponseDto:
       type: object
-      description: A JSON Patch operation as defined in RFC 6902.
-      required:
-      - op
-      - path
+      description: Error response body.
       properties:
-        op:
+        detailCode:
           type: string
-          description: The operation to perform.
-          enum:
-          - add
-          - remove
-          - replace
-          - move
-          - copy
-          - test
+          description: Fine-grained error code providing more detail.
           examples:
-          - replace
-        path:
+          - 400.1 Bad Request Content
+        trackingId:
           type: string
-          description: The JSON pointer path for the operation.
+          description: Unique tracking ID for the error.
           examples:
-          - /description
-        value:
-          description: The value for the operation (required for add, replace, test).
-    IdentityAttribute:
-      type: object
-      description: A public identity attribute key-value pair.
-      properties:
-        key:
-          type: string
-          description: The attribute key.
-          examples:
-          - country
-        name:
-          type: string
-          description: Human-readable display name of the attribute.
-          examples:
-          - Country
-        value:
-          type:
-          - string
-          - 'null'
-          description: The attribute value.
-          examples:
-          - US
+          - e7eab60924f64aa284175b9fa3309599
+        messages:
+          type: array
+          description: Generic localized reason for error.
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                description: The locale for the message text.
+                examples:
+                - en-US
+              localeOrigin:
+                type: string
+                description: An indicator of how the locale was selected.
+                enum:
+                - DEFAULT
+                - REQUEST
+                examples:
+                - DEFAULT
+              text:
+                type: string
+                description: The actual text of the error message.
+                examples:
+                - The request was syntactically correct but its content is semantically invalid.
+        causes:
+          type: array
+          description: Plain-text descriptive reasons to provide additional detail to the text provided in the messages field.
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                examples:
+                - en-US
+              localeOrigin:
+                type: string
+                enum:
+                - DEFAULT
+                - REQUEST
+              text:
+                type: string
     PublicIdentity:
       type: object
       description: Details about a public identity.
@@ -681,6 +508,179 @@ components:
           description: The public identity attributes of the identity.
           items:
             $ref: '#/components/schemas/IdentityAttribute'
+    IdentityAttribute:
+      type: object
+      description: A public identity attribute key-value pair.
+      properties:
+        key:
+          type: string
+          description: The attribute key.
+          examples:
+          - country
+        name:
+          type: string
+          description: Human-readable display name of the attribute.
+          examples:
+          - Country
+        value:
+          type:
+          - string
+          - 'null'
+          description: The attribute value.
+          examples:
+          - US
+    OwnerReference:
+      type: object
+      description: Reference to the owner of the object.
+      properties:
+        type:
+          type: string
+          description: Owner type. Must be either left null or set to IDENTITY on input, otherwise a 400 Bad Request error will result.
+          enum:
+          - IDENTITY
+          examples:
+          - IDENTITY
+        id:
+          type: string
+          description: The owner's identity ID.
+          examples:
+          - 2c9180a46faadee4016fb4e018c20639
+        name:
+          type: string
+          description: The owner's name. If set, it must match the current value of the owner's display name, otherwise a 400 Bad Request error will result.
+          examples:
+          - support
+    SourceReference:
+      type: object
+      description: Reference to a source.
+      properties:
+        type:
+          type: string
+          description: The source object type.
+          enum:
+          - SOURCE
+          examples:
+          - SOURCE
+        id:
+          type: string
+          description: The source ID.
+          examples:
+          - 2c9180835d191a86015d28455b4b232a
+        name:
+          type: string
+          description: The source name.
+          examples:
+          - HR Active Directory
+    JsonPatchOperation:
+      type: object
+      description: A JSON Patch operation as defined in RFC 6902.
+      required:
+      - op
+      - path
+      properties:
+        op:
+          type: string
+          description: The operation to perform.
+          enum:
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          - test
+          examples:
+          - replace
+        path:
+          type: string
+          description: The JSON pointer path for the operation.
+          examples:
+          - /description
+        value:
+          description: The value for the operation (required for add, replace, test).
+    TaskResultSimplified:
+      type: object
+      description: A simplified task result for asynchronous operations.
+      properties:
+        id:
+          type: string
+          description: The task ID.
+          examples:
+          - 464ae7bf-791e-49fd-b746-06a2e4a89635
+        type:
+          type: string
+          description: The type of task.
+          examples:
+          - TASK_RESULT
+        name:
+          type:
+          - string
+          - 'null'
+          description: The task name.
+    IdentityReference:
+      type:
+      - object
+      - 'null'
+      description: Reference to an identity.
+      properties:
+        type:
+          type: string
+          description: The type of the referenced object.
+          enum:
+          - IDENTITY
+          examples:
+          - IDENTITY
+        id:
+          type: string
+          description: The identity ID.
+          examples:
+          - 2c9180a46faadee4016fb4e018c20639
+        name:
+          type: string
+          description: Human-readable display name of the identity.
+          examples:
+          - Thomas Edison
+  responses:
+    NotFound:
+      description: Not Found - Returned if the specified resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    TooManyRequests:
+      description: Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.
+      headers:
+        Retry-After:
+          description: Number of seconds to wait before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    BadRequest:
+      description: Client Error - Returned if the request body is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    Forbidden:
+      description: Forbidden - Returned if the user you are running as does not have access to this endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    InternalServerError:
+      description: Internal Server Error - Returned if there is an unexpected error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    Unauthorized:
+      description: Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
   parameters:
     Offset:
       name: offset
@@ -691,14 +691,6 @@ components:
         type: integer
         minimum: 0
         default: 0
-    Count:
-      name: count
-      in: query
-      description: If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.
-      required: false
-      schema:
-        type: boolean
-        default: false
     Limit:
       name: limit
       in: query
@@ -709,6 +701,14 @@ components:
         minimum: 0
         maximum: 250
         default: 250
+    Count:
+      name: count
+      in: query
+      description: If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.
+      required: false
+      schema:
+        type: boolean
+        default: false
   securitySchemes:
     oauth2:
       type: oauth2

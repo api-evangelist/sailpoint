@@ -1,10 +1,7 @@
 {
   "provider": "sailpoint",
   "sources": [
-    "sailpoint-access-profiles-api-openapi.yml",
-    "sailpoint-certifications-api-openapi.yml",
-    "sailpoint-identities-api-openapi.yml",
-    "sailpoint-roles-api-openapi.yml"
+    "_original/identity-security-cloud-v3.yml"
   ],
   "outputs": [
     "sailpoint-access-profiles-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "identity-security-cloud-v3.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "sailpoint-access-profiles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sailpoint-certifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sailpoint-identities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sailpoint-roles-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

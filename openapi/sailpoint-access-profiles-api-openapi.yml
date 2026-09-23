@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Identity Security Cloud V3 Access Profiles API
   description: Use these APIs to interact with the Identity Security Cloud platform to achieve repeatable, automated processes with greater scalability. The V3 APIs provide core endpoints covering access profiles, certifications, identities, roles, search, sources, transforms, workflows, and more. We encourage you to join the SailPoint Developer Community forum at https://developer.sailpoint.com/discuss to connect with other developers using our APIs.
@@ -347,31 +347,17 @@ paths:
         - idn:access-profile:manage
 components:
   schemas:
-    AccessProfileSourceRef:
+    EntitlementRef:
       type: object
-      description: Reference to the source associated with the access profile.
+      description: Reference to an entitlement.
       properties:
-        id:
-          type: string
-          description: The source ID.
-          examples:
-          - 2c91809773dee3610173fdb1b6969d4e
         type:
           type: string
-          description: The source object type.
+          description: The entitlement object type.
           enum:
-          - SOURCE
+          - ENTITLEMENT
           examples:
-          - SOURCE
-        name:
-          type: string
-          description: The source name.
-          examples:
-          - ODS-AD-SOURCE
-    Entitlement:
-      type: object
-      description: An entitlement representing access rights on a source.
-      properties:
+          - ENTITLEMENT
         id:
           type: string
           description: The entitlement ID.
@@ -379,53 +365,31 @@ components:
           - 2c91809773dee32014e13e122092014e
         name:
           type: string
-          description: The entitlement name.
+          description: The entitlement display name.
           examples:
           - CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local
-        description:
+    ApprovalScheme:
+      type: object
+      description: An approval scheme defining the approval process.
+      properties:
+        approverType:
+          type: string
+          description: The type of approver. APP_OWNER is the application owner, OWNER is the access profile/role owner, SOURCE_OWNER is the source owner, MANAGER is the requesting user's manager, and GOVERNANCE_GROUP is a governance group.
+          enum:
+          - APP_OWNER
+          - OWNER
+          - SOURCE_OWNER
+          - MANAGER
+          - GOVERNANCE_GROUP
+          examples:
+          - MANAGER
+        approverId:
           type:
           - string
           - 'null'
-          description: The entitlement description.
+          description: The ID of the approver. Only required when approverType is GOVERNANCE_GROUP.
           examples:
-          - Entitlement granting access to the developer tools
-        attribute:
-          type: string
-          description: The name of the entitlement attribute.
-          examples:
-          - memberOf
-        value:
-          type: string
-          description: The value of the entitlement.
-          examples:
-          - CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local
-        sourceSchemaObjectType:
-          type: string
-          description: The object type of the source schema.
-          examples:
-          - group
-        privileged:
-          type: boolean
-          description: Whether the entitlement is privileged.
-          default: false
-        cloudGoverned:
-          type: boolean
-          description: Whether the entitlement is governed in the cloud.
-          default: false
-        created:
-          type: string
-          format: date-time
-          description: Date and time the entitlement was created.
-          readOnly: true
-        modified:
-          type: string
-          format: date-time
-          description: Date and time the entitlement was last modified.
-          readOnly: true
-        source:
-          $ref: '#/components/schemas/EntitlementSourceRef'
-        owner:
-          $ref: '#/components/schemas/OwnerReference'
+          - 46c79c6399252b1a80dbdff5e2b1d4b7
     Revocability:
       type:
       - object
@@ -445,6 +409,76 @@ components:
           description: List of approval schemes for revocation requests.
           items:
             $ref: '#/components/schemas/ApprovalScheme'
+    EntitlementSourceRef:
+      type: object
+      description: Reference to the source associated with the entitlement.
+      properties:
+        id:
+          type: string
+          description: The source ID.
+          examples:
+          - 2c9180835d191a86015d28455b4b232a
+        type:
+          type: string
+          description: The source object type.
+          examples:
+          - SOURCE
+        name:
+          type: string
+          description: The source name.
+          examples:
+          - ODS-AD-SOURCE
+    AccessProfileBulkDeleteResponse:
+      type: object
+      description: Response body for bulk deleting access profiles.
+      properties:
+        pending:
+          type: array
+          description: IDs of access profiles queued for deletion.
+          items:
+            type: string
+        inUse:
+          type: array
+          description: Details about access profiles that could not be deleted because they are in use.
+          items:
+            type: object
+            properties:
+              accessProfileId:
+                type: string
+                description: The access profile ID.
+              usedBy:
+                type: array
+                description: Objects using this access profile.
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+    OwnerReference:
+      type: object
+      description: Reference to the owner of the object.
+      properties:
+        type:
+          type: string
+          description: Owner type. Must be either left null or set to IDENTITY on input, otherwise a 400 Bad Request error will result.
+          enum:
+          - IDENTITY
+          examples:
+          - IDENTITY
+        id:
+          type: string
+          description: The owner's identity ID.
+          examples:
+          - 2c9180a46faadee4016fb4e018c20639
+        name:
+          type: string
+          description: The owner's name. If set, it must match the current value of the owner's display name, otherwise a 400 Bad Request error will result.
+          examples:
+          - support
     AccessProfile:
       type: object
       description: An access profile groups entitlements that represent access rights on sources. Access profiles are used in provisioning, certifications, access requests, and roles.
@@ -523,6 +557,148 @@ components:
           examples:
           - - f7b1b8a3-5fed-4fd4-ad29-82014e137e19
             - 29cb6c06-1da8-43ea-8be4-b3125f248f2a
+    AccessProfileSourceRef:
+      type: object
+      description: Reference to the source associated with the access profile.
+      properties:
+        id:
+          type: string
+          description: The source ID.
+          examples:
+          - 2c91809773dee3610173fdb1b6969d4e
+        type:
+          type: string
+          description: The source object type.
+          enum:
+          - SOURCE
+          examples:
+          - SOURCE
+        name:
+          type: string
+          description: The source name.
+          examples:
+          - ODS-AD-SOURCE
+    JsonPatchOperation:
+      type: object
+      description: A JSON Patch operation as defined in RFC 6902.
+      required:
+      - op
+      - path
+      properties:
+        op:
+          type: string
+          description: The operation to perform.
+          enum:
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          - test
+          examples:
+          - replace
+        path:
+          type: string
+          description: The JSON pointer path for the operation.
+          examples:
+          - /description
+        value:
+          description: The value for the operation (required for add, replace, test).
+    AccessProfileBulkDeleteRequest:
+      type: object
+      description: Request body for bulk deleting access profiles.
+      required:
+      - accessProfileIds
+      properties:
+        accessProfileIds:
+          type: array
+          description: List of access profile IDs to delete.
+          items:
+            type: string
+          examples:
+          - - 2c91808a7190d06e01719938fcd20792
+            - 2c91808a7190d06e01719938fcd20793
+        bestEffortOnly:
+          type: boolean
+          default: false
+          description: If true, silently skip access profiles that cannot be deleted.
+    Entitlement:
+      type: object
+      description: An entitlement representing access rights on a source.
+      properties:
+        id:
+          type: string
+          description: The entitlement ID.
+          examples:
+          - 2c91809773dee32014e13e122092014e
+        name:
+          type: string
+          description: The entitlement name.
+          examples:
+          - CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local
+        description:
+          type:
+          - string
+          - 'null'
+          description: The entitlement description.
+          examples:
+          - Entitlement granting access to the developer tools
+        attribute:
+          type: string
+          description: The name of the entitlement attribute.
+          examples:
+          - memberOf
+        value:
+          type: string
+          description: The value of the entitlement.
+          examples:
+          - CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local
+        sourceSchemaObjectType:
+          type: string
+          description: The object type of the source schema.
+          examples:
+          - group
+        privileged:
+          type: boolean
+          description: Whether the entitlement is privileged.
+          default: false
+        cloudGoverned:
+          type: boolean
+          description: Whether the entitlement is governed in the cloud.
+          default: false
+        created:
+          type: string
+          format: date-time
+          description: Date and time the entitlement was created.
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          description: Date and time the entitlement was last modified.
+          readOnly: true
+        source:
+          $ref: '#/components/schemas/EntitlementSourceRef'
+        owner:
+          $ref: '#/components/schemas/OwnerReference'
+    Requestability:
+      type:
+      - object
+      - 'null'
+      description: Access request configuration for the object.
+      properties:
+        commentsRequired:
+          type: boolean
+          default: false
+          description: Whether comments are required for access requests.
+        denialCommentsRequired:
+          type: boolean
+          default: false
+          description: Whether comments are required for denial of access requests.
+        approvalSchemes:
+          type: array
+          description: List of approval schemes for access requests.
+          items:
+            $ref: '#/components/schemas/ApprovalScheme'
     ErrorResponseDto:
       type: object
       description: Error response body.
@@ -578,191 +754,9 @@ components:
                 - REQUEST
               text:
                 type: string
-    AccessProfileBulkDeleteResponse:
-      type: object
-      description: Response body for bulk deleting access profiles.
-      properties:
-        pending:
-          type: array
-          description: IDs of access profiles queued for deletion.
-          items:
-            type: string
-        inUse:
-          type: array
-          description: Details about access profiles that could not be deleted because they are in use.
-          items:
-            type: object
-            properties:
-              accessProfileId:
-                type: string
-                description: The access profile ID.
-              usedBy:
-                type: array
-                description: Objects using this access profile.
-                items:
-                  type: object
-                  properties:
-                    type:
-                      type: string
-                    id:
-                      type: string
-                    name:
-                      type: string
-    EntitlementSourceRef:
-      type: object
-      description: Reference to the source associated with the entitlement.
-      properties:
-        id:
-          type: string
-          description: The source ID.
-          examples:
-          - 2c9180835d191a86015d28455b4b232a
-        type:
-          type: string
-          description: The source object type.
-          examples:
-          - SOURCE
-        name:
-          type: string
-          description: The source name.
-          examples:
-          - ODS-AD-SOURCE
-    OwnerReference:
-      type: object
-      description: Reference to the owner of the object.
-      properties:
-        type:
-          type: string
-          description: Owner type. Must be either left null or set to IDENTITY on input, otherwise a 400 Bad Request error will result.
-          enum:
-          - IDENTITY
-          examples:
-          - IDENTITY
-        id:
-          type: string
-          description: The owner's identity ID.
-          examples:
-          - 2c9180a46faadee4016fb4e018c20639
-        name:
-          type: string
-          description: The owner's name. If set, it must match the current value of the owner's display name, otherwise a 400 Bad Request error will result.
-          examples:
-          - support
-    AccessProfileBulkDeleteRequest:
-      type: object
-      description: Request body for bulk deleting access profiles.
-      required:
-      - accessProfileIds
-      properties:
-        accessProfileIds:
-          type: array
-          description: List of access profile IDs to delete.
-          items:
-            type: string
-          examples:
-          - - 2c91808a7190d06e01719938fcd20792
-            - 2c91808a7190d06e01719938fcd20793
-        bestEffortOnly:
-          type: boolean
-          default: false
-          description: If true, silently skip access profiles that cannot be deleted.
-    EntitlementRef:
-      type: object
-      description: Reference to an entitlement.
-      properties:
-        type:
-          type: string
-          description: The entitlement object type.
-          enum:
-          - ENTITLEMENT
-          examples:
-          - ENTITLEMENT
-        id:
-          type: string
-          description: The entitlement ID.
-          examples:
-          - 2c91809773dee32014e13e122092014e
-        name:
-          type: string
-          description: The entitlement display name.
-          examples:
-          - CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local
-    Requestability:
-      type:
-      - object
-      - 'null'
-      description: Access request configuration for the object.
-      properties:
-        commentsRequired:
-          type: boolean
-          default: false
-          description: Whether comments are required for access requests.
-        denialCommentsRequired:
-          type: boolean
-          default: false
-          description: Whether comments are required for denial of access requests.
-        approvalSchemes:
-          type: array
-          description: List of approval schemes for access requests.
-          items:
-            $ref: '#/components/schemas/ApprovalScheme'
-    ApprovalScheme:
-      type: object
-      description: An approval scheme defining the approval process.
-      properties:
-        approverType:
-          type: string
-          description: The type of approver. APP_OWNER is the application owner, OWNER is the access profile/role owner, SOURCE_OWNER is the source owner, MANAGER is the requesting user's manager, and GOVERNANCE_GROUP is a governance group.
-          enum:
-          - APP_OWNER
-          - OWNER
-          - SOURCE_OWNER
-          - MANAGER
-          - GOVERNANCE_GROUP
-          examples:
-          - MANAGER
-        approverId:
-          type:
-          - string
-          - 'null'
-          description: The ID of the approver. Only required when approverType is GOVERNANCE_GROUP.
-          examples:
-          - 46c79c6399252b1a80dbdff5e2b1d4b7
-    JsonPatchOperation:
-      type: object
-      description: A JSON Patch operation as defined in RFC 6902.
-      required:
-      - op
-      - path
-      properties:
-        op:
-          type: string
-          description: The operation to perform.
-          enum:
-          - add
-          - remove
-          - replace
-          - move
-          - copy
-          - test
-          examples:
-          - replace
-        path:
-          type: string
-          description: The JSON pointer path for the operation.
-          examples:
-          - /description
-        value:
-          description: The value for the operation (required for add, replace, test).
   responses:
-    InternalServerError:
-      description: Internal Server Error - Returned if there is an unexpected error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
-    BadRequest:
-      description: Client Error - Returned if the request body is invalid.
+    NotFound:
+      description: Not Found - Returned if the specified resource does not exist.
       content:
         application/json:
           schema:
@@ -778,8 +772,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponseDto'
-    NotFound:
-      description: Not Found - Returned if the specified resource does not exist.
+    BadRequest:
+      description: Client Error - Returned if the request body is invalid.
       content:
         application/json:
           schema:
@@ -796,24 +790,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponseDto'
+    InternalServerError:
+      description: Internal Server Error - Returned if there is an unexpected error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
   parameters:
-    Count:
-      name: count
-      in: query
-      description: If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.
-      required: false
-      schema:
-        type: boolean
-        default: false
-    Offset:
-      name: offset
-      in: query
-      description: Offset into the full result set. Usually specified with limit to paginate through the results.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
     Limit:
       name: limit
       in: query
@@ -824,6 +807,23 @@ components:
         minimum: 0
         maximum: 250
         default: 250
+    Offset:
+      name: offset
+      in: query
+      description: Offset into the full result set. Usually specified with limit to paginate through the results.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    Count:
+      name: count
+      in: query
+      description: If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.
+      required: false
+      schema:
+        type: boolean
+        default: false
   securitySchemes:
     oauth2:
       type: oauth2

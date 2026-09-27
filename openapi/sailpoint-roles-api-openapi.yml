@@ -342,6 +342,34 @@ paths:
       - oauth2:
         - idn:role-unchecked:manage
 components:
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return. Maximum value is 250.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 250
+        default: 250
+    Offset:
+      name: offset
+      in: query
+      description: Offset into the full result set. Usually specified with limit to paginate through the results.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    Count:
+      name: count
+      in: query
+      description: If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.
+      required: false
+      schema:
+        type: boolean
+        default: false
   schemas:
     EntitlementRef:
       type: object
@@ -364,61 +392,29 @@ components:
           description: The entitlement display name.
           examples:
           - CN=entitlement.490efde5,OU=OrgCo,OU=ServiceDept,DC=HQAD,DC=local
-    ApprovalScheme:
-      type: object
-      description: An approval scheme defining the approval process.
-      properties:
-        approverType:
-          type: string
-          description: The type of approver. APP_OWNER is the application owner, OWNER is the access profile/role owner, SOURCE_OWNER is the source owner, MANAGER is the requesting user's manager, and GOVERNANCE_GROUP is a governance group.
-          enum:
-          - APP_OWNER
-          - OWNER
-          - SOURCE_OWNER
-          - MANAGER
-          - GOVERNANCE_GROUP
-          examples:
-          - MANAGER
-        approverId:
-          type:
-          - string
-          - 'null'
-          description: The ID of the approver. Only required when approverType is GOVERNANCE_GROUP.
-          examples:
-          - 46c79c6399252b1a80dbdff5e2b1d4b7
-    RequestabilityForRole:
+    RoleMembershipSelector:
       type:
       - object
       - 'null'
-      description: Access request configuration for a role.
+      description: Defines the criteria for role membership. When configured, Identity Security Cloud automatically assigns the role to qualifying identities.
       properties:
-        commentsRequired:
-          type: boolean
-          default: false
-          description: Whether comments are required for access requests.
-        denialCommentsRequired:
-          type: boolean
-          default: false
-          description: Whether comments are required for denial.
-        approvalSchemes:
-          type: array
-          description: List of approval schemes for access requests.
-          items:
-            $ref: '#/components/schemas/ApprovalScheme'
-    RoleBulkDeleteRequest:
-      type: object
-      description: Request body for bulk deleting roles.
-      required:
-      - roleIds
-      properties:
-        roleIds:
-          type: array
-          description: List of role IDs to delete.
-          items:
-            type: string
+        type:
+          type: string
+          description: The type of role membership selector.
+          enum:
+          - STANDARD
+          - IDENTITY_LIST
           examples:
-          - - 2c918086749d78830174a1a40e121518
-            - 2c918086749d78830174a1a40e121519
+          - STANDARD
+        criteria:
+          $ref: '#/components/schemas/RoleCriteriaLevel1'
+        identities:
+          type:
+          - array
+          - 'null'
+          description: List of identities for IDENTITY_LIST membership type.
+          items:
+            $ref: '#/components/schemas/RoleMembershipIdentity'
     RoleCriteriaLevel3:
       type: object
       description: Third-level (leaf) role criteria expression.
@@ -470,46 +466,6 @@ components:
           description: Child criteria for compound operations (AND, OR).
           items:
             $ref: '#/components/schemas/RoleCriteriaLevel2'
-    RevocabilityForRole:
-      type:
-      - object
-      - 'null'
-      description: Revocation request configuration for a role.
-      properties:
-        commentsRequired:
-          type: boolean
-          default: false
-          description: Whether comments are required for revocation requests.
-        denialCommentsRequired:
-          type: boolean
-          default: false
-          description: Whether comments are required for denial.
-        approvalSchemes:
-          type: array
-          description: List of approval schemes for revocation requests.
-          items:
-            $ref: '#/components/schemas/ApprovalScheme'
-    OwnerReference:
-      type: object
-      description: Reference to the owner of the object.
-      properties:
-        type:
-          type: string
-          description: Owner type. Must be either left null or set to IDENTITY on input, otherwise a 400 Bad Request error will result.
-          enum:
-          - IDENTITY
-          examples:
-          - IDENTITY
-        id:
-          type: string
-          description: The owner's identity ID.
-          examples:
-          - 2c9180a46faadee4016fb4e018c20639
-        name:
-          type: string
-          description: The owner's name. If set, it must match the current value of the owner's display name, otherwise a 400 Bad Request error will result.
-          examples:
-          - support
     RoleIdentity:
       type: object
       description: An identity assigned to a role.
@@ -546,127 +502,72 @@ components:
           - ACCESS_REQUEST
           examples:
           - ROLE_MEMBERSHIP
-    RoleCriteriaKey:
+    RequestabilityForRole:
       type:
       - object
       - 'null'
-      description: The key element for role criteria.
+      description: Access request configuration for a role.
+      properties:
+        commentsRequired:
+          type: boolean
+          default: false
+          description: Whether comments are required for access requests.
+        denialCommentsRequired:
+          type: boolean
+          default: false
+          description: Whether comments are required for denial.
+        approvalSchemes:
+          type: array
+          description: List of approval schemes for access requests.
+          items:
+            $ref: '#/components/schemas/ApprovalScheme'
+    RevocabilityForRole:
+      type:
+      - object
+      - 'null'
+      description: Revocation request configuration for a role.
+      properties:
+        commentsRequired:
+          type: boolean
+          default: false
+          description: Whether comments are required for revocation requests.
+        denialCommentsRequired:
+          type: boolean
+          default: false
+          description: Whether comments are required for denial.
+        approvalSchemes:
+          type: array
+          description: List of approval schemes for revocation requests.
+          items:
+            $ref: '#/components/schemas/ApprovalScheme'
+    RoleMembershipIdentity:
+      type: object
+      description: An identity for role membership.
       properties:
         type:
           type: string
-          description: The type of criteria key.
+          description: The type of the identity.
           enum:
           - IDENTITY
-          - ACCOUNT
-          - ENTITLEMENT
           examples:
           - IDENTITY
-        property:
-          type: string
-          description: The property name for the criteria.
-          examples:
-          - attribute.department
-        sourceId:
-          type:
-          - string
-          - 'null'
-          description: The ID of the source. Required for ACCOUNT and ENTITLEMENT types.
-          examples:
-          - 2c9180867427f3a301745aec18211519
-    TaskResultSimplified:
-      type: object
-      description: A simplified task result for asynchronous operations.
-      properties:
         id:
           type: string
-          description: The task ID.
+          description: The identity ID.
           examples:
-          - 464ae7bf-791e-49fd-b746-06a2e4a89635
-        type:
-          type: string
-          description: The type of task.
-          examples:
-          - TASK_RESULT
+          - 2c9180a46faadee4016fb4e018c20639
         name:
+          type: string
+          description: The identity name.
+          examples:
+          - Thomas Edison
+        aliasName:
           type:
           - string
           - 'null'
-          description: The task name.
-    RoleMembershipSelector:
-      type:
-      - object
-      - 'null'
-      description: Defines the criteria for role membership. When configured, Identity Security Cloud automatically assigns the role to qualifying identities.
-      properties:
-        type:
-          type: string
-          description: The type of role membership selector.
-          enum:
-          - STANDARD
-          - IDENTITY_LIST
+          description: The identity alias name.
           examples:
-          - STANDARD
-        criteria:
-          $ref: '#/components/schemas/RoleCriteriaLevel1'
-        identities:
-          type:
-          - array
-          - 'null'
-          description: List of identities for IDENTITY_LIST membership type.
-          items:
-            $ref: '#/components/schemas/RoleMembershipIdentity'
-    JsonPatchOperation:
-      type: object
-      description: A JSON Patch operation as defined in RFC 6902.
-      required:
-      - op
-      - path
-      properties:
-        op:
-          type: string
-          description: The operation to perform.
-          enum:
-          - add
-          - remove
-          - replace
-          - move
-          - copy
-          - test
-          examples:
-          - replace
-        path:
-          type: string
-          description: The JSON pointer path for the operation.
-          examples:
-          - /description
-        value:
-          description: The value for the operation (required for add, replace, test).
-    RoleCriteriaLevel2:
-      type: object
-      description: Second-level role criteria expression.
-      properties:
-        operation:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - CONTAINS
-          - STARTS_WITH
-          - ENDS_WITH
-          - AND
-          - OR
-        key:
-          $ref: '#/components/schemas/RoleCriteriaKey'
-        stringValue:
-          type:
-          - string
-          - 'null'
-        children:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/RoleCriteriaLevel3'
+          - t.edison
     AccessProfileRef:
       type: object
       description: Reference to an access profile.
@@ -688,61 +589,6 @@ components:
           description: Human-readable display name of the access profile.
           examples:
           - Access Profile 2567
-    ErrorResponseDto:
-      type: object
-      description: Error response body.
-      properties:
-        detailCode:
-          type: string
-          description: Fine-grained error code providing more detail.
-          examples:
-          - 400.1 Bad Request Content
-        trackingId:
-          type: string
-          description: Unique tracking ID for the error.
-          examples:
-          - e7eab60924f64aa284175b9fa3309599
-        messages:
-          type: array
-          description: Generic localized reason for error.
-          items:
-            type: object
-            properties:
-              locale:
-                type: string
-                description: The locale for the message text.
-                examples:
-                - en-US
-              localeOrigin:
-                type: string
-                description: An indicator of how the locale was selected.
-                enum:
-                - DEFAULT
-                - REQUEST
-                examples:
-                - DEFAULT
-              text:
-                type: string
-                description: The actual text of the error message.
-                examples:
-                - The request was syntactically correct but its content is semantically invalid.
-        causes:
-          type: array
-          description: Plain-text descriptive reasons to provide additional detail to the text provided in the messages field.
-          items:
-            type: object
-            properties:
-              locale:
-                type: string
-                examples:
-                - en-US
-              localeOrigin:
-                type: string
-                enum:
-                - DEFAULT
-                - REQUEST
-              text:
-                type: string
     Role:
       type: object
       description: A role represents the broadest level of access and groups one or more access profiles. Roles can be automatically assigned to qualified identities based on configured criteria.
@@ -832,35 +678,223 @@ components:
           - 'null'
           default: false
           description: Whether the role is dimensional.
-    RoleMembershipIdentity:
+    JsonPatchOperation:
       type: object
-      description: An identity for role membership.
+      description: A JSON Patch operation as defined in RFC 6902.
+      required:
+      - op
+      - path
+      properties:
+        op:
+          type: string
+          description: The operation to perform.
+          enum:
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          - test
+          examples:
+          - replace
+        path:
+          type: string
+          description: The JSON pointer path for the operation.
+          examples:
+          - /description
+        value:
+          description: The value for the operation (required for add, replace, test).
+    TaskResultSimplified:
+      type: object
+      description: A simplified task result for asynchronous operations.
+      properties:
+        id:
+          type: string
+          description: The task ID.
+          examples:
+          - 464ae7bf-791e-49fd-b746-06a2e4a89635
+        type:
+          type: string
+          description: The type of task.
+          examples:
+          - TASK_RESULT
+        name:
+          type:
+          - string
+          - 'null'
+          description: The task name.
+    RoleCriteriaLevel2:
+      type: object
+      description: Second-level role criteria expression.
+      properties:
+        operation:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - CONTAINS
+          - STARTS_WITH
+          - ENDS_WITH
+          - AND
+          - OR
+        key:
+          $ref: '#/components/schemas/RoleCriteriaKey'
+        stringValue:
+          type:
+          - string
+          - 'null'
+        children:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RoleCriteriaLevel3'
+    RoleCriteriaKey:
+      type:
+      - object
+      - 'null'
+      description: The key element for role criteria.
       properties:
         type:
           type: string
-          description: The type of the identity.
+          description: The type of criteria key.
+          enum:
+          - IDENTITY
+          - ACCOUNT
+          - ENTITLEMENT
+          examples:
+          - IDENTITY
+        property:
+          type: string
+          description: The property name for the criteria.
+          examples:
+          - attribute.department
+        sourceId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the source. Required for ACCOUNT and ENTITLEMENT types.
+          examples:
+          - 2c9180867427f3a301745aec18211519
+    RoleBulkDeleteRequest:
+      type: object
+      description: Request body for bulk deleting roles.
+      required:
+      - roleIds
+      properties:
+        roleIds:
+          type: array
+          description: List of role IDs to delete.
+          items:
+            type: string
+          examples:
+          - - 2c918086749d78830174a1a40e121518
+            - 2c918086749d78830174a1a40e121519
+    ApprovalScheme:
+      type: object
+      description: An approval scheme defining the approval process.
+      properties:
+        approverType:
+          type: string
+          description: The type of approver. APP_OWNER is the application owner, OWNER is the access profile/role owner, SOURCE_OWNER is the source owner, MANAGER is the requesting user's manager, and GOVERNANCE_GROUP is a governance group.
+          enum:
+          - APP_OWNER
+          - OWNER
+          - SOURCE_OWNER
+          - MANAGER
+          - GOVERNANCE_GROUP
+          examples:
+          - MANAGER
+        approverId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the approver. Only required when approverType is GOVERNANCE_GROUP.
+          examples:
+          - 46c79c6399252b1a80dbdff5e2b1d4b7
+    ErrorResponseDto:
+      type: object
+      description: Error response body.
+      properties:
+        detailCode:
+          type: string
+          description: Fine-grained error code providing more detail.
+          examples:
+          - 400.1 Bad Request Content
+        trackingId:
+          type: string
+          description: Unique tracking ID for the error.
+          examples:
+          - e7eab60924f64aa284175b9fa3309599
+        messages:
+          type: array
+          description: Generic localized reason for error.
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                description: The locale for the message text.
+                examples:
+                - en-US
+              localeOrigin:
+                type: string
+                description: An indicator of how the locale was selected.
+                enum:
+                - DEFAULT
+                - REQUEST
+                examples:
+                - DEFAULT
+              text:
+                type: string
+                description: The actual text of the error message.
+                examples:
+                - The request was syntactically correct but its content is semantically invalid.
+        causes:
+          type: array
+          description: Plain-text descriptive reasons to provide additional detail to the text provided in the messages field.
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                examples:
+                - en-US
+              localeOrigin:
+                type: string
+                enum:
+                - DEFAULT
+                - REQUEST
+              text:
+                type: string
+    OwnerReference:
+      type: object
+      description: Reference to the owner of the object.
+      properties:
+        type:
+          type: string
+          description: Owner type. Must be either left null or set to IDENTITY on input, otherwise a 400 Bad Request error will result.
           enum:
           - IDENTITY
           examples:
           - IDENTITY
         id:
           type: string
-          description: The identity ID.
+          description: The owner's identity ID.
           examples:
           - 2c9180a46faadee4016fb4e018c20639
         name:
           type: string
-          description: The identity name.
+          description: The owner's name. If set, it must match the current value of the owner's display name, otherwise a 400 Bad Request error will result.
           examples:
-          - Thomas Edison
-        aliasName:
-          type:
-          - string
-          - 'null'
-          description: The identity alias name.
-          examples:
-          - t.edison
+          - support
   responses:
+    Forbidden:
+      description: Forbidden - Returned if the user you are running as does not have access to this endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
     NotFound:
       description: Not Found - Returned if the specified resource does not exist.
       content:
@@ -878,14 +912,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponseDto'
-    BadRequest:
-      description: Client Error - Returned if the request body is invalid.
+    InternalServerError:
+      description: Internal Server Error - Returned if there is an unexpected error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponseDto'
-    Forbidden:
-      description: Forbidden - Returned if the user you are running as does not have access to this endpoint.
+    BadRequest:
+      description: Client Error - Returned if the request body is invalid.
       content:
         application/json:
           schema:
@@ -896,40 +930,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponseDto'
-    InternalServerError:
-      description: Internal Server Error - Returned if there is an unexpected error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return. Maximum value is 250.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 250
-        default: 250
-    Offset:
-      name: offset
-      in: query
-      description: Offset into the full result set. Usually specified with limit to paginate through the results.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    Count:
-      name: count
-      in: query
-      description: If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.
-      required: false
-      schema:
-        type: boolean
-        default: false
   securitySchemes:
     oauth2:
       type: oauth2

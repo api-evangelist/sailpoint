@@ -57,11 +57,11 @@ apis:
   name: SailPoint
   description: >-
     The SailPoint Developer Forums are a great place to find solutions to common development problems.
-  humanURL: ' https://developer.sailpoint.com/'
+  humanURL: https://developer.sailpoint.com/
   tags: []
   properties:
   - type: Documentation
-    url: ' https://developer.sailpoint.com/'
+    url: https://developer.sailpoint.com/
 - aid: sailpoint:nerm-v1-api
   name: SailPoint Non-Employee Risk Management V1 API
   description: >-
@@ -97,7 +97,7 @@ apis:
     which represent access rights on sources. For example, an Active Directory source can have multiple
     entitlements grouped into an access profile such as 'AD Developers' combining 'Employees' and 'Developers'
     entitlements. Access profiles are used in provisioning, certifications, access requests, and roles.
-  humanURL: ' https://developer.sailpoint.com/'
+  humanURL: https://developer.sailpoint.com/
   tags:
   - Access Profiles
   properties:
@@ -130,7 +130,7 @@ apis:
     reviewers to review users' access to entitlements and decide whether to approve, revoke, or reassign
     the review. Certification campaigns provide a structured process for periodic access reviews and compliance
     verification.
-  humanURL: ' https://developer.sailpoint.com/'
+  humanURL: https://developer.sailpoint.com/
   tags:
   - Certification
   tags_raw:
@@ -164,7 +164,7 @@ apis:
     Use this API to retrieve and manage public identity information. Public identities represent users
     within the Identity Security Cloud platform, including their attributes, lifecycle state, and manager
     relationships.
-  humanURL: ' https://developer.sailpoint.com/'
+  humanURL: https://developer.sailpoint.com/
   tags:
   - Identities
   properties:
@@ -197,7 +197,7 @@ apis:
     access and group one or more access profiles. When you create a role and configure it with role criteria,
     Identity Security Cloud can automatically assign the role to qualified identities. Roles simplify
     access management for organizational positions.
-  humanURL: ' https://developer.sailpoint.com/'
+  humanURL: https://developer.sailpoint.com/
   tags:
   - Roles
   properties:

@@ -446,7 +446,41 @@ paths:
       - oauth2:
         - idn:certification:read
 components:
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return. Maximum value is 250.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 250
+        default: 250
+    Offset:
+      name: offset
+      in: query
+      description: Offset into the full result set. Usually specified with limit to paginate through the results.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    Count:
+      name: count
+      in: query
+      description: If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.
+      required: false
+      schema:
+        type: boolean
+        default: false
   responses:
+    Forbidden:
+      description: Forbidden - Returned if the user you are running as does not have access to this endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
     NotFound:
       description: Not Found - Returned if the specified resource does not exist.
       content:
@@ -464,14 +498,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponseDto'
-    BadRequest:
-      description: Client Error - Returned if the request body is invalid.
+    InternalServerError:
+      description: Internal Server Error - Returned if there is an unexpected error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponseDto'
-    Forbidden:
-      description: Forbidden - Returned if the user you are running as does not have access to this endpoint.
+    BadRequest:
+      description: Client Error - Returned if the request body is invalid.
       content:
         application/json:
           schema:
@@ -482,37 +516,66 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponseDto'
-    InternalServerError:
-      description: Internal Server Error - Returned if there is an unexpected error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
   schemas:
-    CertificationIdentitySummary:
+    CampaignReference:
       type: object
-      description: Summary of the identity being certified.
+      description: Reference to the campaign associated with the certification.
+      required:
+      - id
+      - name
+      - type
+      - campaignType
       properties:
         id:
           type: string
-          description: The identity ID.
+          description: The unique ID of the campaign.
           examples:
-          - 2c9180857182305e0171993735622948
+          - ef38f94347e94562b5bb8424a56397d8
         name:
           type: string
-          description: The identity name.
+          description: The name of the campaign.
           examples:
-          - Alison Ferguso
-        identityId:
+          - Campaign Name
+        type:
           type: string
-          description: The identity unique identifier.
+          description: The type of object being referenced.
+          enum:
+          - CAMPAIGN
           examples:
-          - ALF01
-        completed:
-          type: boolean
-          description: Whether all decisions have been made for this identity.
+          - CAMPAIGN
+        campaignType:
+          type: string
+          description: The type of the campaign.
+          enum:
+          - MANAGER
+          - SOURCE_OWNER
+          - SEARCH
           examples:
-          - false
+          - MANAGER
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the campaign.
+          examples:
+          - A description of the campaign
+        correlatedStatus:
+          type: string
+          description: The correlated status of the campaign. Only SOURCE_OWNER campaigns can be Uncorrelated. An Uncorrelated campaign only includes uncorrelated identities.
+          enum:
+          - CORRELATED
+          - UNCORRELATED
+          examples:
+          - CORRELATED
+        mandatoryCommentRequirement:
+          type: string
+          description: Determines whether comments are required for decisions during certification reviews. By default, comments are not required.
+          enum:
+          - ALL_DECISIONS
+          - REVOKE_ONLY_DECISIONS
+          - NO_DECISIONS
+          examples:
+          - NO_DECISIONS
     ReviewRecommendation:
       type:
       - object
@@ -541,6 +604,45 @@ components:
           - 'null'
           format: date-time
           description: The date the recommendation was generated.
+    AccessSummary:
+      type: object
+      description: Summary of the access being reviewed.
+      properties:
+        access:
+          type: object
+          description: The access item being reviewed.
+          properties:
+            type:
+              type: string
+              description: The type of access.
+              enum:
+              - ROLE
+              - ACCESS_PROFILE
+              - ENTITLEMENT
+              examples:
+              - ACCESS_PROFILE
+            id:
+              type: string
+              description: The ID of the access item.
+              examples:
+              - 2c91808568c529c60168cee9c85a015f
+            name:
+              type: string
+              description: The name of the access item.
+              examples:
+              - Cloud Engineering Access
+        entitlement:
+          type:
+          - object
+          - 'null'
+          description: The entitlement associated with this access item.
+          properties:
+            id:
+              type: string
+              description: The entitlement ID.
+            name:
+              type: string
+              description: The entitlement name.
     AccessReviewItem:
       type: object
       description: An access review item within a certification, representing access that is being reviewed.
@@ -575,22 +677,115 @@ components:
           description: Whether a decision has been made on this item.
           examples:
           - false
-    IdentityCertificationDecisionSummary:
+    CertificationTask:
       type: object
-      description: Summary of certification decisions.
+      description: A pending certification task.
       properties:
-        entitiesCertified:
-          type: integer
-          format: int32
-          description: Number of entities certified.
-        entitiesCompleted:
-          type: integer
-          format: int32
-          description: Number of entities completed.
-        entitiesTotalCount:
-          type: integer
-          format: int32
-          description: Total count of entities.
+        id:
+          type: string
+          description: The certification task ID.
+          examples:
+          - 2c918086749d78830174a1a40e121518
+        type:
+          type: string
+          description: The type of the task.
+          examples:
+          - ADMIN_REASSIGN
+        targetType:
+          type: string
+          description: The type of the target.
+          enum:
+          - CAMPAIGN
+          - CERTIFICATION
+          examples:
+          - CERTIFICATION
+        targetId:
+          type: string
+          description: The ID of the target.
+          examples:
+          - ef38f94347e94562b5bb8424a56397d8
+        status:
+          type: string
+          description: The status of the task.
+          enum:
+          - QUEUED
+          - IN_PROGRESS
+          - SUCCESS
+          - ERROR
+          examples:
+          - QUEUED
+        created:
+          type: string
+          format: date-time
+          description: When the task was created.
+    ReviewReassign:
+      type: object
+      description: Request body to reassign a certification review.
+      required:
+      - reassign
+      - reason
+      properties:
+        reassign:
+          type: array
+          description: List of reassignment items.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the item or identity to reassign.
+              type:
+                type: string
+                description: The type of item to reassign.
+                enum:
+                - TARGET_SUMMARY
+                - ACCESS_REVIEW_ITEM
+        reassignTo:
+          $ref: '#/components/schemas/IdentityReference'
+        reason:
+          type: string
+          description: The reason for the reassignment.
+          examples:
+          - Reassigning to the appropriate reviewer
+    Reassignment:
+      type:
+      - object
+      - 'null'
+      description: Information about a certification reassignment, if applicable.
+      properties:
+        from:
+          $ref: '#/components/schemas/IdentityReference'
+        comment:
+          type:
+          - string
+          - 'null'
+          description: The comment provided when reassigning.
+          examples:
+          - Reassigning to the new team lead
+    CertificationIdentitySummary:
+      type: object
+      description: Summary of the identity being certified.
+      properties:
+        id:
+          type: string
+          description: The identity ID.
+          examples:
+          - 2c9180857182305e0171993735622948
+        name:
+          type: string
+          description: The identity name.
+          examples:
+          - Alison Ferguso
+        identityId:
+          type: string
+          description: The identity unique identifier.
+          examples:
+          - ALF01
+        completed:
+          type: boolean
+          description: Whether all decisions have been made for this identity.
+          examples:
+          - false
     Reviewer:
       type: object
       description: The reviewer of a certification.
@@ -633,199 +828,6 @@ components:
           description: The date the reviewing identity was last modified.
           examples:
           - '2018-06-25T20:22:28.104Z'
-    IdentityReference:
-      type:
-      - object
-      - 'null'
-      description: Reference to an identity.
-      properties:
-        type:
-          type: string
-          description: The type of the referenced object.
-          enum:
-          - IDENTITY
-          examples:
-          - IDENTITY
-        id:
-          type: string
-          description: The identity ID.
-          examples:
-          - 2c9180a46faadee4016fb4e018c20639
-        name:
-          type: string
-          description: Human-readable display name of the identity.
-          examples:
-          - Thomas Edison
-    Reassignment:
-      type:
-      - object
-      - 'null'
-      description: Information about a certification reassignment, if applicable.
-      properties:
-        from:
-          $ref: '#/components/schemas/IdentityReference'
-        comment:
-          type:
-          - string
-          - 'null'
-          description: The comment provided when reassigning.
-          examples:
-          - Reassigning to the new team lead
-    ReviewReassign:
-      type: object
-      description: Request body to reassign a certification review.
-      required:
-      - reassign
-      - reason
-      properties:
-        reassign:
-          type: array
-          description: List of reassignment items.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The ID of the item or identity to reassign.
-              type:
-                type: string
-                description: The type of item to reassign.
-                enum:
-                - TARGET_SUMMARY
-                - ACCESS_REVIEW_ITEM
-        reassignTo:
-          $ref: '#/components/schemas/IdentityReference'
-        reason:
-          type: string
-          description: The reason for the reassignment.
-          examples:
-          - Reassigning to the appropriate reviewer
-    CertificationDecision:
-      type: object
-      description: A decision made on a certification item, approving, revoking, or acknowledging access.
-      required:
-      - id
-      - decision
-      properties:
-        id:
-          type: string
-          description: The ID of the access review item being decided.
-          examples:
-          - 2c9180857182305e0171993735622948
-        decision:
-          type: string
-          description: The decision for the certification item.
-          enum:
-          - APPROVE
-          - REVOKE
-          - ACKNOWLEDGE
-          examples:
-          - APPROVE
-        bulk:
-          type: boolean
-          default: false
-          description: Whether this is a bulk decision applying to multiple items.
-        comments:
-          type:
-          - string
-          - 'null'
-          description: Comments to accompany the decision.
-          examples:
-          - Access is still required for this project
-    AccessSummary:
-      type: object
-      description: Summary of the access being reviewed.
-      properties:
-        access:
-          type: object
-          description: The access item being reviewed.
-          properties:
-            type:
-              type: string
-              description: The type of access.
-              enum:
-              - ROLE
-              - ACCESS_PROFILE
-              - ENTITLEMENT
-              examples:
-              - ACCESS_PROFILE
-            id:
-              type: string
-              description: The ID of the access item.
-              examples:
-              - 2c91808568c529c60168cee9c85a015f
-            name:
-              type: string
-              description: The name of the access item.
-              examples:
-              - Cloud Engineering Access
-        entitlement:
-          type:
-          - object
-          - 'null'
-          description: The entitlement associated with this access item.
-          properties:
-            id:
-              type: string
-              description: The entitlement ID.
-            name:
-              type: string
-              description: The entitlement name.
-    ErrorResponseDto:
-      type: object
-      description: Error response body.
-      properties:
-        detailCode:
-          type: string
-          description: Fine-grained error code providing more detail.
-          examples:
-          - 400.1 Bad Request Content
-        trackingId:
-          type: string
-          description: Unique tracking ID for the error.
-          examples:
-          - e7eab60924f64aa284175b9fa3309599
-        messages:
-          type: array
-          description: Generic localized reason for error.
-          items:
-            type: object
-            properties:
-              locale:
-                type: string
-                description: The locale for the message text.
-                examples:
-                - en-US
-              localeOrigin:
-                type: string
-                description: An indicator of how the locale was selected.
-                enum:
-                - DEFAULT
-                - REQUEST
-                examples:
-                - DEFAULT
-              text:
-                type: string
-                description: The actual text of the error message.
-                examples:
-                - The request was syntactically correct but its content is semantically invalid.
-        causes:
-          type: array
-          description: Plain-text descriptive reasons to provide additional detail to the text provided in the messages field.
-          items:
-            type: object
-            properties:
-              locale:
-                type: string
-                examples:
-                - en-US
-              localeOrigin:
-                type: string
-                enum:
-                - DEFAULT
-                - REQUEST
-              text:
-                type: string
     IdentityCertification:
       type: object
       description: An identity certification used in access review campaigns to review a user's access to entitlements and approve or remove that access.
@@ -924,134 +926,132 @@ components:
           - SIGNED
           examples:
           - ACTIVE
-    CertificationTask:
+    CertificationDecision:
       type: object
-      description: A pending certification task.
-      properties:
-        id:
-          type: string
-          description: The certification task ID.
-          examples:
-          - 2c918086749d78830174a1a40e121518
-        type:
-          type: string
-          description: The type of the task.
-          examples:
-          - ADMIN_REASSIGN
-        targetType:
-          type: string
-          description: The type of the target.
-          enum:
-          - CAMPAIGN
-          - CERTIFICATION
-          examples:
-          - CERTIFICATION
-        targetId:
-          type: string
-          description: The ID of the target.
-          examples:
-          - ef38f94347e94562b5bb8424a56397d8
-        status:
-          type: string
-          description: The status of the task.
-          enum:
-          - QUEUED
-          - IN_PROGRESS
-          - SUCCESS
-          - ERROR
-          examples:
-          - QUEUED
-        created:
-          type: string
-          format: date-time
-          description: When the task was created.
-    CampaignReference:
-      type: object
-      description: Reference to the campaign associated with the certification.
+      description: A decision made on a certification item, approving, revoking, or acknowledging access.
       required:
       - id
-      - name
-      - type
-      - campaignType
+      - decision
       properties:
         id:
           type: string
-          description: The unique ID of the campaign.
+          description: The ID of the access review item being decided.
           examples:
-          - ef38f94347e94562b5bb8424a56397d8
-        name:
+          - 2c9180857182305e0171993735622948
+        decision:
           type: string
-          description: The name of the campaign.
-          examples:
-          - Campaign Name
-        type:
-          type: string
-          description: The type of object being referenced.
+          description: The decision for the certification item.
           enum:
-          - CAMPAIGN
+          - APPROVE
+          - REVOKE
+          - ACKNOWLEDGE
           examples:
-          - CAMPAIGN
-        campaignType:
-          type: string
-          description: The type of the campaign.
-          enum:
-          - MANAGER
-          - SOURCE_OWNER
-          - SEARCH
-          examples:
-          - MANAGER
-        description:
+          - APPROVE
+        bulk:
+          type: boolean
+          default: false
+          description: Whether this is a bulk decision applying to multiple items.
+        comments:
           type:
           - string
           - 'null'
-          description: The description of the campaign.
+          description: Comments to accompany the decision.
           examples:
-          - A description of the campaign
-        correlatedStatus:
+          - Access is still required for this project
+    ErrorResponseDto:
+      type: object
+      description: Error response body.
+      properties:
+        detailCode:
           type: string
-          description: The correlated status of the campaign. Only SOURCE_OWNER campaigns can be Uncorrelated. An Uncorrelated campaign only includes uncorrelated identities.
-          enum:
-          - CORRELATED
-          - UNCORRELATED
+          description: Fine-grained error code providing more detail.
           examples:
-          - CORRELATED
-        mandatoryCommentRequirement:
+          - 400.1 Bad Request Content
+        trackingId:
           type: string
-          description: Determines whether comments are required for decisions during certification reviews. By default, comments are not required.
-          enum:
-          - ALL_DECISIONS
-          - REVOKE_ONLY_DECISIONS
-          - NO_DECISIONS
+          description: Unique tracking ID for the error.
           examples:
-          - NO_DECISIONS
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return. Maximum value is 250.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 250
-        default: 250
-    Offset:
-      name: offset
-      in: query
-      description: Offset into the full result set. Usually specified with limit to paginate through the results.
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    Count:
-      name: count
-      in: query
-      description: If true, the total count of items in the full result set is included in the X-Total-Count response header. Only items in the current page are returned. Requesting a count can decrease performance.
-      required: false
-      schema:
-        type: boolean
-        default: false
+          - e7eab60924f64aa284175b9fa3309599
+        messages:
+          type: array
+          description: Generic localized reason for error.
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                description: The locale for the message text.
+                examples:
+                - en-US
+              localeOrigin:
+                type: string
+                description: An indicator of how the locale was selected.
+                enum:
+                - DEFAULT
+                - REQUEST
+                examples:
+                - DEFAULT
+              text:
+                type: string
+                description: The actual text of the error message.
+                examples:
+                - The request was syntactically correct but its content is semantically invalid.
+        causes:
+          type: array
+          description: Plain-text descriptive reasons to provide additional detail to the text provided in the messages field.
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                examples:
+                - en-US
+              localeOrigin:
+                type: string
+                enum:
+                - DEFAULT
+                - REQUEST
+              text:
+                type: string
+    IdentityReference:
+      type:
+      - object
+      - 'null'
+      description: Reference to an identity.
+      properties:
+        type:
+          type: string
+          description: The type of the referenced object.
+          enum:
+          - IDENTITY
+          examples:
+          - IDENTITY
+        id:
+          type: string
+          description: The identity ID.
+          examples:
+          - 2c9180a46faadee4016fb4e018c20639
+        name:
+          type: string
+          description: Human-readable display name of the identity.
+          examples:
+          - Thomas Edison
+    IdentityCertificationDecisionSummary:
+      type: object
+      description: Summary of certification decisions.
+      properties:
+        entitiesCertified:
+          type: integer
+          format: int32
+          description: Number of entities certified.
+        entitiesCompleted:
+          type: integer
+          format: int32
+          description: Number of entities completed.
+        entitiesTotalCount:
+          type: integer
+          format: int32
+          description: Total count of entities.
   securitySchemes:
     oauth2:
       type: oauth2

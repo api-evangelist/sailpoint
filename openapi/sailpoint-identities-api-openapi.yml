@@ -332,6 +332,48 @@ paths:
       - oauth2:
         - idn:identity-profile:manage
 components:
+  responses:
+    InternalServerError:
+      description: Internal Server Error - Returned if there is an unexpected error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    TooManyRequests:
+      description: Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.
+      headers:
+        Retry-After:
+          description: Number of seconds to wait before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    Forbidden:
+      description: Forbidden - Returned if the user you are running as does not have access to this endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    BadRequest:
+      description: Client Error - Returned if the request body is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    NotFound:
+      description: Not Found - Returned if the specified resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    Unauthorized:
+      description: Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
   schemas:
     IdentityProfile:
       type: object
@@ -401,6 +443,149 @@ components:
           readOnly: true
           examples:
           - '2023-01-05T18:40:35.772Z'
+    IdentityAttribute:
+      type: object
+      description: A public identity attribute key-value pair.
+      properties:
+        key:
+          type: string
+          description: The attribute key.
+          examples:
+          - country
+        name:
+          type: string
+          description: Human-readable display name of the attribute.
+          examples:
+          - Country
+        value:
+          type:
+          - string
+          - 'null'
+          description: The attribute value.
+          examples:
+          - US
+    IdentityReference:
+      type:
+      - object
+      - 'null'
+      description: Reference to an identity.
+      properties:
+        type:
+          type: string
+          description: The type of the referenced object.
+          enum:
+          - IDENTITY
+          examples:
+          - IDENTITY
+        id:
+          type: string
+          description: The identity ID.
+          examples:
+          - 2c9180a46faadee4016fb4e018c20639
+        name:
+          type: string
+          description: Human-readable display name of the identity.
+          examples:
+          - Thomas Edison
+    SourceReference:
+      type: object
+      description: Reference to a source.
+      properties:
+        type:
+          type: string
+          description: The source object type.
+          enum:
+          - SOURCE
+          examples:
+          - SOURCE
+        id:
+          type: string
+          description: The source ID.
+          examples:
+          - 2c9180835d191a86015d28455b4b232a
+        name:
+          type: string
+          description: The source name.
+          examples:
+          - HR Active Directory
+    JsonPatchOperation:
+      type: object
+      description: A JSON Patch operation as defined in RFC 6902.
+      required:
+      - op
+      - path
+      properties:
+        op:
+          type: string
+          description: The operation to perform.
+          enum:
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          - test
+          examples:
+          - replace
+        path:
+          type: string
+          description: The JSON pointer path for the operation.
+          examples:
+          - /description
+        value:
+          description: The value for the operation (required for add, replace, test).
+    PublicIdentity:
+      type: object
+      description: Details about a public identity.
+      properties:
+        id:
+          type: string
+          description: The identity ID.
+          examples:
+          - 2c9180857182305e0171993735622948
+        name:
+          type: string
+          description: Human-readable display name of the identity.
+          examples:
+          - Alison Ferguso
+        alias:
+          type: string
+          description: Alternate unique identifier for the identity.
+          examples:
+          - alison.ferguso
+        email:
+          type:
+          - string
+          - 'null'
+          description: Email address of the identity.
+          examples:
+          - alison.ferguso@acme-solar.com
+        status:
+          type:
+          - string
+          - 'null'
+          description: The lifecycle status for the identity.
+          examples:
+          - Active
+        identityState:
+          type:
+          - string
+          - 'null'
+          description: The current state of the identity, which determines how Identity Security Cloud interacts with the identity. Active identities are included in identity picklists in Request Center, identity processing, and more. Inactive identities are excluded from these features.
+          enum:
+          - ACTIVE
+          - INACTIVE_SHORT_TERM
+          - INACTIVE_LONG_TERM
+          - null
+          examples:
+          - ACTIVE
+        manager:
+          $ref: '#/components/schemas/IdentityReference'
+        attributes:
+          type: array
+          description: The public identity attributes of the identity.
+          items:
+            $ref: '#/components/schemas/IdentityAttribute'
     ErrorResponseDto:
       type: object
       description: Error response body.
@@ -456,79 +641,25 @@ components:
                 - REQUEST
               text:
                 type: string
-    PublicIdentity:
+    TaskResultSimplified:
       type: object
-      description: Details about a public identity.
+      description: A simplified task result for asynchronous operations.
       properties:
         id:
           type: string
-          description: The identity ID.
+          description: The task ID.
           examples:
-          - 2c9180857182305e0171993735622948
+          - 464ae7bf-791e-49fd-b746-06a2e4a89635
+        type:
+          type: string
+          description: The type of task.
+          examples:
+          - TASK_RESULT
         name:
-          type: string
-          description: Human-readable display name of the identity.
-          examples:
-          - Alison Ferguso
-        alias:
-          type: string
-          description: Alternate unique identifier for the identity.
-          examples:
-          - alison.ferguso
-        email:
           type:
           - string
           - 'null'
-          description: Email address of the identity.
-          examples:
-          - alison.ferguso@acme-solar.com
-        status:
-          type:
-          - string
-          - 'null'
-          description: The lifecycle status for the identity.
-          examples:
-          - Active
-        identityState:
-          type:
-          - string
-          - 'null'
-          description: The current state of the identity, which determines how Identity Security Cloud interacts with the identity. Active identities are included in identity picklists in Request Center, identity processing, and more. Inactive identities are excluded from these features.
-          enum:
-          - ACTIVE
-          - INACTIVE_SHORT_TERM
-          - INACTIVE_LONG_TERM
-          - null
-          examples:
-          - ACTIVE
-        manager:
-          $ref: '#/components/schemas/IdentityReference'
-        attributes:
-          type: array
-          description: The public identity attributes of the identity.
-          items:
-            $ref: '#/components/schemas/IdentityAttribute'
-    IdentityAttribute:
-      type: object
-      description: A public identity attribute key-value pair.
-      properties:
-        key:
-          type: string
-          description: The attribute key.
-          examples:
-          - country
-        name:
-          type: string
-          description: Human-readable display name of the attribute.
-          examples:
-          - Country
-        value:
-          type:
-          - string
-          - 'null'
-          description: The attribute value.
-          examples:
-          - US
+          description: The task name.
     OwnerReference:
       type: object
       description: Reference to the owner of the object.
@@ -550,137 +681,6 @@ components:
           description: The owner's name. If set, it must match the current value of the owner's display name, otherwise a 400 Bad Request error will result.
           examples:
           - support
-    SourceReference:
-      type: object
-      description: Reference to a source.
-      properties:
-        type:
-          type: string
-          description: The source object type.
-          enum:
-          - SOURCE
-          examples:
-          - SOURCE
-        id:
-          type: string
-          description: The source ID.
-          examples:
-          - 2c9180835d191a86015d28455b4b232a
-        name:
-          type: string
-          description: The source name.
-          examples:
-          - HR Active Directory
-    JsonPatchOperation:
-      type: object
-      description: A JSON Patch operation as defined in RFC 6902.
-      required:
-      - op
-      - path
-      properties:
-        op:
-          type: string
-          description: The operation to perform.
-          enum:
-          - add
-          - remove
-          - replace
-          - move
-          - copy
-          - test
-          examples:
-          - replace
-        path:
-          type: string
-          description: The JSON pointer path for the operation.
-          examples:
-          - /description
-        value:
-          description: The value for the operation (required for add, replace, test).
-    TaskResultSimplified:
-      type: object
-      description: A simplified task result for asynchronous operations.
-      properties:
-        id:
-          type: string
-          description: The task ID.
-          examples:
-          - 464ae7bf-791e-49fd-b746-06a2e4a89635
-        type:
-          type: string
-          description: The type of task.
-          examples:
-          - TASK_RESULT
-        name:
-          type:
-          - string
-          - 'null'
-          description: The task name.
-    IdentityReference:
-      type:
-      - object
-      - 'null'
-      description: Reference to an identity.
-      properties:
-        type:
-          type: string
-          description: The type of the referenced object.
-          enum:
-          - IDENTITY
-          examples:
-          - IDENTITY
-        id:
-          type: string
-          description: The identity ID.
-          examples:
-          - 2c9180a46faadee4016fb4e018c20639
-        name:
-          type: string
-          description: Human-readable display name of the identity.
-          examples:
-          - Thomas Edison
-  responses:
-    NotFound:
-      description: Not Found - Returned if the specified resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
-    TooManyRequests:
-      description: Too Many Requests - Returned in response to too many requests in a given period of time, rate limited. The Retry-After header in the response includes how long to wait before trying again.
-      headers:
-        Retry-After:
-          description: Number of seconds to wait before retrying.
-          schema:
-            type: integer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
-    BadRequest:
-      description: Client Error - Returned if the request body is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
-    Forbidden:
-      description: Forbidden - Returned if the user you are running as does not have access to this endpoint.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
-    InternalServerError:
-      description: Internal Server Error - Returned if there is an unexpected error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
-    Unauthorized:
-      description: Unauthorized - Returned if there is no authorization header, or if the JWT token is expired.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
   parameters:
     Offset:
       name: offset

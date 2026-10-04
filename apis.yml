@@ -230,6 +230,9 @@ maintainers:
     email: developer@sailpoint.com
     url: https://developer.sailpoint.com
 common:
+  - type: CapabilityMap
+    url: capabilities/sailpoint-capability-edges.yml
+    name: SailPoint Business Capability Map
   - type: Website
     url: https://www.sailpoint.com/
   - type: PostmanWorkspace

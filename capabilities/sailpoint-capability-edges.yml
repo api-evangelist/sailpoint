@@ -1,0 +1,55 @@
+slug: sailpoint
+provider: SailPoint
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Access Profiles
+  spec_file: sailpoint-access-profiles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.95
+  evidence: GET /access-profiles  listAccessProfiles; GET /access-profiles/{id}/entitlements  listAccessProfileEntitlements;
+    schemas Entitlement, Requestability, ApprovalScheme
+  reason: CRUD over access profiles and entitlements on an identity governance platform — plainly identity
+    and access management.
+- tag: Identities
+  spec_file: sailpoint-identities-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.92
+  evidence: GET /identity-profiles listIdentityProfiles "List identity profiles"; schemas IdentityProfile,
+    IdentityAttribute, PublicIdentity — SailPoint "Identity Security Cloud" identity governance
+  reason: Operations create and manage identity profiles and identity records on an identity governance
+    platform; this is Identity & Access Management, not customer data.
+- tag: Roles
+  spec_file: sailpoint-roles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.9
+  evidence: GET /roles/{id}/identities "List identities assigned a role"; schemas Role, EntitlementRef,
+    RoleMembershipSelector, AccessProfileRef
+  reason: Role definition, entitlement references and role-to-identity assignment are access governance
+    constructs — IAM, not HR job roles.
+- tag: Certifications
+  spec_file: sailpoint-certifications-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.88
+  evidence: GET /certifications/{id}/access-review-items  listCertificationAccessReviewItems; POST /certifications/{id}/sign-off  Finalize
+    identity certification decisions
+  reason: '''Certifications'' here means access certification campaigns and access reviews (not product/training
+    certifications), a core IAM governance function.'

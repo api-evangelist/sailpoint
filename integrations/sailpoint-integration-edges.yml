@@ -1,8 +1,11 @@
 generated: '2026-10-13'
 method: searched
 checked:
+- guidewire/integrations/guidewire-integration-edges.yml
 - https://aws.amazon.com/marketplace/
 - https://azuremarketplace.microsoft.com/
+- microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
+- palo-alto-networks/integrations/palo-alto-networks-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -37,3 +40,69 @@ edges:
   seller_name: SailPoint
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: Guidewire (own)
+  partner: guidewire
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.guidewire.com/product/01tKj00000Pu4lFIAR/01tKj00000Pu4lFIAR
+  mirror_of: guidewire/integrations/guidewire-integration-edges.yml
+  apps:
+  - SailPoint Identity Security Accelerator for ContactManager
+  - SailPoint Identity Security Accelerator for PolicyCenter
+  - SailPoint Identity Security Accelerator for ClaimCenter
+  - SailPoint Identity Security Accelerator for BillingCenter
+  listing_count: 4
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Accelerator; Claims Estimating & Servicing;Fraud Detection & Investigation; ContactManager
+  badges:
+  - Ready for Guidewire
+  - 'Partner tier: Growth'
+- partner_name: Microsoft Sentinel (own)
+  partner: microsoft-sentinel
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/SailPointIdentityNow
+  mirror_of: microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
+  apps:
+  - SailPointIdentityNow
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Security - Threat Protection
+  badges:
+  - support-tier:partner
+- partner_name: Palo Alto Networks (own)
+  partner: palo-alto-networks
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://cortex.marketplace.pan.dev/marketplace/details/SailPointIdentityIQ/
+  mirror_of: palo-alto-networks/integrations/palo-alto-networks-integration-edges.yml
+  apps:
+  - SailPoint IdentityIQ
+  - SailPoint IdentityNow
+  listing_count: 2
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Data Enrichment & Threat Intelligence
+  badges:
+  - support:partner
+source:
+- guidewire/integrations/guidewire-integration-edges.yml
+- microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
+- palo-alto-networks/integrations/palo-alto-networks-integration-edges.yml

@@ -89,7 +89,7 @@
     app_slug: sailpoint
     beta: false
     builder: unknown (not in the directory record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: sailpoint-fedramp
   label: FedRAMP

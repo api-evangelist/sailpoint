@@ -167,3 +167,29 @@
       latest_authorization: '2025-05-12'
   status: not-a-workflow
   arazzo: null
+- slug: sailpoint-microsoft-teams-own
+  label: Microsoft Teams (own)
+  partner: microsoft-teams
+  partner_name: Microsoft Teams (own)
+  category: Microsoft Teams app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appsource.microsoft.com/en-us/product/office/WA200002761
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: sailpoint-slack-own
+  label: Slack (own)
+  partner: slack
+  partner_name: Slack (own)
+  category: Slack app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://slack.com/marketplace/A01GETLKWEB-sailpoint
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null

@@ -27,6 +27,7 @@ checked:
 - https://www.commoncriteriaportal.org/products/certified_products-archived.csv
 - https://www.commoncriteriaportal.org/products/certified_products.csv
 - https://www.niap-ccevs.org/Product/PCL.cfm
+- https://openid.net/foundation/sponsoring-members/
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -431,6 +432,32 @@ edges:
     identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
   detected_by: sweep-common-criteria-certified-products.py
   first_seen: '2026-10-21'
+- partner_name: OpenID Foundation
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://openid.net/foundation/sponsoring-members/
+  category: identity standards body membership
+  partner_tier: Sustaining Corporate
+  contract_reference:
+    register: OpenID Foundation members (openid.net/foundation/sponsoring-members/)
+    standard: OpenID Foundation specifications (OpenID Connect, FAPI, CIBA, OpenID4VC, Shared Signals, AuthZEN)
+    spec_file: null
+    role: oidf-member
+    registered_name: SailPoint
+    register_id: https://www.sailpoint.com/
+    matched_domain: sailpoint.com
+    matched_by: domain
+    signal_note: 'participation only: corporate membership of the OpenID Foundation (level in partner_tier); the
+      logo links the member''s website (the link is the identity). Membership is not certification: OIDF certification
+      edges are written by sweep-identity.py and reused, not re-read'
+    detected_by: sweep-openid-certified-implementations.py
+    detected: '2026-10-22'
+  detected_by: sweep-openid-certified-implementations.py
+  first_seen: '2026-10-22'
 source:
 - guidewire/integrations/guidewire-integration-edges.yml
 - microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml

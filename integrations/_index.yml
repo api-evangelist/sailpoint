@@ -364,3 +364,28 @@
     identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
   status: not-a-workflow
   arazzo: null
+- slug: sailpoint-openid-foundation
+  label: OpenID Foundation
+  partner_name: OpenID Foundation
+  category: identity standards body membership
+  type: register
+  channel: standard-directory
+  evidence: https://openid.net/foundation/sponsoring-members/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: OpenID Foundation members (openid.net/foundation/sponsoring-members/)
+    standard: OpenID Foundation specifications (OpenID Connect, FAPI, CIBA, OpenID4VC, Shared Signals, AuthZEN)
+    spec_file: null
+    role: oidf-member
+    registered_name: SailPoint
+    register_id: https://www.sailpoint.com/
+    matched_domain: sailpoint.com
+    matched_by: domain
+    signal_note: 'participation only: corporate membership of the OpenID Foundation (level in partner_tier); the
+      logo links the member''s website (the link is the identity). Membership is not certification: OIDF certification
+      edges are written by sweep-identity.py and reused, not re-read'
+    detected_by: sweep-openid-certified-implementations.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null

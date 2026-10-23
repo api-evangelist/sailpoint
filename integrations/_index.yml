@@ -485,3 +485,69 @@
     detected: '2026-10-22'
   status: not-a-workflow
   arazzo: null
+- slug: sailpoint-servicenow-store-partner-apps
+  label: ServiceNow Store (partner apps)
+  partner: servicenow
+  partner_name: ServiceNow Store (partner apps)
+  category: ServiceNow Store partner app / app certification
+  type: register
+  channel: standard-directory
+  evidence: https://store.servicenow.com/store/seller/ccc3712e871a1400491683bdff434d59
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: ServiceNow Store (store.servicenow.com/store/sitemap_xml -> /store/app/<id> server-rendered pages)
+    standard: ServiceNow Store app certification (ServiceNow Certified App badge)
+    spec_file: null
+    role: servicenow-store-partner
+    registered_name: SailPoint Technologies Inc
+    register_id: ccc3712e871a1400491683bdff434d59
+    matched_domain: sailpoint.com
+    matched_by: domain
+    identity_source: the listing's own seller website link (no lookup)
+    certified_products:
+    - product: ServiceNow Certified App (scoped_app / generative_ai)
+      product_type: scoped_app / generative_ai
+      standard: ServiceNow Store app certification (ServiceNow Certified App badge)
+      lapsed: false
+      products_sample:
+      - SailPoint Service Catalog AI Assistant
+      releases:
+      - Zurich
+      - Australia
+    - product: ServiceNow Certified App (scoped_app / integration)
+      product_type: scoped_app / integration
+      standard: ServiceNow Store app certification (ServiceNow Certified App badge)
+      lapsed: false
+      products_sample:
+      - SailPoint Identity Governance Connector
+      releases:
+      - Yokohama
+      - Zurich
+      - Australia
+    - product: ServiceNow Certified App (scoped_app / standalone)
+      product_type: scoped_app / standalone
+      standard: ServiceNow Store app certification (ServiceNow Certified App badge)
+      lapsed: false
+      products_sample:
+      - SailPoint Identity Security Cloud Service Catalog
+      - SailPoint IdentityIQ Service Catalog
+      - SailPoint for Service Desk
+      releases:
+      - Yokohama
+      - Zurich
+      - Australia
+    products_sample:
+    - SailPoint Identity Governance Connector
+    - SailPoint Identity Security Cloud Service Catalog
+    - SailPoint IdentityIQ Service Catalog
+    - SailPoint Service Catalog AI Assistant
+    - SailPoint for Service Desk
+    signal_note: 'listing alone = standard-participant; certified_products = one entry per Application type the
+      seller holds a ServiceNow Certified App badge for, standard named on each; lapsed: true when none of that
+      type''s certified apps lists either of the two newest release families on the Store; app counts are context,
+      never counted'
+    detected_by: sweep-servicenow-store.py
+    detected: '2026-10-23'
+  status: not-a-workflow
+  arazzo: null
